@@ -61,7 +61,7 @@ const LandingPage = () => {
 
   return (
     <div className="bg-gray-100">
-    {/* <div>
+    <div>
     <Banner/>
     </div>
 
@@ -70,16 +70,16 @@ const LandingPage = () => {
     </div>
     <div className=" mt-24">
       <ShopCollection/>
-    </div> */}
+    </div>
     <div className=" mt-24">
       <BestSellers products={products}/>
     </div>
-    {/* <div className=" ">
+    <div className=" ">
       <Trends/>
     </div>
     <div className=" ">
       <FeatureProducts/>
-    </div> */}
+    </div>
     </div>
   );
 };

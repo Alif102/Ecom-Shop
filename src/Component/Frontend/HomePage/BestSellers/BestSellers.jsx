@@ -85,7 +85,6 @@ function BestSellers({products}) {
     },
   ];
 
-  const [selectedVariations, setSelectedVariations] = useState({}); // Store selected variations for each product
 
 const handleVariationSelect = (productId, value) => {
   setSelectedVariations((prevState) => ({
@@ -93,6 +92,9 @@ const handleVariationSelect = (productId, value) => {
     [productId]: prevState[productId] === value ? null : value, // Toggle selection
   }));
 };
+const [selectedVariations, setSelectedVariations] = useState([]);
+const [selectedCombination, setSelectedCombination] = useState(null);
+
 
   
   return (
@@ -100,27 +102,14 @@ const handleVariationSelect = (productId, value) => {
       <div className="p-2 w-[80%] mx-auto  md:mb-9 md:mt-20 relative">
         <h2 className="text-center text-2xl  md:text-3xl font-semibold pollinator mb-8"> <span className=" border border-pink-500 border-l-4 mr-3"></span> Shop Our Bestsellers</h2>
         <Slider {...settings} className="cursor-pointer  md:mb-10">
+
         {products.slice(0, 8).map((product, index) => {
+  // Extract the highest and lowest prices from variation_combinations
+  const prices = product.variation_combinations.map((comb) => comb.price);
+  const highPrice = Math.max(...prices);
+  const lowPrice = Math.min(...prices);
 
-const variationCombinationsPrice = product.variation_combinations || [];
-
-// Calculate the highest and lowest price
-const prices = variationCombinationsPrice.map(item => item.price);
-const highPrice = Math.max(...prices);
-const lowPrice = Math.min(...prices);
-
-
-
-  const variationCombinations = product.variation_combinations || [];
-
-  // Find the price based on the selected variation value
-  const selectedVariationData = variationCombinations.find(
-    (combination) => combination.values === (selectedVariations[product.id] || "")
-  );
-  const selectedPrice = selectedVariationData ? selectedVariationData.price : "";
-  const selectedDiscount = selectedVariationData ? selectedVariationData.discount : "";
-  const selectedDiscountDate = selectedVariationData ? selectedVariationData.discount_date : "";
-  const discountTotal =  selectedPrice - selectedDiscount;
+  // State to track the selected combination
 
   return (
     <div key={index} className="w-full gap-2 py-4 px-2 h-full group">
@@ -145,81 +134,71 @@ const lowPrice = Math.min(...prices);
 
       <div className="hidden group-hover:block transition-all duration-500">
         <div className="bg-white px-4">
-      
-        {!selectedPrice && (
-  <div>
-    <h1 className="text-sm">
-  Price : {highPrice === lowPrice ? highPrice : `(${highPrice} - ${lowPrice})`}
-</h1>
+          {/* High and Low Prices Display */}
+          <div className="bg-white mt-2">
+            <h1>
+            (  <span className="">{highPrice}৳</span> - 
+              <span className="">{lowPrice}৳</span> )
+            </h1>
+          </div>
 
-  </div>
-)}
-        {selectedPrice && (
-  <div>
-    {new Date(selectedDiscountDate) > new Date() && discountTotal > 0 ? (
-      <>
-        <h1>
-           Price : <span className="  text-xl">{discountTotal}</span> <span className="text-2xl font-bold">৳</span> {" "} 
-          <span className="line-through ">
-         {selectedPrice} <span className="text-2xl font-bold">৳</span>
-          </span>
-        </h1>
- 
-     
-      
-     
-      </>
-    ) : (
-      <h1>
-    Price :{" "}
-        <span className="font-semibold">{selectedPrice} ৳</span>
-      </h1>
-    )}
-  </div>
-)}
-
-
-
-        </div>
-
-        <div className="flex gap-2 bg-white px-1">
-          {(product.product_variation || []).map((value, i) => (
-            <div key={i} className=" rounded text-[15px] px-3">
-              <h1 className="mt-1">{value.variation?.name}</h1>
-
-
-              <div className="flex flex-wrap mt-2 gap-1">
-                {(Array.isArray(value.variaton_values)
-                  ? value.variaton_values
-                  : String(value.variaton_values || "").split(",")
-                ).map((v, index) => (
-                  <div
-                    key={index}
-                    className={`border px-1 border-gray-400 rounded text-center text-[12px] ${
-                      selectedVariations[product.id] === v.trim() ? 'bg-blue-500 text-white' : ''
-                    }`} // Apply bg color when selected
-                    onClick={() => handleVariationSelect(product.id, v.trim())} // Update selection on click for the specific product
-                  >
-                    {v.trim()}
-                  </div>
-                ))}
+          {/* Selected Price Display */}
+          <div className="bg-white mt-2">
+            {selectedCombination !== null && (
+              <div>
+                <h2 className="text-md font-semibold">
+               Price:{" "}
+                  {
+                    product.variation_combinations.find(
+                      (comb) => comb.id === selectedCombination
+                    )?.price
+                  }{" "}
+                  <span className="text-2xl font-bold">৳</span>
+                </h2>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
+
+          {/* Variation Buttons */}
+          {/* <h1 className="text-lg font-semibold mb-2">Variation Values</h1> */}
+          <div className="flex flex-wrap gap-2">
+            {product.variation_combinations.map((combination) => (
+              <button
+                key={combination.id}
+                className={`px-4 py-2 border rounded ${
+                  selectedCombination === combination.id
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => setSelectedCombination(combination.id)}
+              >
+                {combination.values}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="bg-white p-4 flex justify-between gap-1">
           <h1 className="border px-2 flex items-center border-gray-300 rounded text-center text-[12px]">
-            <span><PiAirplane /></span> Time to Shipping : 10 Days
+            <span>
+              <PiAirplane />
+            </span>{" "}
+            Time to Shipping: 10 Days
           </h1>
           <h1 className="border px-2 flex items-center border-gray-300 rounded text-center text-[12px]">
-            <span><MdProductionQuantityLimits /></span> Similar Product
+            <span>
+              <MdProductionQuantityLimits />
+            </span>{" "}
+            Similar Product
           </h1>
         </div>
       </div>
     </div>
   );
 })}
+
+
+
 
 
 </Slider>
