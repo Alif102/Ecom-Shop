@@ -84,7 +84,9 @@
   .custom-bg-blue{
     background-color: rgb(73 87 158);
   }
-  
+  .slider-con{
+    gap: 5px;
+  }
  .pollinator {
     font-family: 'Pollinator';
     src: url('/public/font/pollinator.otf') format('truetype');
@@ -99,4 +101,36 @@
   }
   
 
+
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 90%;
+    margin: 0 auto;
+  }
   
+  .arrow-icon {
+    z-index: 10; /* Ensure the arrows are above other content */
+    color: gray; /* Set color to ensure it's visible */
+    font-size: 2rem; /* Adjust size if needed */
+  }
+  
+/* .slick-next:before {
+  font-family:initial!important;
+  color:rgb(238, 229, 229); 
+border-radius: 30px;
+  padding: 5px;
+  background: skyblue;
+  
+}
+.slick-prev:before
+{
+
+  font-family:initial!important;
+  color:rgb(238, 229, 229); 
+border-radius: 30px;
+  padding: 5px;
+  background: skyblue;
+  
+  
+} */
