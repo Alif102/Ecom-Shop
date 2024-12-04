@@ -1,0 +1,116 @@
+[
+    {
+    "id": 135,
+    
+    "name": "Art",
+    "short_desc": "hfhb",
+    "image": "7_4251_1730903463.webp",
+    "category_id": 4,
+    "is_published": 1,
+    "price": 2000,
+    "stock": 20,
+    "code": "EPP87741803",
+    "stock_location": null,
+    "buying_price": 500,
+    "has_variation": 0,
+    "is_discount": 0,
+    "discount_type": "fixed",
+    "discount_amount": "undefined",
+    "discount_date": "2024-11-21",
+    "stock_location_id": 2,
+    "created_by": 7,
+    "created_at": "2024-11-20T11:51:49.000000Z",
+    "updated_at": "2024-11-24T08:26:22.000000Z",
+    "product_variation": [   {
+        "id": 83,
+        "product_id": 174,
+        "variation_id": 14,
+        "variaton_values": "6 m-1.5y,2 y-2.5y,3 y-3.5y,4 y-5.5y,6 y-7.5y,8 y-9.5y,10 y-11.5y,12 y-13.5y,14 y-18y",
+        "created_at": "2024-11-27T04:22:07.000000Z",
+        "updated_at": "2024-11-27T04:22:07.000000Z",
+        "variation": {
+            "id": 14,
+            "name": "size"
+        }
+    }, 
+      {
+        "id": 84,
+        "product_id": 174,
+        "variation_id": 14,
+        "variaton_values": "34 , 35",
+        "created_at": "2024-11-27T04:22:07.000000Z",
+        "updated_at": "2024-11-27T04:22:07.000000Z",
+        "variation": {
+            "id": 14,
+            "name": "color"
+        }
+    }
+],
+    "variation_combinations": [ {
+        "id": 284,
+        "product_id": 174,
+        "values": "12 y-13.5y",
+        "buying_price": 1160,
+        "price": 2200,
+        "stock": 8,
+        "discount_date":"2024-11-22",
+        "discount": 111,
+        "discount_type": "fixed",
+        "code": "EPP53745620",
+        "created_at": "2024-11-27T04:22:07.000000Z",
+        "updated_at": "2024-11-27T04:22:07.000000Z"
+    },
+    {
+        "id": 285,
+        "product_id": 174,
+        "values": "14 y-18y",
+        "buying_price": 1160,
+        "price": 2200,
+        "stock": 6,
+        "discount_date": "2024-1-5",
+        "discount": 0,
+        "discount_type": "fixed",
+        "code": "EPP53745620",
+        "created_at": "2024-11-27T04:22:07.000000Z",
+        "updated_at": "2024-11-27T04:22:07.000000Z"
+    }
+],
+    "category": {
+        "id": 4,
+        "name": "Cloth"
+    }
+},
+{
+    "id": 135,
+    "unique_id": "P-000135",
+    "client_id": 7,
+    "user_id": 7,
+    "business_id": "18,11",
+    "name": "Art",
+    "short_desc": "hfhb",
+    "image": "7_4251_1730903463.webp",
+    "category_id": 4,
+    "is_published": 1,
+    "price": 2000,
+    "stock": 20,
+    "code": "EPP87741803",
+    "stock_location": null,
+    "buying_price": 500,
+    "has_variation": 0,
+    "is_discount": 0,
+    "discount_type": "fixed",
+    "discount_amount": "undefined",
+    "discount_date": "2024-11-21",
+    "stock_location_id": 2,
+    "created_by": 7,
+    "created_at": "2024-11-20T11:51:49.000000Z",
+    "updated_at": "2024-11-24T08:26:22.000000Z",
+    "product_variation": [],
+    "variation_combinations": [],
+    "category": {
+        "id": 4,
+        "name": "Cloth"
+    }
+   
+}
+]
