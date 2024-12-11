@@ -3,6 +3,7 @@ import { FaHeart, FaSearch, FaBars, FaTimes,  FaInfoCircle, FaList, FaPlaneArriv
 import { FaAccusoft } from "react-icons/fa6";
 import { GiWomanElfFace } from "react-icons/gi";
 import azmain from '../../../../assets/azmain.png'
+import SwiperBanner from "../../SwiperBanner/SwiperBanner";
 
 
 const Banner = () => {
@@ -21,7 +22,7 @@ const Banner = () => {
     useEffect(() => {
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000);
+      }, 8000);
   
       return () => clearInterval(interval); // Cleanup interval on unmount
     }, [images.length]);
@@ -29,12 +30,8 @@ const Banner = () => {
     <div>
       <div className="relative">
        <div className="relative">
-       <img
-          className="w-screen"
-          src={images[currentImageIndex]}
-          alt={`banner-${currentImageIndex}`}
-        />
-          <div className=" flex justify-around w-full absolute  md:-bottom-20 gap-2">
+       <SwiperBanner/>
+          {/* <div className=" flex justify-around w-full absolute  md:-bottom-20 gap-2">
           <div>
             <img src="../../../../../src/assets/ca1.jpg" alt="picccc"  />
           </div>
@@ -47,13 +44,13 @@ const Banner = () => {
           <div>
             <img src="../../../../../src/assets/ca4.jpg" alt="picccc"  />
           </div>
-        </div>
+        </div> */}
 
        </div>
        
         {/* Navbar */}
         <div>
-          <nav className="navbar absolute top-0 left-0 w-full bg-transparent">
+          <nav className="navbar absolute top-0 left-0 w-ful bg-transparent z-50">
             <div className="container mx-auto flex items-center justify-between">
               {/* Logo */}
               <div className=" w-20 md:w-32">
@@ -62,19 +59,19 @@ const Banner = () => {
 
               {/* Links (hidden on small devices) */}
               <div className="hidden md:flex space-x-4">
-                <a href="#Women" className="text-white hover:text-gray-200">
+                <a href="#Women" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                   Women
                 </a>
-                <a href="#Man" className="text-white hover:text-gray-200">
+                <a href="#Man" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                   Man
                 </a>
-                <a href="#content" className="text-white hover:text-gray-200">
+                <a href="#content" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                   Kids
                 </a>
-                <a href="#Accessories" className="text-white hover:text-gray-200">
+                <a href="#Accessories" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                 Accessories
                 </a>
-                <a href="#New" className="text-white hover:text-gray-200">
+                <a href="#New" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                 New Arrival
                 </a>
               </div>
@@ -85,13 +82,13 @@ const Banner = () => {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="input bg-transparent border  border-white input-xs md:input-sm rounded-full text-white focus:border-white focus:border-2 focus:ring-0"
+                    className="input bg-transparent border  border-white input-xs md:input-sm rounded-full text-[#C43882] font-sembold text-[20px] focus:border-white focus:border-2 focus:ring-0"
                   />
-                  <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-white" />
+                  <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold text-[20px]" />
                 </div>
                 <div className="relative group cursor-pointer">
-  <FaHeart className="text-white text-lg" size={22} />
-  <span className="badge badge-sm bg-red-500 text-white absolute -top-2 -right-2">
+  <FaHeart className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
+  <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
     3
   </span>
   <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
@@ -103,7 +100,7 @@ const Banner = () => {
 
                 {/* Menu icon (visible on small devices) */}
                 <button
-                  className="text-white md:hidden"
+                  className="text-[#C43882] font-sembold text-[20px] md:hidden"
                   onClick={() => setIsDrawerOpen(true)}
                 >
                   <FaBars className="text-xl" size={22} />

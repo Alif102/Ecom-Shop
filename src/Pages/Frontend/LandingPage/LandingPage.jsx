@@ -5,6 +5,7 @@ import ShopCollection from "../../../Component/Frontend/ShopCollection/ShopColle
 import BestSellers from "../../../Component/Frontend/HomePage/BestSellers/BestSellers";
 import Trends from "../../../Component/Frontend/HomePage/Trends/Trends";
 import FeatureProducts from "../../../Component/Frontend/HomePage/FeatureProducts/FeatureProducts";
+import Feature from "../../../Component/Frontend/HomePage/FeatureProducts/Feature";
 
 
 
@@ -19,20 +20,24 @@ const LandingPage = ({products}) => {
     <Banner/>
     </div>
 
-    <div className=" mt-24">
+    {/* <div className=" mt-24">
       <ShopCategory/>
+    </div> */}
+    <div className=" mt-16">
+      <Feature products={products}/>
     </div>
-    <div className=" mt-24">
+ 
+    {/* <div className=" mt-24">
       <ShopCollection/>
-    </div>
+    </div> */}
     <div className=" mt-24">
       <BestSellers products={products}/>
     </div>
-    <div className=" ">
+    {/* <div className=" ">
       <Trends/>
-    </div>
+    </div> */}
     <div className=" ">
-      <FeatureProducts/>
+      <FeatureProducts products={products}/>
     </div>
     </div>
   );

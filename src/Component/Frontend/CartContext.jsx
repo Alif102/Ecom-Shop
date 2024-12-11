@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 export const CartContext = createContext();
@@ -62,13 +63,28 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(updatedCart.reduce((acc, item) => acc + item.price, 0));
 
     // Show success message
-    Swal.fire({
-        icon: "success",
-        title: "Product added/updated in cart!",
-        text: `You now have ${updatedCart[existingProductIndex]?.quantity || quantityToAdd} of this product in your cart.`,
-        showConfirmButton: false,
-        timer: 1000,
-    });
+    // Swal.fire({
+    //     icon: "success",
+    //     title: "Product added/updated in cart!",
+    //     text: `You now have ${updatedCart[existingProductIndex]?.quantity || quantityToAdd} of this product in your cart.`,
+    //     showConfirmButton: false,
+    //     timer: 1000,
+    // });
+    toast(
+      <>
+        Product added successfully in your cart.<br /> 
+        {/* You now have {updatedCart[existingProductIndex]?.quantity || quantityToAdd} of this product in your cart. */}
+      </>,
+      {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#C43882',
+          color: '#fff',
+        },
+      }
+    );
+    
 };
 
   

@@ -1,10 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { TbRosetteDiscount } from "react-icons/tb";
-import { FaCopy } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { IoClose } from "react-icons/io5";
-import axios from "axios";
+
 
 
 import {
@@ -20,7 +16,7 @@ import { BsCart3 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { CartContext } from "../CartContext";
 import AddToCart from "./AddToCArt";
-
+import azmain from '../../../assets/azmain.png'
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -228,9 +224,9 @@ const Header = () => {
               {/* Middle Section: Company Logo */}
               <div className="flex-1 items-center justify-center text-center  ">
                 <Link to="/" className="">
-                  <div className="w-36 h-10 md:w-52 md:h-16 mx-auto overflow-hidden">
+                  <div className="w-80 h-10 md:w-[5%]  md:h-[2%] mx-auto overflow-hidden">
                     <img
-                      src="https://glorebd.com/assets/logo2.png"
+                      src={azmain}
                       alt="MyCompany Logo"
                       className="w-full h-full object-contain"
                     />

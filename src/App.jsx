@@ -5,6 +5,7 @@ import SingleProduct from './Pages/Frontend/SingleProduct/SIngleProduct'
 import axios from "axios";
 import CheckOut from "./Pages/Frontend/CheckOut/CheckOut";
 import ThankYou from "./Pages/Frontend/ThankYou";
+import Footer from "./Component/Frontend/Footer";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,7 @@ const App = () => {
 
       try {
      
-        const response = await axios.get("https://admin.ezicalc.com/api/product/get/7" ,{
+        const response = await axios.get("https://admin.ezicalc.com/api/product/get/15" ,{
           headers: {
               'Authorization': `Bearer ${token}`,
             },
@@ -55,6 +56,7 @@ const App = () => {
 
         </Routes>
       </Router>
+      <Footer/>
     </div>
   )
 }

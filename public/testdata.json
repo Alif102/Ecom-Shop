@@ -1,116 +1,192 @@
 [
     {
-    "id": 135,
-    
-    "name": "Art",
-    "short_desc": "hfhb",
-    "image": "7_4251_1730903463.webp",
-    "category_id": 4,
-    "is_published": 1,
-    "price": 2000,
-    "stock": 20,
-    "code": "EPP87741803",
-    "stock_location": null,
-    "buying_price": 500,
-    "has_variation": 0,
-    "is_discount": 0,
-    "discount_type": "fixed",
-    "discount_amount": "undefined",
-    "discount_date": "2024-11-21",
-    "stock_location_id": 2,
-    "created_by": 7,
-    "created_at": "2024-11-20T11:51:49.000000Z",
-    "updated_at": "2024-11-24T08:26:22.000000Z",
-    "product_variation": [   {
-        "id": 83,
-        "product_id": 174,
-        "variation_id": 14,
-        "variaton_values": "6 m-1.5y,2 y-2.5y,3 y-3.5y,4 y-5.5y,6 y-7.5y,8 y-9.5y,10 y-11.5y,12 y-13.5y,14 y-18y",
-        "created_at": "2024-11-27T04:22:07.000000Z",
-        "updated_at": "2024-11-27T04:22:07.000000Z",
-        "variation": {
-            "id": 14,
-            "name": "size"
-        }
-    }, 
-      {
-        "id": 84,
-        "product_id": 174,
-        "variation_id": 14,
-        "variaton_values": "34 , 35",
-        "created_at": "2024-11-27T04:22:07.000000Z",
-        "updated_at": "2024-11-27T04:22:07.000000Z",
-        "variation": {
-            "id": 14,
-            "name": "color"
-        }
-    }
-],
-    "variation_combinations": [ {
-        "id": 284,
-        "product_id": 174,
-        "values": "12 y-13.5y",
-        "buying_price": 1160,
-        "price": 2200,
-        "stock": 8,
-        "discount_date":"2024-11-22",
-        "discount": 111,
+        "id": 186,
+        "unique_id": "P-000186",
+        "client_id": 7,
+        "user_id": 7,
+        "business_id": "10,11",
+        "name": "Dress testt fgfddgb",
+        "short_desc": "fbhfgbh",
+        "image": "7_3046_1733826294.webp",
+        "category_id": 36,
+        "is_published": 1,
+        "price": 0,
+        "stock": 0,
+        "code": "EPP88907943",
+        "stock_location": null,
+        "buying_price": 0,
+        "has_variation": 1,
+        "is_discount": 0,
         "discount_type": "fixed",
-        "code": "EPP53745620",
-        "created_at": "2024-11-27T04:22:07.000000Z",
-        "updated_at": "2024-11-27T04:22:07.000000Z"
+        "discount_amount": null,
+        "discount_date": null,
+        "stock_location_id": 2,
+        "created_by": 7,
+        "created_at": "2024-12-10T10:27:13.000000Z",
+        "updated_at": "2024-12-10T10:27:13.000000Z",
+        "product_variation": [
+            {
+                "id": 98,
+                "product_id": 186,
+                "variation_id": 4,
+                "variaton_values": "black,red",
+                "created_at": "2024-12-10T10:27:13.000000Z",
+                "updated_at": "2024-12-10T10:27:13.000000Z",
+                "variation": {
+                    "id": 4,
+                    "name": "colour"
+                }
+            },
+            {
+                "id": 99,
+                "product_id": 186,
+                "variation_id": 2,
+                "variaton_values": "large",
+                "created_at": "2024-12-10T10:27:13.000000Z",
+                "updated_at": "2024-12-10T10:27:13.000000Z",
+                "variation": {
+                    "id": 2,
+                    "name": "Size"
+                }
+            }
+        ],
+        "variation_combinations": [
+            {
+                "id": 320,
+                "product_id": 186,
+                "values": "black,large",
+                "buying_price": 200,
+                "price": 800,
+                "stock": 441,
+                "discount_date": "2025-01-01",
+                "discount": 44,
+                "discount_type": "fixed",
+                "code": "EPP88907943",
+                "created_at": "2024-12-10T10:27:13.000000Z",
+                "updated_at": "2024-12-10T10:27:13.000000Z"
+            },
+            {
+                "id": 321,
+                "product_id": 186,
+                "values": "red,large",
+                "buying_price": 666,
+                "price": 5888,
+                "stock": 88,
+                "discount_date": "2024-12-25",
+                "discount": 88,
+                "discount_type": "fixed",
+                "code": "EPP88907943",
+                "created_at": "2024-12-10T10:27:13.000000Z",
+                "updated_at": "2024-12-10T10:27:13.000000Z"
+            }
+        ],
+        "category": {
+            "id": 36,
+            "name": "T-shirt"
+        },
+        "businesses": [
+            {
+                "id": 10,
+                "name": "Express IT BD",
+                "pivot": {
+                    "product_id": 186,
+                    "business_id": 10
+                }
+            },
+            {
+                "id": 11,
+                "name": "Womens Clothing",
+                "pivot": {
+                    "product_id": 186,
+                    "business_id": 11
+                }
+            }
+        ]
     },
-    {
-        "id": 285,
-        "product_id": 174,
-        "values": "14 y-18y",
-        "buying_price": 1160,
-        "price": 2200,
-        "stock": 6,
-        "discount_date": "2024-1-5",
-        "discount": 0,
-        "discount_type": "fixed",
-        "code": "EPP53745620",
-        "created_at": "2024-11-27T04:22:07.000000Z",
-        "updated_at": "2024-11-27T04:22:07.000000Z"
-    }
-],
-    "category": {
-        "id": 4,
-        "name": "Cloth"
-    }
-},
-{
-    "id": 135,
-    "unique_id": "P-000135",
-    "client_id": 7,
-    "user_id": 7,
-    "business_id": "18,11",
-    "name": "Art",
-    "short_desc": "hfhb",
-    "image": "7_4251_1730903463.webp",
-    "category_id": 4,
-    "is_published": 1,
-    "price": 2000,
-    "stock": 20,
-    "code": "EPP87741803",
-    "stock_location": null,
-    "buying_price": 500,
-    "has_variation": 0,
-    "is_discount": 0,
-    "discount_type": "fixed",
-    "discount_amount": "undefined",
-    "discount_date": "2024-11-21",
-    "stock_location_id": 2,
-    "created_by": 7,
-    "created_at": "2024-11-20T11:51:49.000000Z",
-    "updated_at": "2024-11-24T08:26:22.000000Z",
-    "product_variation": [],
-    "variation_combinations": [],
-    "category": {
-        "id": 4,
-        "name": "Cloth"
-    }
    
-}
+
+    {
+        "id": 100,
+        "unique_id": "P-000100",
+        "client_id": 7,
+        "user_id": 7,
+        "business_id": "11,10",
+        "name": "Dress 1",
+        "short_desc": "dgfdhgfdhb",
+        "image": "7_7743_1730961607.webp",
+        "category_id": 4,
+        "is_published": 1,
+        "price": 0,
+        "stock": 0,
+        "code": "EPP49727571",
+        "stock_location": null,
+        "buying_price": 0,
+        "has_variation": 1,
+        "is_discount": 0,
+        "discount_type": null,
+        "discount_amount": null,
+        "discount_date": null,
+        "stock_location_id": 2,
+        "created_by": 7,
+        "created_at": "2024-11-11T09:59:26.000000Z",
+        "updated_at": "2024-11-11T09:59:26.000000Z",
+        "product_variation": [
+            {
+                "id": 27,
+                "product_id": 100,
+                "variation_id": 3,
+                "variaton_values": "black",
+                "created_at": "2024-11-11T09:59:26.000000Z",
+                "updated_at": "2024-11-11T09:59:26.000000Z",
+                "variation": null
+            },
+            {
+                "id": 28,
+                "product_id": 100,
+                "variation_id": 2,
+                "variaton_values": "large,small",
+                "created_at": "2024-11-11T09:59:26.000000Z",
+                "updated_at": "2024-11-11T09:59:26.000000Z",
+                "variation": {
+                    "id": 2,
+                    "name": "Size"
+                }
+            }
+        ],
+        "variation_combinations": [
+            {
+                "id": 25,
+                "product_id": 100,
+                "values": "black,large",
+                "buying_price": 500,
+                "price": 800,
+                "stock": 40,
+                "discount_date": "2024-11-13",
+                "discount": 20,
+                "discount_type": null,
+                "code": "EPP49727571",
+                "created_at": "2024-11-11T09:59:26.000000Z",
+                "updated_at": "2024-11-15T13:24:59.000000Z"
+            },
+            {
+                "id": 26,
+                "product_id": 100,
+                "values": "black,small",
+                "buying_price": 200,
+                "price": 600,
+                "stock": 50,
+                "discount_date": "2024-11-12",
+                "discount": 30,
+                "discount_type": null,
+                "code": "EPP49727571",
+                "created_at": "2024-11-11T09:59:26.000000Z",
+                "updated_at": "2024-11-11T09:59:26.000000Z"
+            }
+        ],
+        "category": {
+            "id": 4,
+            "name": "Cloth"
+        },
+        "businesses": []
+    }
 ]
