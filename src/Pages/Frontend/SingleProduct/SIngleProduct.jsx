@@ -1,6 +1,6 @@
 
 
-import { FaCartShopping, FaMinus } from "react-icons/fa6";
+import { FaCartShopping } from "react-icons/fa6";
 
 
 
@@ -15,7 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 
 
 // Import Swiper styles
-import { FaPlus } from "react-icons/fa"; // Import the icon
+import { FaArrowUp, FaPlus } from "react-icons/fa"; // Import the icon
 
 
 
@@ -23,6 +23,7 @@ import { CartContext } from "../../../Component/Frontend/CartContext";
 import Header from "../../../Component/Frontend/Header/Header";
 import ScrollToTop from "../../../Component/Frontend/ScrollToTop";
 import AddToCart from "../../../Component/Frontend/Header/AddToCArt";
+import { BsArrowUpSquare } from "react-icons/bs";
 // import toast from "react-hot-toast";
 
 const SingleProduct = ({ products }) => {
@@ -37,7 +38,7 @@ const SingleProduct = ({ products }) => {
   const [currentId, setCurrentId] = useState("");
 
   const [currentVariation, setCurrentVariation] = useState([]);
-
+console.log(selectedVariations)
   const [currentPrice, setCurrentPrice] = useState("");
   const [currentStock, setCurrentStock] = useState(0);
 
@@ -122,6 +123,23 @@ const SingleProduct = ({ products }) => {
 
   console.log(productCount)
   console.log(product)
+  useEffect(() => {
+    if (product && product.variation_combinations.length > 0) {
+      const prices = product.variation_combinations.map((variation) => {
+        const variationDiscountEndDate = new Date(variation.discount_date);
+        const isDiscountActive =
+          variation.discount > 0 && variationDiscountEndDate >= new Date();
+        return isDiscountActive
+          ? variation.price - variation.discount
+          : variation.price;
+      });
+  
+      const minPrice = Math.min(...prices);
+      const maxPrice = Math.max(...prices);
+      setCurrentPrice(minPrice === maxPrice ? minPrice : `${minPrice} - ${maxPrice}`);
+    }
+  }, [product]);
+  
   const handleVariationChange = (variationType, value) => {
     const updatedVariations = { ...selectedVariations, [variationType]: value };
     setSelectedVariations(updatedVariations);
@@ -134,30 +152,20 @@ const SingleProduct = ({ products }) => {
     );
   
     if (combination) {
-      const newId = `v${combination.id}`;
-      setCurrentId(newId);
-  
-      const newVariation = combination;
-      setCurrentVariation(newVariation);
-  
-      const variationDiscountEndDate = new Date(combination.discount_date);
-      const currentDate = new Date();
-      const isDiscountActive =
-        combination.discount > 0 && variationDiscountEndDate >= currentDate;
-  
-      const priceToDisplay = isDiscountActive
-        ? combination.price - combination.discount
-        : combination.price;
+      const priceToDisplay =
+        combination.discount > 0 &&
+        new Date(combination.discount_date) >= new Date()
+          ? combination.price - combination.discount
+          : combination.price;
   
       setCurrentPrice(priceToDisplay);
       setCurrentStock(combination.stock);
     } else {
-      // Reset variation and set default pricing if no combination is found
-      setCurrentVariation(null); // Reset current variation
+      // Reset to default Min Price - Max Price
       const prices = product.variation_combinations.map((variation) => {
-        const variationDiscountEndDate = new Date(variation.discount_date);
         const isDiscountActive =
-          variation.discount > 0 && variationDiscountEndDate >= new Date();
+          variation.discount > 0 &&
+          new Date(variation.discount_date) >= new Date();
         return isDiscountActive
           ? variation.price - variation.discount
           : variation.price;
@@ -165,24 +173,27 @@ const SingleProduct = ({ products }) => {
   
       const minPrice = Math.min(...prices);
       const maxPrice = Math.max(...prices);
-  
       setCurrentPrice(minPrice === maxPrice ? minPrice : `${minPrice} - ${maxPrice}`);
       setCurrentStock(0);
     }
   };
   
+  
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
   const handleAddToCart = (e) => {
-    if (!currentPrice) {
-      setIsToastVisible(true); // Show toast if no price is selected
-      setTimeout(() => setIsToastVisible(false), 4000); // Hide toast after 3 seconds
-      e.preventDefault(); // Prevent redirection if no price is selected
+    if (Object.keys(selectedVariations).length === 0) {
+      // Show the warning if no variation is selected
+      setIsToastVisible(true);
+      e.preventDefault(); // Prevent redirection if no variation is selected
     } else {
+      setIsToastVisible(false); // Hide the warning when a variation is selected
       addToCart(product, productCount, currentId, currentVariation, currentPrice);
     }
   };
+  
+  
   return (
     <div className="pb-28 md:pb-0 ">
       <Header />
@@ -216,16 +227,17 @@ const SingleProduct = ({ products }) => {
             <p className="text-sm md:text-base text-gray-500 mt-0 md:mt-2">
               SKU: {product.code}
             </p>
-            <div className="flex items-center space-x-0 md:space-x-4 mt-0 md:mt-4 flex-col md:flex-row">
-              {product.is_discount === 1 && (
-                <span className="text-md md:text-lg text-gray-400 line-through">
-                  ৳{product.discount_amount}
-                </span>
-              )}
-              <span className="text-lg md:text-2xl font-bold text-[#C43882]">
-                <h2>Price: ৳ {currentPrice}</h2>
-              </span>
-            </div>
+           <div className="flex items-center space-x-0 md:space-x-4 mt-0 md:mt-4 flex-col md:flex-row">
+  <span className="text-lg flex gap-3 md:text-2xl font-semibold text-[#C43882]">
+    <h2>
+      {typeof currentPrice === "string" && currentPrice.includes("-")
+        ? "Min Price - Max Price :"
+        : "Price :"}
+    </h2>
+    <h2>৳ {currentPrice}</h2>
+  </span>
+</div>
+
           </div>
 
           <ul className="space-y-4 mt-3">
@@ -256,6 +268,11 @@ const SingleProduct = ({ products }) => {
               <li>No variations available</li>
             )}
           </ul>
+          {isToastVisible && (
+  <div className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
+    Please choose a variant. <BsArrowUpSquare size={23}  />
+  </div>
+)}
 
           <div className="py-2 flex md:flex-col flex-row items-center md:items-start justify-between">
             <div className="mt-2 md:mt-4">
@@ -277,31 +294,32 @@ const SingleProduct = ({ products }) => {
               </div>
             </div>
           </div>
+         
 
           <div className="hidden md:block mt-6 space-y-4">
             <button
               onClick={handleAddToCart}
-              className="w-full py-2 md:py-3 bg-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition"
+              className="w-full py-2 md:py-3 bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition"
             >
-              কিনতে চাই
+             কার্ট এ যোগ করুন
             </button>
 
             <Link to="/checkout">
               <button
                 onClick={(e) => handleAddToCart(e)}
-                className="w-full py-2 mt-3 md:py-3 bg-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition text-center block"
+                className="w-full py-2 mt-3 md:py-3 bg-gradient-to-l from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition text-center block"
               >
                 অর্ডার করুন
               </button>
             </Link>
-            {isToastVisible && (
+            {/* {isToastVisible && (
               <div
-                className="fixed top-20 right-5 animate-bounce transform -translate-x-1/2 bg-[#C43882] text-white px-4 py-2 rounded shadow-lg transition-all duration-500 ease-in-out"
+                className="fixed top-20 right-5 animate-bounce transform -translate-x-1/2 bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white px-4 py-2 rounded shadow-lg transition-all duration-500 ease-in-out"
                 style={{ transform: 'translateX(-50%)' }}
               >
                 <p>Please choose a Variant. 🤨</p>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="mt-4 border-t border-gray-200">
@@ -397,13 +415,13 @@ const SingleProduct = ({ products }) => {
       </div>
     </div>
 
-   <button
+   {/* <button
                   onClick={() => addToCart(product)}
-                  className="absolute bottom-28 right-3 bg-[#C43882] text-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-[#a72e6e] transition "
+                  className="absolute bottom-20 right-3 bg-[#C43882] text-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-[#a72e6e] transition "
                   title="Add to Cart"
                 >
                   <FaPlus />
-                </button>
+                </button> */}
   </div>
 </Link>
 
@@ -485,7 +503,7 @@ const SingleProduct = ({ products }) => {
         <div className="gap-2 md:hidden fixed flex flex-row items-center justify-between bottom-0 w-full bg-gradient-to-t from-gray-50 to-white shadow-lg z-20 px-6 py-4">
           <Link
  onClick={(e) => handleAddToCart(e)} 
-             className="flex-1 bg-[#C43882] text-white font-medium text-lg py-2 rounded-full shadow-lg text-center "  disabled={!currentPrice} 
+             className="flex-1 bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-medium text-lg py-2 rounded-full shadow-lg text-center "  disabled={!currentVariation} 
           >
             অর্ডার করুন
           </Link>

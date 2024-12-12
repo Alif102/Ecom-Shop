@@ -53,8 +53,8 @@ const Banner = () => {
           <nav className="navbar absolute top-0 left-0 w-ful bg-transparent z-50">
             <div className="container mx-auto flex items-center justify-between">
               {/* Logo */}
-              <div className=" w-20 md:w-32">
-              <img src={azmain} alt="logo" srcset="" />
+              <div className=" w-20 h-20  md:w-32 ">
+              <img src={azmain}  alt="logo" srcset="" />
               </div>
 
               {/* Links (hidden on small devices) */}
@@ -82,7 +82,7 @@ const Banner = () => {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="input bg-transparent border  border-white input-xs md:input-sm rounded-full text-[#C43882] font-sembold text-[20px] focus:border-white focus:border-2 focus:ring-0"
+                    className="input bg-transparent border w-32 md:w-full  border-white input-xs  md:input-sm rounded-full text-[#C43882] font-sembold text-[20px] focus:border-white focus:border-2 focus:ring-0"
                   />
                   <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold text-[20px]" />
                 </div>

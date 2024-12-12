@@ -32,7 +32,7 @@ const Feature = ({ products }) => {
                     <button
                         key={index}
                         onClick={() => setSelectedCategory(category)}
-                        className={`inline-block px-2 md:px-3 py-1 rounded-md lg:rounded-full  ${selectedCategory === category
+                        className={` whitespace-nowrap px-2 md:px-3 py-1 mb-1 rounded-md lg:rounded-full  ${selectedCategory === category
                                 ? "bg-pink-700 text-white"
                                 : "bg-pink-200 text-pink-700"
                             }`}
