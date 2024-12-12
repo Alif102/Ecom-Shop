@@ -1,18 +1,18 @@
 [
     {
-        "id": 186,
-        "unique_id": "P-000186",
-        "client_id": 7,
-        "user_id": 7,
-        "business_id": "10,11",
-        "name": "Dress testt fgfddgb",
-        "short_desc": "fbhfgbh",
-        "image": "7_3046_1733826294.webp",
-        "category_id": 36,
+        "id": "v250",
+        "unique_id": "P-000170",
+        "client_id": 15,
+        "user_id": 15,
+        "business_id": "16,21",
+        "name": "BS-07",
+        "short_desc": "BOSS SET-07",
+        "image": "15_4372_1732287568.webp",
+        "category_id": 48,
         "is_published": 1,
-        "price": 0,
+        "price": 1950,
         "stock": 0,
-        "code": "EPP88907943",
+        "code": "EPP75955843",
         "stock_location": null,
         "buying_price": 0,
         "has_variation": 1,
@@ -20,173 +20,643 @@
         "discount_type": "fixed",
         "discount_amount": null,
         "discount_date": null,
-        "stock_location_id": 2,
-        "created_by": 7,
-        "created_at": "2024-12-10T10:27:13.000000Z",
-        "updated_at": "2024-12-10T10:27:13.000000Z",
+        "stock_location_id": 6,
+        "created_by": 15,
+        "created_at": "2024-11-22T15:03:23.000000Z",
+        "updated_at": "2024-11-22T15:03:23.000000Z",
         "product_variation": [
             {
-                "id": 98,
-                "product_id": 186,
-                "variation_id": 4,
-                "variaton_values": "black,red",
-                "created_at": "2024-12-10T10:27:13.000000Z",
-                "updated_at": "2024-12-10T10:27:13.000000Z",
+                "id": 79,
+                "product_id": 170,
+                "variation_id": 15,
+                "variaton_values": "2 y-3.5y,4 y-5.5y,6 y-7.5y,8 y-9.5y,10 y-11.5y,12 y-13.5y,14 y-16y",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z",
                 "variation": {
-                    "id": 4,
-                    "name": "colour"
-                }
-            },
-            {
-                "id": 99,
-                "product_id": 186,
-                "variation_id": 2,
-                "variaton_values": "large",
-                "created_at": "2024-12-10T10:27:13.000000Z",
-                "updated_at": "2024-12-10T10:27:13.000000Z",
-                "variation": {
-                    "id": 2,
-                    "name": "Size"
+                    "id": 15,
+                    "name": "KIDS BOSS SET"
                 }
             }
         ],
         "variation_combinations": [
             {
-                "id": 320,
-                "product_id": 186,
-                "values": "black,large",
-                "buying_price": 200,
-                "price": 800,
-                "stock": 441,
-                "discount_date": "2025-01-01",
-                "discount": 44,
+                "id": 245,
+                "product_id": 170,
+                "values": "2 y-3.5y",
+                "buying_price": 1090,
+                "price": 1550,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
                 "discount_type": "fixed",
-                "code": "EPP88907943",
-                "created_at": "2024-12-10T10:27:13.000000Z",
-                "updated_at": "2024-12-10T10:27:13.000000Z"
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
             },
             {
-                "id": 321,
-                "product_id": 186,
-                "values": "red,large",
-                "buying_price": 666,
-                "price": 5888,
-                "stock": 88,
-                "discount_date": "2024-12-25",
-                "discount": 88,
+                "id": 246,
+                "product_id": 170,
+                "values": "4 y-5.5y",
+                "buying_price": 1090,
+                "price": 1550,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
                 "discount_type": "fixed",
-                "code": "EPP88907943",
-                "created_at": "2024-12-10T10:27:13.000000Z",
-                "updated_at": "2024-12-10T10:27:13.000000Z"
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
+            },
+            {
+                "id": 247,
+                "product_id": 170,
+                "values": "6 y-7.5y",
+                "buying_price": 1140,
+                "price": 1750,
+                "stock": 3,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
+            },
+            {
+                "id": 248,
+                "product_id": 170,
+                "values": "8 y-9.5y",
+                "buying_price": 1140,
+                "price": 1750,
+                "stock": 4,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-05T05:33:25.000000Z"
+            },
+            {
+                "id": 249,
+                "product_id": 170,
+                "values": "10 y-11.5y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 23,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-09T12:03:08.000000Z"
+            },
+            {
+                "id": 250,
+                "product_id": 170,
+                "values": "12 y-13.5y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 10,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-07T15:25:49.000000Z"
+            },
+            {
+                "id": 251,
+                "product_id": 170,
+                "values": "14 y-16y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 9,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
             }
         ],
         "category": {
-            "id": 36,
-            "name": "T-shirt"
+            "id": 48,
+            "name": "KIDS BOSS SET"
         },
         "businesses": [
             {
-                "id": 10,
-                "name": "Express IT BD",
+                "id": 16,
+                "name": "Azmain Fashion",
                 "pivot": {
-                    "product_id": 186,
-                    "business_id": 10
+                    "product_id": 170,
+                    "business_id": 16
                 }
             },
             {
-                "id": 11,
-                "name": "Womens Clothing",
+                "id": 21,
+                "name": "AZMAIN KIDS MART",
                 "pivot": {
-                    "product_id": 186,
-                    "business_id": 11
+                    "product_id": 170,
+                    "business_id": 21
                 }
             }
-        ]
+        ],
+        "quantity": 1,
+        "unitPrice": 1950,
+        "variation_values": "12 y-13.5y",
+        "variationDetails": {
+            "id": 250,
+            "product_id": 170,
+            "values": "12 y-13.5y",
+            "buying_price": 1220,
+            "price": 1950,
+            "stock": 10,
+            "discount_date": null,
+            "discount": 0,
+            "discount_type": "fixed",
+            "code": "EPP75955843",
+            "created_at": "2024-11-22T15:03:23.000000Z",
+            "updated_at": "2024-12-07T15:25:49.000000Z"
+        }
     },
-   
-
     {
-        "id": 100,
-        "unique_id": "P-000100",
-        "client_id": 7,
-        "user_id": 7,
-        "business_id": "11,10",
-        "name": "Dress 1",
-        "short_desc": "dgfdhgfdhb",
-        "image": "7_7743_1730961607.webp",
-        "category_id": 4,
+        "id": "v246",
+        "unique_id": "P-000170",
+        "client_id": 15,
+        "user_id": 15,
+        "business_id": "16,21",
+        "name": "BS-07",
+        "short_desc": "BOSS SET-07",
+        "image": "15_4372_1732287568.webp",
+        "category_id": 48,
         "is_published": 1,
-        "price": 0,
+        "price": 6200,
         "stock": 0,
-        "code": "EPP49727571",
+        "code": "EPP75955843",
         "stock_location": null,
         "buying_price": 0,
         "has_variation": 1,
         "is_discount": 0,
-        "discount_type": null,
+        "discount_type": "fixed",
         "discount_amount": null,
         "discount_date": null,
-        "stock_location_id": 2,
-        "created_by": 7,
-        "created_at": "2024-11-11T09:59:26.000000Z",
-        "updated_at": "2024-11-11T09:59:26.000000Z",
+        "stock_location_id": 6,
+        "created_by": 15,
+        "created_at": "2024-11-22T15:03:23.000000Z",
+        "updated_at": "2024-11-22T15:03:23.000000Z",
         "product_variation": [
             {
-                "id": 27,
-                "product_id": 100,
-                "variation_id": 3,
-                "variaton_values": "black",
-                "created_at": "2024-11-11T09:59:26.000000Z",
-                "updated_at": "2024-11-11T09:59:26.000000Z",
-                "variation": null
-            },
-            {
-                "id": 28,
-                "product_id": 100,
-                "variation_id": 2,
-                "variaton_values": "large,small",
-                "created_at": "2024-11-11T09:59:26.000000Z",
-                "updated_at": "2024-11-11T09:59:26.000000Z",
+                "id": 79,
+                "product_id": 170,
+                "variation_id": 15,
+                "variaton_values": "2 y-3.5y,4 y-5.5y,6 y-7.5y,8 y-9.5y,10 y-11.5y,12 y-13.5y,14 y-16y",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z",
                 "variation": {
-                    "id": 2,
-                    "name": "Size"
+                    "id": 15,
+                    "name": "KIDS BOSS SET"
                 }
             }
         ],
         "variation_combinations": [
             {
-                "id": 25,
-                "product_id": 100,
-                "values": "black,large",
-                "buying_price": 500,
-                "price": 800,
-                "stock": 40,
-                "discount_date": "2024-11-13",
-                "discount": 20,
-                "discount_type": null,
-                "code": "EPP49727571",
-                "created_at": "2024-11-11T09:59:26.000000Z",
-                "updated_at": "2024-11-15T13:24:59.000000Z"
+                "id": 245,
+                "product_id": 170,
+                "values": "2 y-3.5y",
+                "buying_price": 1090,
+                "price": 1550,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
             },
             {
-                "id": 26,
-                "product_id": 100,
-                "values": "black,small",
-                "buying_price": 200,
-                "price": 600,
-                "stock": 50,
-                "discount_date": "2024-11-12",
-                "discount": 30,
-                "discount_type": null,
-                "code": "EPP49727571",
-                "created_at": "2024-11-11T09:59:26.000000Z",
-                "updated_at": "2024-11-11T09:59:26.000000Z"
+                "id": 246,
+                "product_id": 170,
+                "values": "4 y-5.5y",
+                "buying_price": 1090,
+                "price": 1550,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
+            },
+            {
+                "id": 247,
+                "product_id": 170,
+                "values": "6 y-7.5y",
+                "buying_price": 1140,
+                "price": 1750,
+                "stock": 3,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
+            },
+            {
+                "id": 248,
+                "product_id": 170,
+                "values": "8 y-9.5y",
+                "buying_price": 1140,
+                "price": 1750,
+                "stock": 4,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-05T05:33:25.000000Z"
+            },
+            {
+                "id": 249,
+                "product_id": 170,
+                "values": "10 y-11.5y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 23,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-09T12:03:08.000000Z"
+            },
+            {
+                "id": 250,
+                "product_id": 170,
+                "values": "12 y-13.5y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 10,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-12-07T15:25:49.000000Z"
+            },
+            {
+                "id": 251,
+                "product_id": 170,
+                "values": "14 y-16y",
+                "buying_price": 1220,
+                "price": 1950,
+                "stock": 9,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP75955843",
+                "created_at": "2024-11-22T15:03:23.000000Z",
+                "updated_at": "2024-11-22T15:03:23.000000Z"
             }
         ],
         "category": {
-            "id": 4,
-            "name": "Cloth"
+            "id": 48,
+            "name": "KIDS BOSS SET"
         },
-        "businesses": []
+        "businesses": [
+            {
+                "id": 16,
+                "name": "Azmain Fashion",
+                "pivot": {
+                    "product_id": 170,
+                    "business_id": 16
+                }
+            },
+            {
+                "id": 21,
+                "name": "AZMAIN KIDS MART",
+                "pivot": {
+                    "product_id": 170,
+                    "business_id": 21
+                }
+            }
+        ],
+        "quantity": 4,
+        "unitPrice": 1550,
+        "variation_values": "4 y-5.5y",
+        "variationDetails": {
+            "id": 246,
+            "product_id": 170,
+            "values": "4 y-5.5y",
+            "buying_price": 1090,
+            "price": 1550,
+            "stock": 2,
+            "discount_date": null,
+            "discount": 0,
+            "discount_type": "fixed",
+            "code": "EPP75955843",
+            "created_at": "2024-11-22T15:03:23.000000Z",
+            "updated_at": "2024-11-22T15:03:23.000000Z"
+        }
+    },
+    {
+        "id": "v146",
+        "unique_id": "P-000150",
+        "client_id": 15,
+        "user_id": 15,
+        "business_id": "21,16",
+        "name": "PS-21",
+        "short_desc": "PRINCE SET-21",
+        "image": "15_8410_1732171217.webp",
+        "category_id": 45,
+        "is_published": 1,
+        "price": 11750,
+        "stock": 0,
+        "code": "EPP50110513",
+        "stock_location": null,
+        "buying_price": 0,
+        "has_variation": 1,
+        "is_discount": 0,
+        "discount_type": "fixed",
+        "discount_amount": null,
+        "discount_date": null,
+        "stock_location_id": 6,
+        "created_by": 15,
+        "created_at": "2024-11-21T06:42:37.000000Z",
+        "updated_at": "2024-11-21T06:42:37.000000Z",
+        "product_variation": [
+            {
+                "id": 59,
+                "product_id": 150,
+                "variation_id": 11,
+                "variaton_values": "2 y-2.5 y,4 y-5.5 y,6 y-7.5 y,8 y- 9.5 y,12 y-13.5 y",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z",
+                "variation": {
+                    "id": 11,
+                    "name": "KIDS PANJABI KOTI SET"
+                }
+            }
+        ],
+        "variation_combinations": [
+            {
+                "id": 142,
+                "product_id": 150,
+                "values": "2 y-2.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 143,
+                "product_id": 150,
+                "values": "4 y-5.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 5,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 144,
+                "product_id": 150,
+                "values": "6 y-7.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 9,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 145,
+                "product_id": 150,
+                "values": "8 y- 9.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 7,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 146,
+                "product_id": 150,
+                "values": "12 y-13.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 1,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            }
+        ],
+        "category": {
+            "id": 45,
+            "name": "KIDS PANJABI KOTI SET"
+        },
+        "businesses": [
+            {
+                "id": 16,
+                "name": "Azmain Fashion",
+                "pivot": {
+                    "product_id": 150,
+                    "business_id": 16
+                }
+            },
+            {
+                "id": 21,
+                "name": "AZMAIN KIDS MART",
+                "pivot": {
+                    "product_id": 150,
+                    "business_id": 21
+                }
+            }
+        ],
+        "quantity": 5,
+        "unitPrice": 2350,
+        "variation_values": "12 y-13.5 y",
+        "variationDetails": {
+            "id": 146,
+            "product_id": 150,
+            "values": "12 y-13.5 y",
+            "buying_price": 1350,
+            "price": 2350,
+            "stock": 1,
+            "discount_date": null,
+            "discount": 0,
+            "discount_type": "fixed",
+            "code": "EPP50110513",
+            "created_at": "2024-11-21T06:42:37.000000Z",
+            "updated_at": "2024-11-21T06:42:37.000000Z"
+        }
+    },
+    {
+        "id": "v144",
+        "unique_id": "P-000150",
+        "client_id": 15,
+        "user_id": 15,
+        "business_id": "21,16",
+        "name": "PS-21",
+        "short_desc": "PRINCE SET-21",
+        "image": "15_8410_1732171217.webp",
+        "category_id": 45,
+        "is_published": 1,
+        "price": 7050,
+        "stock": 0,
+        "code": "EPP50110513",
+        "stock_location": null,
+        "buying_price": 0,
+        "has_variation": 1,
+        "is_discount": 0,
+        "discount_type": "fixed",
+        "discount_amount": null,
+        "discount_date": null,
+        "stock_location_id": 6,
+        "created_by": 15,
+        "created_at": "2024-11-21T06:42:37.000000Z",
+        "updated_at": "2024-11-21T06:42:37.000000Z",
+        "product_variation": [
+            {
+                "id": 59,
+                "product_id": 150,
+                "variation_id": 11,
+                "variaton_values": "2 y-2.5 y,4 y-5.5 y,6 y-7.5 y,8 y- 9.5 y,12 y-13.5 y",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z",
+                "variation": {
+                    "id": 11,
+                    "name": "KIDS PANJABI KOTI SET"
+                }
+            }
+        ],
+        "variation_combinations": [
+            {
+                "id": 142,
+                "product_id": 150,
+                "values": "2 y-2.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 2,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 143,
+                "product_id": 150,
+                "values": "4 y-5.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 5,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 144,
+                "product_id": 150,
+                "values": "6 y-7.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 9,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 145,
+                "product_id": 150,
+                "values": "8 y- 9.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 7,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            },
+            {
+                "id": 146,
+                "product_id": 150,
+                "values": "12 y-13.5 y",
+                "buying_price": 1350,
+                "price": 2350,
+                "stock": 1,
+                "discount_date": null,
+                "discount": 0,
+                "discount_type": "fixed",
+                "code": "EPP50110513",
+                "created_at": "2024-11-21T06:42:37.000000Z",
+                "updated_at": "2024-11-21T06:42:37.000000Z"
+            }
+        ],
+        "category": {
+            "id": 45,
+            "name": "KIDS PANJABI KOTI SET"
+        },
+        "businesses": [
+            {
+                "id": 16,
+                "name": "Azmain Fashion",
+                "pivot": {
+                    "product_id": 150,
+                    "business_id": 16
+                }
+            },
+            {
+                "id": 21,
+                "name": "AZMAIN KIDS MART",
+                "pivot": {
+                    "product_id": 150,
+                    "business_id": 21
+                }
+            }
+        ],
+        "quantity": 3,
+        "unitPrice": 2350,
+        "variation_values": "6 y-7.5 y",
+        "variationDetails": {
+            "id": 144,
+            "product_id": 150,
+            "values": "6 y-7.5 y",
+            "buying_price": 1350,
+            "price": 2350,
+            "stock": 9,
+            "discount_date": null,
+            "discount": 0,
+            "discount_type": "fixed",
+            "code": "EPP50110513",
+            "created_at": "2024-11-21T06:42:37.000000Z",
+            "updated_at": "2024-11-21T06:42:37.000000Z"
+        }
     }
 ]

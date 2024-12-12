@@ -41,7 +41,7 @@ const App = () => {
       fetchApiData();
     }, []);
   
-    console.log(products);
+    // console.log(products);
   return (
     <div>
      

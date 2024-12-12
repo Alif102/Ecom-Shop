@@ -22,7 +22,6 @@ const Header = () => {
 
   const { cartCount } = useContext(CartContext);
 
-  console.log(cartCount);
  
   useEffect(() => {
     const handleScroll = () => {

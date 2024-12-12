@@ -15,10 +15,10 @@ const CheckOut = () => {
 
   const navigate = useNavigate();
 
-  const {cart , totalPrice} = useContext(CartContext);
+  const { cart, totalPrice } = useContext(CartContext);
 
-  console.log(cart);
-
+const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
+// console.log(ttt)
   const [errors, setErrors] = useState({});
 
   const [name, setName] = useState("");
@@ -45,37 +45,6 @@ const CheckOut = () => {
   // Size Selection state
   const [selectedSize, setSelectedSize] = useState(null);
 
-  // Product Count state
-
-  // Fetch products from localStorage when the component mounts
-  // useEffect(() => {
-  //   const storedProducts = localStorage.getItem("cart");
-  //   if (storedProducts) {
-  //     const parsedProducts = JSON.parse(storedProducts);
-  //     setProducts(parsedProducts);
-  //   }
-  // }, []);
-
-  // // Function to increase quantity of a specific product
-
-  // const totalPrice = products.reduce(
-  //   (acc, product) => acc + product.price * product.quantity,
-  //   0
-  // );
-
-  // useEffect(() => {
-  //   const storedProducts = localStorage.getItem("cart");
-  //   if (storedProducts) {
-  //     const parsedProducts = JSON.parse(storedProducts);
-  //     setProducts(parsedProducts);
-  //   }
-  // }, []);
-  
-  // Calculate item totals for each product and then sum them up to get total price
-  // const totalPrice = cart.reduce((product) => {
-  //   const itemTotal = product.price * product.quantity;  // Calculate item total
-  //   return  itemTotal;  // Add item total to the accumulator
-  // }, 0);
 
   // Delivery Charge Logic Start
   const [deliveryFee, setDeliveryFee] = useState(0);
@@ -95,26 +64,20 @@ const CheckOut = () => {
 
   const total = totalPrice + deliveryFee;
 
-  // const handleProceedToPayment = () => {
-  //   // Show the popup
-  //   setIsPopupVisible(true);
-  // };
 
   const closePopup = () => {
     // Hide the popup
     setIsPopupVisible(false);
   };
 
-  const orderData = {
-    products,
-    total: totalPrice + deliveryFee,
-    deliveryFee,
-  };
 
-  useEffect(() => {
-    console.log(products);
-  }, []);
+  const sProductQty = cart
+  .filter((product) => product.has_variation === 0)
+  .map((product) => product.quantity);
 
+  const vProductQty = cart
+  .filter((product) => product.has_variation === 1)
+  .map((product) => product.quantity);
   // Create an axios instance for common configuration
 
   const handleSave = async (e) => {
@@ -122,22 +85,22 @@ const CheckOut = () => {
 
     const formData = new FormData();
 
+
+    formData.append("client_id", 15);
+    formData.append("product_ids", cart.map((product) => product.id));
+    // formData.append( "s_product_qty", cart.map((product) => product.quantity));
+    // formData.append( "v_product_qty", cart.map((product) => product.quantity));
+
+    formData.append("s_product_qty", sProductQty.length > 0 ? sProductQty : null);
     formData.append(
-      "product_ids",
-      cart.map((product) => product.id)
-    );
-    formData.append(
-      "s_product_qty",
-      cart.map((product) => product.quantity)
-    );
+      "v_product_qty",
+      vProductQty.length > 0 ? vProductQty.join(",") : null
+    );    formData.append("business_id", cart[0]?.businesses[0]?.id || "" );
     formData.append("c_name", name);
     formData.append("c_phone", phone);
-    // formData.append('courier', courier);
-    // formData.append('note', note);
-    formData.append("source", "online");
+   
     formData.append("address", address);
-    formData.append("discount_amount", 200);
-    formData.append("delivery_charge", deliveryCharge);
+    formData.append("delivery_charge", deliveryFee);
     formData.append("cod_amount", total);
     for (let [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
@@ -153,6 +116,7 @@ const CheckOut = () => {
 
       console.log(response);
       if (response.data.status) {
+        
         console.log(response.data.data.id);
 
         // Reset form fields
@@ -314,7 +278,7 @@ const CheckOut = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <p>Subtotal:</p>
-                    <p className="font-medium">৳{totalPrice}</p>
+                    <p className="font-medium">৳{cod_amount}</p>
                   </div>
                   <div className="flex justify-between mt-4">
                     <p>Delivery fee:</p>
@@ -345,44 +309,44 @@ const CheckOut = () => {
                 Your Products
               </h2>
               <div className="space-y-4">
-              {cart.map((product) => (
-  <div
-    key={product.id}
-    className="flex items-center justify-between border-b pb-3"
-  >
-    <div className="flex items-center">
-      <div className="relative">
-        <img
-          src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
-          alt="Product Image"
-          className="w-16 h-20 rounded-md mr-4"
-        />
-        {product.quantity > 0 && (
-          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-            {product.quantity}
-          </span>
-        )}
-      </div>
+                {cart.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center justify-between border-b pb-3"
+                  >
+                    <div className="flex items-center">
+                      <div className="relative">
+                        <img
+                          src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                          alt="Product Image"
+                          className="w-16 h-20 rounded-md mr-4"
+                        />
+                        {product.quantity > 0 && (
+                          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                            {product.quantity}
+                          </span>
+                        )}
+                      </div>
 
-      <div>
-        <h3 className="text-lg font-medium">{product.name}</h3>
+                      <div>
+                        <h3 className="text-lg font-medium">{product.name}</h3>
 
-        <h3 className="text-md font-medium">
-        {product.variation_values || ""}
-        </h3>
+                        <h3 className="text-md font-medium">
+                          {product.variation_values || ""}
+                        </h3>
 
-        <p className="text-gray-600">
-      product price: {product.price} ৳
-        </p>
-      </div>
-    </div>
-    <p className="font-medium text-gray-800 flex items-center gap-1 text-[20px]">
-      <span className="text-[20px]">
-        ৳ {product.unitPrice * product.quantity}
-      </span>
-    </p>
-  </div>
-))}
+                        <p className="text-gray-600">
+                          product price: {product.price} ৳
+                        </p>
+                      </div>
+                    </div>
+                    <p className="font-medium text-gray-800 flex items-center gap-1 text-[20px]">
+                      <span className="text-[20px]">
+                        ৳ {product.unitPrice * product.quantity}
+                      </span>
+                    </p>
+                  </div>
+                ))}
 
               </div>
             </div>

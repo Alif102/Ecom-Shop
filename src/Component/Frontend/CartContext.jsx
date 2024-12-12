@@ -62,14 +62,7 @@ export const CartProvider = ({ children }) => {
     setCartCount(updatedCart.reduce((acc, item) => acc + item.quantity, 0));
     setTotalPrice(updatedCart.reduce((acc, item) => acc + item.price, 0));
 
-    // Show success message
-    // Swal.fire({
-    //     icon: "success",
-    //     title: "Product added/updated in cart!",
-    //     text: `You now have ${updatedCart[existingProductIndex]?.quantity || quantityToAdd} of this product in your cart.`,
-    //     showConfirmButton: false,
-    //     timer: 1000,
-    // });
+   
     toast(
       <>
         Product added successfully in your cart.<br /> 
