@@ -425,13 +425,13 @@ const SingleProduct = ({ products }) => {
       </div>
     </div>
 
-   <button
+   {/* <button
                   onClick={() => addToCart(product)}
                   className="absolute bottom-28 right-3 bg-[#C43882] text-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-[#a72e6e] transition "
                   title="Add to Cart"
                 >
                   <FaPlus />
-                </button>
+                </button> */}
   </div>
 </Link>
 

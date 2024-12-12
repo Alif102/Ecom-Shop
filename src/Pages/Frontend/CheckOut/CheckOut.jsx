@@ -109,7 +109,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
     setLoading(true); // Start loading
     try {
       const response = await axios.post(
-        "https://admin.glorebd.com/api/public/order/create",
+        "https://admin.ezicalc.com/api/public/order/create",
         formData,
         {}
       );
