@@ -21,9 +21,9 @@ const Feature = ({ products }) => {
     );
 
     return (
-        <div className="w-[80%] mx-auto">
+        <div className="md:w-[80%] w-full mx-auto">
             <h2 className="text-center text-2xl md:text-3xl font-semibold pollinator mb-8">
-                <span className="border border-pink-500 border-l-4 mr-3"></span> Shop By Categories
+                <span className="border border-pink-500 border-l-4 mr-3"></span> Shop By <span className=" text-pink-500">Categories</span>
             </h2>
 
             {/* Category Buttons */}
@@ -47,7 +47,7 @@ const Feature = ({ products }) => {
                 <div className="text-center text-xl font-semibold">Loading Categories...</div>
             ) : (
                 // Feature Products
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => {
                         // Extract the highest and lowest prices from variation_combinations
                         const prices = product.variation_combinations.length
@@ -89,7 +89,7 @@ const Feature = ({ products }) => {
                                         {/* Product Details */}
                                         <div className="p-4">
                                             {/* Product Name */}
-                                            <h2 className="font-semibold text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300">
+                                            <h2 className="font-semibold shippori text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300">
                                                 {product.name}
                                             </h2>
                                             {/* Category Name */}
@@ -98,7 +98,7 @@ const Feature = ({ products }) => {
                                             </h2>
 
                                             {/* Pricing */}
-                                            <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-1 justify-between">
                                                 {product.variation_combinations.length > 0 ? (
                                                     <div className="text-gray-700">
                                                         {lowPrice === highPrice ? (
@@ -123,8 +123,8 @@ const Feature = ({ products }) => {
                                                         {product.price} <span className="text-2xl">৳</span>
                                                     </div>
                                                 )}
-                                                {/* Add to Cart Button */}
-                                                <button className="bg-pink-500 text-white text-sm py-1 px-4 rounded-full hover:bg-pink-600 transition duration-300">
+                                        
+                                                <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-1 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">
                                                     QUICK VIEW
                                                 </button>
                                             </div>

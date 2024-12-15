@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaSearch, FaBars, FaTimes,  FaInfoCircle, FaList, FaPlaneArrival } from "react-icons/fa";
-import { FaAccusoft } from "react-icons/fa6";
+import { FaSearch, FaBars, FaTimes,  FaInfoCircle, FaList, FaPlaneArrival } from "react-icons/fa";
+import { FaAccusoft, FaCartPlus } from "react-icons/fa6";
 import { GiWomanElfFace } from "react-icons/gi";
 import azmain from '../../../../assets/azmain.png'
 import SwiperBanner from "../../SwiperBanner/SwiperBanner";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 
 const Banner = () => {
@@ -87,12 +88,12 @@ const Banner = () => {
                   <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold text-[20px]" />
                 </div>
                 <div className="relative group cursor-pointer">
-  <FaHeart className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
+  <HiOutlineShoppingCart  className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
   <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
     3
   </span>
   <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
-  <FaHeart className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
+  <HiOutlineShoppingCart  className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
   </div>
 </div>
 

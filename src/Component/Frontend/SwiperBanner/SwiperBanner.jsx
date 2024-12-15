@@ -73,7 +73,7 @@ export default function SwiperBanner() {
               <h1  className="text-[18px] pollinator md:text-3xl lg:text-4xl font-bold">
                 The Fabric of Prince Coat and pants <br/> is Tropical Suiting.
               </h1>
-              <h1 className="text-sm md:text-[18px] font-sans my-4 delius">
+              <h1 className="text-sm md:text-[18px]  my-4 belleza">
               The Ultimate Classic For Every Occasion. <br /> Actual product color may vary slightly from the image.            </h1>
               <button className="bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white roboto-mono text-lg mt-4 md:p-4 p-2 rounded-xl transition-all duration-300">
   View Collection
@@ -86,20 +86,20 @@ export default function SwiperBanner() {
         <SwiperSlide>
         <div className="bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400 px-8 md:px-12 flex gap-3 md:gap-0 justify-evenly">
             
-            <div data-aos="fade-left" className="md:mt-60 lg:mt-48 mt-40 pb-3">
+            <div data-aos="fade-left" className="md:mt-52 lg:mt-48 mt-48 pb-3">
               <h1  className="text-[18px] md:text-3xl pollinator font-bold">
               Make your little star shine in plum <br/> hued embroidered cotton straight kurta.
               </h1>
-              <h1 className="text-sm md:text-[18px] font-sans my-4 delius">
+              <h1 className="text-sm md:text-[18px]  my-4 belleza">
                 The Ultimate Classic For Every Occasion. <br /> Actual product color may vary slightly from the image.
               </h1>
-              <button className="bg-gradient-to-r  from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white text-lg roboto-mono mt-4 md:p-4 p-2 rounded-xl transition-all duration-300">
+              <button className="bg-gradient-to-r  from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white whitespace-nowrap text-lg roboto-mono mt-4 md:p-4 p-2 rounded-xl transition-all duration-300">
   View Collection
 </button>
 
             </div>
             <div  data-aos="fade-right">
-              <img src={bs2} className="w-full object-cover md:mt-40 mt-32 h-96" alt="Product" />
+              <img src={bs2} className="w-full object-cover  mt-48 h-96" alt="Product" />
             </div>
           </div>
         </SwiperSlide>

@@ -60,9 +60,9 @@ const AddToCart = ({ onClose }) => {
                   className="w-16 h-20 rounded-sm shadow-sm"
                 />
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-800">{product.name}</p>
+                  <p className="font-semibold shippori text-gray-800">{product.name}</p>
                   <p className="text-gray-600">{product.variation_values || ""}</p>
-                  <p className="text-[#C43882]">৳{product.unitPrice}</p>
+                  <p className="text-[#C43882]">৳{product.unitPrice * product.quantity}</p> 
 
                   {/* <p className="text-[#C43882]">৳{product.price}</p> */}
                   <div className="flex justify-between items-center">
@@ -88,6 +88,7 @@ const AddToCart = ({ onClose }) => {
                       <RiDeleteBin6Line className="text-[20px]" />
                     </button>
                   </div>
+
                 </div>
               </li>
             ))}

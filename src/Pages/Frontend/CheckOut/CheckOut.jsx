@@ -266,7 +266,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
                 <div className="mb-4 border-b block md:hidden opacity-50">
                   {cart.map((product) => (
                     <div className="flex justify-between">
-                      <p className="flex gap-2">
+                      <p className="flex shippori gap-2">
                         {product.name} <p> X {product.quantity}</p>
                       </p>
 

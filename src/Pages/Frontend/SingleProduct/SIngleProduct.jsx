@@ -171,19 +171,38 @@ const SingleProduct = ({ products }) => {
       setCurrentStock(0);
     }
   };
-  console.log(min)
+  console.log(selectedVariations)
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
   const handleAddToCart = (e) => {
-    if (Object.keys(selectedVariations).length === 0) {
-      // Show the warning if no variation is selected
-      setIsToastVisible(true);
-      e.preventDefault(); // Prevent redirection if no variation is selected
-    } else {
-      setIsToastVisible(false); // Hide the warning when a variation is selected
-      addToCart(product, productCount, currentId, currentVariation, currentPrice);
+
+
+
+
+    if(product.has_variation ==1){
+
+      if (Object.keys(selectedVariations).length === 0) {
+        // Show the warning if no variation is selected
+        setIsToastVisible(true);
+        e.preventDefault(); // Prevent redirection if no variation is selected
+      } else {
+        setIsToastVisible(false); // Hide the warning when a variation is selected
+  
+  
+        addToCart(product, productCount, currentId, currentVariation, currentPrice);
+      }
+
     }
+    else{
+
+      addToCart(product, productCount, currentId, currentVariation, currentPrice);
+
+    }
+
+
+
+   
   };
   
 
@@ -214,7 +233,7 @@ const SingleProduct = ({ products }) => {
     <div className="sticky top-4">
       {product ? (
         <>
-          <h2 className="text-lg md:text-3xl font-semibold text-gray-800">
+          <h2 className="text-lg shippori md:text-3xl font-semibold text-gray-800">
             {product.name}
           </h2>
           <div className="flex justify-between items-center md:items-start flex-row md:flex-col">
@@ -391,7 +410,7 @@ const SingleProduct = ({ products }) => {
 
     <div className="p-4 flex justify-between items-center">
       <h2
-        className=" font-semibold text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300"
+        className="shippori font-semibold text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300"
       >
         {product.name}
       </h2>
