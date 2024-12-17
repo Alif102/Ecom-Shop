@@ -87,7 +87,7 @@ const Banner = () => {
                   />
                   <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold text-[20px]" />
                 </div>
-                <div className="relative group cursor-pointer">
+                {/* <div className="relative group cursor-pointer">
   <HiOutlineShoppingCart  className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
   <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
     3
@@ -95,7 +95,7 @@ const Banner = () => {
   <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
   <HiOutlineShoppingCart  className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
   </div>
-</div>
+</div> */}
 
 
 

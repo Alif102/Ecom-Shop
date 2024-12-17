@@ -15,7 +15,7 @@ const App = () => {
 
       try {
      
-        const response = await axios.get("https://admin.ezicalc.com/api/public/products/get/7" ,
+        const response = await axios.get("https://admin.ezicalc.com/api/public/products/get/15" ,
         //   {
         //   headers: {
         //       'Authorization': `Bearer ${token}`,

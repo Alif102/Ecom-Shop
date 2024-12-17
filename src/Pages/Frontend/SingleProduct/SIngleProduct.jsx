@@ -11,11 +11,11 @@ import {
 } from "react-router-dom";
 
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
-// Import Swiper styles
-import { FaPlus } from "react-icons/fa"; // Import the icon
+
+import { FaPlus, FaTimesCircle } from "react-icons/fa"; 
 
 
 
@@ -183,11 +183,11 @@ const SingleProduct = ({ products }) => {
     if(product.has_variation ==1){
 
       if (Object.keys(selectedVariations).length === 0) {
-        // Show the warning if no variation is selected
+       
         setIsToastVisible(true);
-        e.preventDefault(); // Prevent redirection if no variation is selected
+        e.preventDefault(); 
       } else {
-        setIsToastVisible(false); // Hide the warning when a variation is selected
+        setIsToastVisible(false); 
   
   
         addToCart(product, productCount, currentId, currentVariation, currentPrice);
@@ -205,7 +205,68 @@ const SingleProduct = ({ products }) => {
    
   };
   
+// Modal..............
+const [modalOpen, setModalOpen] = useState(false);
+const [selectedProduct, setSelectedProduct] = useState(null);
+const [quantity, setQuantity] = useState(1);
+const [selectedVariationss, setSelectedVariationss] = useState({});
+const [selectedPrice, setSelectedPrice] = useState(null);
+const [totalPrice, setTotalPrice] = useState(null); 
+const openModal = (product) => {
+  setSelectedProduct(product);
+  setModalOpen(true);
+};
 
+const closeModal = () => {
+  setModalOpen(false);
+  setSelectedPrice(null); 
+  setQuantity(1);
+  setSelectedVariationss({}); 
+  setTotalPrice(null); 
+};
+
+const handleVariation = (variationName, value) => {
+  const variationCombination = selectedProduct.variation_combinations.find(
+    (comb) => comb.values === value
+  );
+
+  // Update the selected variation and price
+  setSelectedVariationss((prev) => ({
+    ...prev,
+    [variationName]: value,
+  }));
+
+  if (variationCombination) {
+    setSelectedPrice(variationCombination.price);
+  }
+};
+
+// Update the total price whenever the quantity or selected price changes
+useEffect(() => {
+  if (selectedPrice !== null) {
+    setTotalPrice(selectedPrice * quantity);
+  } else if (selectedProduct) {
+    const prices =
+      selectedProduct.variation_combinations?.length > 0
+        ? selectedProduct.variation_combinations.map((comb) => comb.price)
+        : [selectedProduct.price];
+    const highPrice = Math.max(...prices);
+    setTotalPrice(highPrice * quantity);
+  }
+}, [quantity, selectedPrice, selectedProduct]);
+console.log(selectedPrice)
+console.log(selectedVariationss)
+
+
+const handleAddToCartModal = (e) => {
+  console.log("Button clicked");  // Check if this is logged
+  if (Object.keys(selectedVariationss).length === 0) {
+    addToCart(product, productCount, currentId, currentVariation, currentPrice);
+    e.preventDefault(); 
+  } else {
+    addToCart(product, productCount, currentId, currentVariation, currentPrice);
+  }
+};
 
   return (
     <div className="pb-28 md:pb-0 ">
@@ -382,7 +443,7 @@ const SingleProduct = ({ products }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 whitespace-nowrap">
           
 
-{products.slice(0, 4).map((product, index) => {
+{products.slice(8, 15).map((product, index) => {
   const prices = product.variation_combinations.length
     ? product.variation_combinations.map((comb) => comb.price)
     : [product.price]; 
@@ -391,8 +452,10 @@ const SingleProduct = ({ products }) => {
   const lowPrice = Math.min(...prices);
 
   return (
-    <div key={index} className="w-full gap-2 py-4 px-2 h-full group">
-    <Link to={`/singleproduct/${product.name}-${product.id}`}>
+    <div key={index} className="w-full gap-2 py-4 px-2 h-full group"  onClick={() => openModal(product)}>
+    <Link
+    //  to={`/singleproduct/${product.name}-${product.id}`}
+     >
   <div className="relative bg-white shadow-md rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300">
     <div className="relative">
       <img
@@ -400,13 +463,10 @@ const SingleProduct = ({ products }) => {
         alt={product.offer}
         className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
       />
-      {product.discount && (
-        <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
-          {product.discount}% Off
-        </span>
-      )}
+    
     
     </div>
+    
 
     <div className="p-4 flex justify-between items-center">
       <h2
@@ -457,75 +517,117 @@ const SingleProduct = ({ products }) => {
     </div>
   );
 })}
+
+{modalOpen && selectedProduct && (() => {
+  // Compute price range
+  const prices =
+    selectedProduct.variation_combinations?.length > 0
+      ? selectedProduct.variation_combinations.map((comb) => comb.price)
+      : [selectedProduct.price];
+
+  const highPrice = Math.max(...prices);
+  const lowPrice = Math.min(...prices);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded shadow-lg w-96 relative">
+        <button
+          className="absolute top-2 right-2 py-2 px-4 rounded-md text-pink-500"
+          onClick={closeModal}
+        >
+          <FaTimesCircle size={24} />
+        </button>
+
+        <div className="flex gap-5 mt-4">
+          <div>
+            <img
+              src={`https://admin.ezicalc.com/public/storage/product/${selectedProduct.image}`}
+              alt={selectedProduct.name}
+              className="w-full h-40 object-cover rounded-lg"
+            />
+          </div>
+
+          <div className="flex-1 space-y-3">
+            <h2 className="text-xl font-semibold">{selectedProduct.name}</h2>
+            <h2 className="text-sm font-semibold">
+              Price: ৳ {" "}
+              {selectedPrice !== null
+                ? totalPrice
+                : `${lowPrice * quantity} - ${highPrice * quantity}৳`}
+            </h2>
+
+            {selectedProduct.product_variation?.length > 0 ? (
+              <div className="space-y-3">
+                {selectedProduct.product_variation.map((variation, index) => (
+                  <div key={index}>
+                    <h3 className="text-sm font-semibold">
+                      {variation?.variation?.name}
+                    </h3>
+                    <div className="grid grid-cols-2 gap-1">
+                      {variation?.variaton_values
+                        ?.split(",")
+                        .map((value, i) => (
+                          <button
+                            key={i}
+                            onClick={() =>
+                              handleVariation(
+                                variation?.variation?.name,
+                                value
+                              )
+                            }
+                            className={`py-1 px-3 rounded ${
+                              selectedVariationss[variation?.variation?.name] ===
+                              value
+                                ? "bg-pink-500 text-white"
+                                : "bg-gray-200 hover:bg-pink-500 hover:text-white"
+                            }`}
+                          >
+                            {value}
+                          </button>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm font-semibold">No variations available</p>
+            )}
+
+            <div className="flex w-20 h-7 bg-gray-200 py-1 rounded-full items-center justify-center space-x-0 md:space-x-2">
+              <button
+                onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+                className="bg-slate-200 text-gray-800 p-1 rounded-full hover:text-white hover:bg-sky-400"
+              >
+                <FaMinus size={10} />
+              </button>
+              <span className="text-sm">{quantity}</span>
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="bg-slate-200 text-gray-800 p-1 rounded-full hover:text-white hover:bg-sky-400"
+              >
+                <FaPlus size={10} />
+              </button>
+            </div>
+
+            <div className="mt-3" >
+              <button className=" bg-pink-500 p-3 text-white rounded-lg">
+              অর্ডার করুন
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+})()}
+
+
+
           </div>
         </div>
       </div>
 
     
-      {/* <div>
-        <div className="md:px-10 mx-auto ">
-          <h2 className="text-center text-xl md:text-3xl font-bold mb-2 md:mb-8 Poppins">
-            Recently Viewed
-          </h2>
-          <div className="overflow-x-hidden">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-
-              {products.slice(0, 8).map((product) => (
-                <div
-
-                  className="group overflow-hidden relative"
-                >
-                  <Link
-                    to={`/singleproduct/${product.name}-${product.id}`} className="w-full flex items-center justify-center">
-                    <img
-                      src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
-                      alt="Product 1"
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </Link >
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="absolute bottom-28 right-3 bg-[#C43882] text-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-[#a72e6e] transition "
-                    title="Add to Cart"
-                  >
-                    <FaPlus />
-                  </button>
-                  <Link to={`/singleproduct/${product.name}-${product.id}`} className="p-4 bg-white">
-                    <p className="font-normal md:font-medium Poppins text-sm text-gray-800 pb-1">
-                      {product.name}
-                    </p>
-                    <p className="font-normal md:font-medium Poppins text-sm text-gray-600 flex items-center pb-1">
-                      {product.is_discount == 1 && (
-                        <span className="text-md md:text-lg text-gray-400 line-through ">
-                          <span className="text-2xl">৳</span>{product.discount_amount}
-                        </span>
-                      )}
-                      <span className="text-lg mb-3 font-bold text-[#C43882]">
-                        <span className="text-2xl">৳</span>{product.price - product.discount_amount}
-                      </span>
-                    </p>
-
-                    {product.product_variation &&
-                      product.product_variation.length > 0 ? (
-                      product.product_variation.map((variation) => (
-                        <p
-                          key={variation.id}
-                          className="font-normal md:font-medium Poppins text-sm text-gray-600"
-                        >
-                          {variation.variation.name}: {variation.variaton_values}
-                        </p>
-                      ))
-                    ) : (
-                      <p className="font-normal Poppins text-sm text-gray-600">
-                      </p>
-                    )}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div> */}
      
 
       <div>
