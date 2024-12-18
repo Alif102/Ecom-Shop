@@ -1,4 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui';
+import aspectRatio from '@tailwindcss/aspect-ratio';
+
 export default {
   content: [
     "./index.html",
@@ -14,7 +16,7 @@ export default {
     },
   },
   plugins: [
-    require('daisyui'),
-    require('@tailwindcss/aspect-ratio'),
+    daisyui,
+    aspectRatio,
   ],
 };
