@@ -514,6 +514,8 @@ const SingleProduct = ({ products }) => {
                         />
                       </div>
 
+                
+
                       <div className="flex-1 space-y-3">
                         <h2 className="text-xl font-semibold">{selectedProduct.name}</h2>
                         {!currentPrice && (
