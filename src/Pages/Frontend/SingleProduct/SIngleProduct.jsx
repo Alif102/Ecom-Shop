@@ -1,24 +1,14 @@
 
-
-import { FaCartShopping, FaMinus } from "react-icons/fa6";
-
-
-
-
 import {
-
   useParams,
 } from "react-router-dom";
+
+import { FaCartShopping, FaMinus } from "react-icons/fa6";
 
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-
-
 import { FaPlus, FaTimesCircle } from "react-icons/fa";
-
-
-
 import { CartContext } from "../../../Component/Frontend/CartContext";
 import Header from "../../../Component/Frontend/Header/Header";
 import ScrollToTop from "../../../Component/Frontend/ScrollToTop";
@@ -33,24 +23,25 @@ const SingleProduct = ({ products }) => {
 
 
   const [product, setProduct] = useState(null);
-  const [categoryProducts, setCategoryProducts] = useState([]);
+
+  const [isCartOpen, setIsCartOpen] = useState(false); // State to toggle the cart sidebar
+  const [quantity, setQuantity] = useState(1);
   const [selectedVariations, setSelectedVariations] = useState({});
   const [currentId, setCurrentId] = useState("");
+
+  const [min, setMin] = useState('');
 
   const [currentVariation, setCurrentVariation] = useState([]);
 
   const [currentPrice, setCurrentPrice] = useState("");
   const [currentStock, setCurrentStock] = useState(0);
-  
-  const [min, setMin] = useState('');
-  const [productCount, setProductCount] = useState(1);
-  const [isCartOpen, setIsCartOpen] = useState(false); // State to toggle the cart sidebar
-
-
 
   const [isToastVisible, setIsToastVisible] = useState(false);
+
+  // Modal
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
+
   const { product_info } = useParams();
 
   const lastIndex = product_info.lastIndexOf("-");
@@ -62,7 +53,7 @@ const SingleProduct = ({ products }) => {
       const filtered = products.filter((p) => p.id === product_id);
       if (filtered.length > 0) {
         setProduct(filtered[0]);
-        setSelectedProduct(product);
+        setSelectedProduct(filtered[0]);
       } else {
         console.log("Product not found");
         setProduct(null);
@@ -71,35 +62,10 @@ const SingleProduct = ({ products }) => {
   }, [products, product_id]);
 
 
-  useEffect(() => {
-    if (product) {
-      const relatedProducts = products
-        .filter((p) => p.category_id === product.category_id && p.id !== product.id)
-        .slice(0, 4); // Limit to the first 4 related products
-      setCategoryProducts(relatedProducts);
-    }
-  }, [product, products]);
+  console.log(product);
 
-
-
-
-
-
-  useEffect(() => {
-  }, [products]);
-
-  useEffect(() => {
-    if (product) {
-      const filtered = products
-        .filter((p) => p.category_id === product_id)
-        .slice(0, 4); // Limit to the first 4 products
-      setCategoryProducts(filtered);
-    }
-  }, [products, product_id]);
-
-  const incrementCount = () => setProductCount(productCount + 1);
-  const decrementCount = () =>
-    setProductCount(productCount > 1 ? productCount - 1 : 1);
+  const incrementCount = () => setQuantity(quantity + 1);
+  const decrementCount = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
 
   const handleCartToggle = () => {
@@ -172,76 +138,52 @@ const SingleProduct = ({ products }) => {
     }
   };
 
+  const varientErr = document.getElementById("error");
+
   const handleAddToCart = (e) => {
 
-    console.log('handleAddToCart')
-    console.log(e);
-    console.log('handleAddToCart check')
+    e.preventDefault();
 
     if (product.has_variation == 1) {
 
-      if (Object.keys(selectedVariations).length === 0) {
+      if (Object.keys(selectedVariations).length < Object.keys(product.product_variation).length) {
         setIsToastVisible(true);
-        e.preventDefault();
+        if (varientErr && !modalOpen) {
+          varientErr.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
       } else {
         setIsToastVisible(false);
-        addToCart(product, productCount, currentId, currentVariation, currentPrice);
+        addToCart(product, quantity, currentId, currentVariation, currentPrice);
       }
 
     }
     else {
-      addToCart(product, productCount, currentId, currentVariation, currentPrice);
+      addToCart(product, quantity, currentId, currentVariation, currentPrice);
+      console.log(product, quantity, currentId, currentVariation, currentPrice);
     }
   };
 
   // Modal..............
-  const [modalOpen, setModalOpen] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [selectedVariationss, setSelectedVariationss] = useState({});
-  const [selectedPrice, setSelectedPrice] = useState(null);
-  const [totalPrice, setTotalPrice] = useState(null);
+
   const openModal = (product) => {
     setProduct(product);
     setModalOpen(true);
-    setSelectedPrice(null);
-    setSelectedVariationss({});
+    setSelectedVariations({})
+    setCurrentId("")
+    setQuantity(1)
+    setCurrentVariation([])
+    setCurrentPrice('')
   };
 
   const closeModal = () => {
-    setModalOpen(false)
-    setProduct(selectedProduct);
+    setModalOpen(false);
+    setProduct(selectedProduct)
+    setQuantity(1)
+    setSelectedVariations({})
+    setCurrentId("")
+    setCurrentVariation([])
+    setCurrentPrice('')
   };
-
-  const handleVariation = (variationName, value) => {
-    const variationCombination = selectedProduct.variation_combinations.find(
-      (comb) => comb.values === value
-    );
-
-    // Update the selected variation and price
-    setSelectedVariationss((prev) => ({
-      ...prev,
-      [variationName]: value,
-    }));
-
-    if (variationCombination) {
-      setSelectedPrice(variationCombination.price);
-    }
-  };
-
-  // Update the total price whenever the quantity or selected price changes
-  useEffect(() => {
-    if (selectedPrice !== null) {
-      setTotalPrice(selectedPrice * quantity);
-    } else if (selectedProduct) {
-      const prices =
-        selectedProduct.variation_combinations?.length > 0
-          ? selectedProduct.variation_combinations.map((comb) => comb.price)
-          : [selectedProduct.price];
-      const highPrice = Math.max(...prices);
-      setTotalPrice(highPrice * quantity);
-    }
-  }, [quantity, selectedPrice, selectedProduct]);
-
 
   return (
     <div className="pb-28 md:pb-0 ">
@@ -302,7 +244,6 @@ const SingleProduct = ({ products }) => {
                             <h2>Price: <span className="text-4xl">৳</span> {product.price}</h2>
                           )}
                         </span>
-
                       )}
                       {currentPrice > 0 && (
                         <h2 className="text-lg md:text-2xl font-bold text-[#C43882]">Price: <span className="text-4xl">৳</span> {currentPrice}</h2>
@@ -330,7 +271,6 @@ const SingleProduct = ({ products }) => {
                               >
                                 {value}
                               </button>
-
                             ))}
                           </div>
                         </div>
@@ -340,11 +280,14 @@ const SingleProduct = ({ products }) => {
                     )}
                   </ul>
 
-                  {isToastVisible && (
-                    <div className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
-                      Please choose a variant. <BsArrowUpSquare size={23} />
-                    </div>
-                  )}
+                  <div id="error">
+                    {isToastVisible && (
+                      <span className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
+                        Please choose a variant. <BsArrowUpSquare size={23} />
+                      </span>
+                    )}
+                  </div>
+
 
                   <div className="py-2 flex md:flex-col flex-row items-center md:items-start justify-between">
                     <div className="mt-2 md:mt-4">
@@ -356,7 +299,7 @@ const SingleProduct = ({ products }) => {
                         >
                           -
                         </button>
-                        <span className="text-xl font-bold">{productCount}</span>
+                        <span className="text-xl font-bold">{quantity}</span>
                         <button
                           onClick={incrementCount}
                           className="w-10 h-10 flex items-center justify-center border-l text-gray-800 rounded-md hover:bg-gray-100 transition text-lg font-semibold"
@@ -375,8 +318,7 @@ const SingleProduct = ({ products }) => {
                       কার্টে যোগ করুন
                     </button>
 
-                    {/* done  */}
-                    <Link to='/checkout'>
+                    <Link to="/checkout">
                       <button
                         onClick={(e) => handleAddToCart(e)}
                         className="w-full py-2 mt-3 md:py-3 bg-gradient-to-l from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition text-center block"
@@ -438,13 +380,21 @@ const SingleProduct = ({ products }) => {
                           alt={product.offer}
                           className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
+
+
                       </div>
+
+
                       <div className="p-4 flex justify-between items-center">
                         <h2
                           className="shippori font-semibold text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300"
                         >
                           {product.name}
                         </h2>
+
+
+
+
                         <div className="flex items-center justify-between">
                           {product.variation_combinations.length > 0 ? (
                             <div className="text-gray-700">
@@ -485,15 +435,7 @@ const SingleProduct = ({ products }) => {
               );
             })}
 
-            {modalOpen && selectedProduct && (() => {
-              // Compute price range
-              const prices =
-                selectedProduct.variation_combinations?.length > 0
-                  ? selectedProduct.variation_combinations.map((comb) => comb.price)
-                  : [selectedProduct.price];
-
-              const highPrice = Math.max(...prices);
-              const lowPrice = Math.min(...prices);
+            {modalOpen && (() => {
 
               return (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -509,24 +451,22 @@ const SingleProduct = ({ products }) => {
                       <div>
                         <img
                           src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
-                          alt={selectedProduct.name}
+                          alt={product.name}
                           className="w-full h-40 object-cover rounded-lg"
                         />
                       </div>
 
-                
-
                       <div className="flex-1 space-y-3">
-                        <h2 className="text-xl font-semibold">{selectedProduct.name}</h2>
+                        <h2 className="text-xl font-semibold">{product.name}</h2>
                         {!currentPrice && (
                           <span className="text-lg md:text-2xl font-bold text-[#C43882]">
-                            {selectedProduct.variation_combinations && product.variation_combinations.length > 0 ? (
+                            {product.variation_combinations && product.variation_combinations.length > 0 ? (
                               (() => {
                                 const minPrice = Math.min(
-                                  ...selectedProduct.variation_combinations.map((combination) => combination.price)
+                                  ...product.variation_combinations.map((combination) => combination.price)
                                 );
                                 const maxPrice = Math.max(
-                                  ...selectedProduct.variation_combinations.map((combination) => combination.price)
+                                  ...product.variation_combinations.map((combination) => combination.price)
                                 );
 
                                 return minPrice === maxPrice ? (
@@ -540,21 +480,23 @@ const SingleProduct = ({ products }) => {
                                 );
                               })()
                             ) : (
-                              <h2>Price: <span className="text-4xl">৳</span> {selectedProduct.price}</h2>
+                              <h2>Price: <span className="text-4xl">৳</span> {product.price}</h2>
                             )}
                           </span>
 
                         )}
+
                         {currentPrice > 0 && (
                           <h2 className="text-lg md:text-2xl font-bold text-[#C43882]">Price: <span className="text-4xl">৳</span> {currentPrice}</h2>
                         )}
-                        {/* selectedProduct */}
-                        {selectedProduct.product_variation?.length > 0 ? (
-                          selectedProduct.product_variation.map((variation) => (
+
+                        {product.product_variation?.length > 0 ? (
+                          product.product_variation.map((variation) => (
                             <div key={variation.id}>
                               <h3 className="text-sm my-1 font-semibold">{variation.variation.name}</h3>
                               <div className="flex flex-wrap gap-3">
                                 {variation.variaton_values.split(",").map((value, i) => (
+
                                   <button
                                     key={i}
                                     onClick={() => handleVariationChange(variation.variation.name, value)}
@@ -574,7 +516,6 @@ const SingleProduct = ({ products }) => {
                           <li>No variations available</li>
                         )}
 
-
                         {isToastVisible && (
                           <div className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
                             Please choose a variant. <BsArrowUpSquare size={23} />
@@ -583,23 +524,23 @@ const SingleProduct = ({ products }) => {
 
                         <div className="flex w-20 h-7 bg-gray-200 py-1 rounded-full items-center justify-center space-x-0 md:space-x-2">
                           <button
-                            onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+                            onClick={decrementCount}
                             className="bg-slate-200 text-gray-800 p-1 rounded-full hover:text-white hover:bg-sky-400"
                           >
                             <FaMinus size={10} />
                           </button>
                           <span className="text-sm">{quantity}</span>
                           <button
-                            onClick={() => setQuantity(quantity + 1)}
+                            onClick={incrementCount}
                             className="bg-slate-200 text-gray-800 p-1 rounded-full hover:text-white hover:bg-sky-400"
                           >
                             <FaPlus size={10} />
                           </button>
                         </div>
 
-                        <div className="mt-3" >
-                          <button onClick={() => handleAddToCart(product)} className=" bg-pink-500 p-3 text-white rounded-lg">
-                            অর্ডার করুন Musab
+                        <div className="mt-3" onClick={handleAddToCart}>
+                          <button className=" bg-pink-500 p-3 text-white rounded-lg">
+                            অর্ডার করুন
                           </button>
                         </div>
                       </div>
@@ -638,7 +579,7 @@ const SingleProduct = ({ products }) => {
             </span>
           </button>
 
-          {isCartOpen && <AddToCart productCount={productCount} onClose={() => setIsCartOpen(false)} />}
+          {isCartOpen && <AddToCart quantity={quantity} onClose={() => setIsCartOpen(false)} />}
         </div>
       </div>
       <ScrollToTop />
