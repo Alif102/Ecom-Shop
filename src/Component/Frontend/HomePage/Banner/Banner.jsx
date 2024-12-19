@@ -55,7 +55,7 @@ const Banner = () => {
             <div className="container mx-auto flex items-center justify-between">
               {/* Logo */}
               <div className=" w-20 h-20  md:w-32 ">
-              <img src={azmain}  alt="logo" srcset="" />
+              <img src={azmain}  alt="logo" srcSet="" />
               </div>
 
               {/* Links (hidden on small devices) */}

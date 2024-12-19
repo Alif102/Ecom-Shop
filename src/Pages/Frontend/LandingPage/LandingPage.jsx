@@ -10,9 +10,6 @@ import Feature from "../../../Component/Frontend/HomePage/FeatureProducts/Featur
 
 
 const LandingPage = ({products}) => {
- 
-    
- console.log(products)
 
   return (
     <div className="bg-gray-100">

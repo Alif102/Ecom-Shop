@@ -96,8 +96,8 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
       "v_product_qty",
       vProductQty.length > 0 ? vProductQty.join(",") : null
     );    formData.append("business_id", cart[0]?.businesses[0]?.id || "" );
-    formData.append("c_name", name);
-    formData.append("c_phone", phone);
+    formData.append("name", name);
+    formData.append("phone", phone);
    
     formData.append("address", address);
     formData.append("delivery_charge", deliveryFee);

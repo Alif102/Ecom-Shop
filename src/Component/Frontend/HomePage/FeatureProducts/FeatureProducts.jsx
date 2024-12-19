@@ -8,7 +8,7 @@ import { FaEye, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function FeatureProducts({products}) {
-  console.log(products)
+  
   const settings = {
     dots: true,
     infinite: true,

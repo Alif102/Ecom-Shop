@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import {toast} from "react-toastify";
 import Swal from "sweetalert2";
 
 export const CartContext = createContext();
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(updatedCart.reduce((acc, item) => acc + item.price, 0));
 
 
-    toast(
+    toast.success(
       <>
         Product added successfully in your cart.<br />
         {/* You now have {updatedCart[existingProductIndex]?.quantity || quantityToAdd} of this product in your cart. */}
@@ -76,6 +76,7 @@ export const CartProvider = ({ children }) => {
           background: '#C43882',
           color: '#fff',
         },
+        theme: "colored"
       }
     );
 
