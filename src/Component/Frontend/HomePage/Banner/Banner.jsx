@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaBars, FaTimes,  FaInfoCircle, FaList, FaPlaneArrival } from "react-icons/fa";
+import { FaSearch, FaBars, FaTimes, FaInfoCircle, FaList, FaPlaneArrival } from "react-icons/fa";
 import { FaAccusoft, FaCartPlus } from "react-icons/fa6";
 import { GiWomanElfFace } from "react-icons/gi";
 import azmain from '../../../../assets/azmain.png'
 import SwiperBanner from "../../SwiperBanner/SwiperBanner";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 
 const Banner = () => {
 
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  
-    const images = [
-      "../../../../../src/assets/ba4.png",
-      "../../../../../src/assets/ba2.jpg",
-      "../../../../../src/assets/ba3.jpg",
-      "../../../../../src/assets/ba1.jpg",
-    ];
-  
-    // Change the background image every 3 seconds
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 8000);
-  
-      return () => clearInterval(interval); // Cleanup interval on unmount
-    }, [images.length]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const images = [
+    "../../../../../src/assets/ba4.png",
+    "../../../../../src/assets/ba2.jpg",
+    "../../../../../src/assets/ba3.jpg",
+    "../../../../../src/assets/ba1.jpg",
+  ];
+
+  // Change the background image every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 8000);
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, [images.length]);
   return (
     <div>
       <div className="relative">
-       <div className="relative">
-       <SwiperBanner/>
+        <div className="relative">
+          <SwiperBanner />
           {/* <div className=" flex justify-around w-full absolute  md:-bottom-20 gap-2">
           <div>
             <img src="../../../../../src/assets/ca1.jpg" alt="picccc"  />
@@ -47,58 +49,50 @@ const Banner = () => {
           </div>
         </div> */}
 
-       </div>
-       
+        </div>
+
         {/* Navbar */}
         <div>
           <nav className="navbar absolute top-0 left-0 w-ful bg-transparent z-50">
             <div className="container mx-auto flex items-center justify-between">
               {/* Logo */}
-              <div className=" w-20 h-20  md:w-32 ">
-              <img src={azmain}  alt="logo" srcSet="" />
-              </div>
+              <img src={azmain} alt="logo" className="w-auto h-16" srcSet="" />
 
               {/* Links (hidden on small devices) */}
               <div className="hidden md:flex space-x-4">
-                <a href="#Women" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  Women
-                </a>
-                <a href="#Man" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
+                <Link to="/collection" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
+                  New-Arrival
+                </Link>
+                <Link to="/collection/man" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                   Man
-                </a>
-                <a href="#content" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
+                </Link>
+                <Link to="/collection/women" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
+                  Women
+                </Link>
+                <Link to="/collection/kids" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                   Kids
-                </a>
-                <a href="#Accessories" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                Accessories
-                </a>
-                <a href="#New" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                New Arrival
-                </a>
+                </Link>
+                <Link to="/collection/accessories" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
+                  Accessories
+                </Link>
               </div>
 
               {/* Right icons */}
               <div className="flex items-center space-x-4">
                 <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="input bg-transparent border w-32 md:w-full  border-white input-xs  md:input-sm rounded-full text-[#C43882] font-sembold text-[20px] focus:border-white focus:border-2 focus:ring-0"
-                  />
-                  <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold text-[20px]" />
+                  <Link to="/collection">
+                    <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold z-30 block" size={20} />
+                  </Link>
                 </div>
                 {/* <div className="relative group cursor-pointer">
-  <HiOutlineShoppingCart  className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
-  <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
-    3
-  </span>
-  <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
-  <HiOutlineShoppingCart  className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
-  </div>
-</div> */}
-
-
-
+                    <HiOutlineShoppingCart  className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
+                    <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
+                      3
+                    </span>
+                    <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
+                    <HiOutlineShoppingCart  className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
+                    </div>
+                  </div> */}
                 {/* Menu icon (visible on small devices) */}
                 <button
                   className="text-[#C43882] font-sembold text-[20px] md:hidden"
@@ -111,7 +105,7 @@ const Banner = () => {
           </nav>
         </div>
 
-       
+
 
         {/* Drawer */}
         {isDrawerOpen && (

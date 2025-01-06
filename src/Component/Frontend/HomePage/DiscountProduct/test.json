@@ -1,0 +1,158 @@
+{
+    "id": 204,
+    "unique_id": "P-000204",
+    "client_id": 7,
+    "user_id": 7,
+    "business_id": "17",
+    "name": "musab 43",
+    "short_desc": null,
+    "image": "7_9448_1736056971.webp",
+    "video": null,
+    "category_id": 50,
+    "is_published": 1,
+    "updated_by": null,
+    "price": 0,
+    "stock": 0,
+    "sell_count": null,
+    "code": "EPP64353930",
+    "stock_location": null,
+    "buying_price": 0,
+    "has_variation": 1,
+    "is_discount": 1,
+    "discount_type": "percent",
+    "discount_percent": null,
+    "discount_amount": "0",
+    "discount_date": "2025-01-28",
+    "stock_location_id": 2,
+    "created_by": 7,
+    "created_at": "2025-01-02T12:56:18.000000Z",
+    "updated_at": "2025-01-05T07:30:37.000000Z",
+    "product_variation": [
+        {
+            "id": 339,
+            "product_id": 204,
+            "variation_id": 4,
+            "variaton_values": "black",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z",
+            "variation": {
+                "id": 4,
+                "name": "colour"
+            }
+        },
+        {
+            "id": 340,
+            "product_id": 204,
+            "variation_id": 16,
+            "variaton_values": "44",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z",
+            "variation": {
+                "id": 16,
+                "name": "Chest"
+            }
+        },
+        {
+            "id": 341,
+            "product_id": 204,
+            "variation_id": 2,
+            "variaton_values": "large,medium,small",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z",
+            "variation": {
+                "id": 2,
+                "name": "Size"
+            }
+        }
+    ],
+    "variation_combinations": [
+        {
+            "id": 803,
+            "product_id": 204,
+            "values": "black,44,large",
+            "buying_price": 2000,
+            "price": 2500,
+            "stock": 20,
+            "image": "7_5877_1736056982.webp",
+            "discount_date": "2025-01-10",
+            "discount": 500,
+            "discount_type": "percent",
+            "discount_percent": null,
+            "code": "EPP64353930",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z"
+        },
+        {
+            "id": 804,
+            "product_id": 204,
+            "values": "black,44,medium",
+            "buying_price": 3000,
+            "price": 4000,
+            "stock": 20,
+            "image": "7_2931_1736056977.webp",
+            "discount_date": "2025-01-20",
+            "discount": 800,
+            "discount_type": "percent",
+            "discount_percent": null,
+            "code": "EPP64353930",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z"
+        },
+        {
+            "id": 805,
+            "product_id": 204,
+            "values": "black,44,small",
+            "buying_price": 1500,
+            "price": 2500,
+            "stock": 20,
+            "image": "7_9448_1736056971.webp",
+            "discount_date": "2025-01-15",
+            "discount": 500,
+            "discount_type": "percent",
+            "discount_percent": null,
+            "code": "EPP64353930",
+            "created_at": "2025-01-05T08:59:48.000000Z",
+            "updated_at": "2025-01-05T08:59:48.000000Z"
+        }
+    ],
+    "category": {
+        "id": 50,
+        "name": "Winter"
+    },
+    "businesses": [
+        {
+            "id": 17,
+            "name": "test",
+            "pivot": {
+                "product_id": 204,
+                "business_id": 17
+            }
+        }
+    ],
+    "product_images": [
+        {
+            "id": 220,
+            "name": "7_9448_1736056971.webp",
+            "pivot": {
+                "product_id": 204,
+                "image_id": 220
+            }
+        },
+        {
+            "id": 222,
+            "name": "7_5877_1736056982.webp",
+            "pivot": {
+                "product_id": 204,
+                "image_id": 222
+            }
+        },
+        {
+            "id": 221,
+            "name": "7_2931_1736056977.webp",
+            "pivot": {
+                "product_id": 204,
+                "image_id": 221
+            }
+        }
+    ]
+}

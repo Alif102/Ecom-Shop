@@ -55,7 +55,7 @@ const AddToCart = ({ onClose }) => {
             {cart.map((product) => (
               <li key={product.id} className="flex items-center space-x-4">
                 <img
-                  src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                  src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                   alt={product.name || "Product"}
                   className="w-16 h-20 rounded-sm shadow-sm"
                 />

@@ -1,0 +1,86 @@
+/* Container */
+.price-range-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Slider container */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #d1d5db;
+  /* Gray background for the track */
+  border-radius: 4px;
+}
+
+/* Full slider track */
+.slider-track {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background-color: #d1d5db;
+  /* Gray */
+  border-radius: 4px;
+}
+
+/* Highlighted range between min and max */
+.slider-range {
+  position: absolute;
+  height: 6px;
+  background-color: #ff007f;
+  /* Pink color */
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* Slider thumb (handle) */
+.slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 2;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Custom thumb styling */
+.slider-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  /* Pink color */
+  border: 4px solid #ff007f;
+  /* White border */
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.slider-thumb::-moz-range-thumb {
+  background-color: #fff;
+  /* Pink color */
+  border: 4px solid #ff007f;
+  /* White border */
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+/* Values */
+.values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #4a5568;
+  /* Gray-700 */
+}

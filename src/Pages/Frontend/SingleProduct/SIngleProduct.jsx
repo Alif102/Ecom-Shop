@@ -217,12 +217,12 @@ const SingleProduct = ({ products }) => {
             {/* Product Image Section */}
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
               <img
-                src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                 alt="Product"
                 className="w-full h-auto object-cover rounded-md"
               />
               < img
-                src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                 alt="Product" className={`w-[300px] fixed h-[400px] hidden opacity-0 invisible z-50 ${(imageFly && !modalOpen) && 'single-mobile-flying-div  single-flying-div'}`}
                 onAnimationEnd={() => setimageFly(false)}
               />
@@ -239,9 +239,13 @@ const SingleProduct = ({ products }) => {
                   </p>
                   <div className="flex items-center space-x-0 md:space-x-4 mt-0 md:mt-4 flex-col md:flex-row">
                     {currentPrice ? (
-                      <h2 className="text-lg md:text-2xl font-bold text-[#C43882]">
-                        Price: <span className="md:text-2xl">৳</span> {currentPrice} {oldPrice && <s>{oldPrice}</s>}
-                      </h2>
+                      <>
+                        <span className="text-lg md:text-2xl font-bold text-[#C43882]">
+                          Price: <span className="md:text-2xl">৳</span> {currentPrice}
+                        </span>
+                        {oldPrice && <s className="text-lg text-black">৳{oldPrice}</s>}
+                        <span className="bg-red-500 rounded-lg text-white text-sm font-bold py-1 px-2">Save ৳ {(oldPrice - currentPrice)}</span>
+                      </>
                     ) : (
                       <div className="text-lg md:text-2xl font-bold text-[#C43882]">
                         {product.variation_combinations && product.variation_combinations.length > 0 ? (
@@ -429,7 +433,7 @@ const SingleProduct = ({ products }) => {
                         <div className="relative"
                           onClick={() => openModal(product)}>
                           <img
-                            src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                             alt={product.offer}
                             className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
@@ -452,12 +456,12 @@ const SingleProduct = ({ products }) => {
                               {product.variation_combinations.length > 0 ? (
                                 <div className="text-gray-700">
                                   {lowPrice === highPrice ? (
-                                    <span className="text-green-500 font-bold">
-                                      {highPrice} <span className="text-2xl"><span className="text-2xl">৳</span></span>
+                                    <span className="text-pink-500 font-bold">
+                                      {lowPrice} <span className="text-2xl"><span className="text-2xl">৳</span></span>
                                     </span>
                                   ) : (
                                     <>
-                                      <span className="text-green-500 font-bold">
+                                      <span className="text-pink-500 font-bold">
                                         {lowPrice} <span className="text-2xl"><span className="text-2xl">৳</span></span>{" "}
                                       </span>
                                       -{" "}
@@ -468,7 +472,7 @@ const SingleProduct = ({ products }) => {
                                   )}
                                 </div>
                               ) : (
-                                <div className="text-green-500 font-bold">{product.price} <span className=" text-2xl"><span className="text-2xl">৳</span></span> </div>
+                                <div className="text-pink-500 font-bold">{product.price} <span className=" text-2xl"><span className="text-2xl">৳</span></span> </div>
                               )}
                             </div>
                           </div>
@@ -486,12 +490,12 @@ const SingleProduct = ({ products }) => {
                       <div className="grid grid-cols-2 md:grid-cols-3 items-center gap-3">
                         <div>
                           <img
-                            src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                             alt={product.name}
                             className="w-full h-auto rounded-lg"
                           />
                           <img
-                            src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                             alt="Product" className={`md:left-10 w-[100px] h-[120px] md:absolute hidden opacity-0 invisible z-50 ${imageFly && 'popup-flying-div popup-mobile-flying-div'}`}
                             onAnimationEnd={() => setimageFly(false)}
                           />
@@ -503,7 +507,7 @@ const SingleProduct = ({ products }) => {
                           </div>
                           {currentPrice ? (
                             <h2 className="md:text-2xl font-bold text-[#C43882]">
-                              Price: <span className="md:text-2xl">৳</span> {currentPrice} {oldPrice && <s>{oldPrice}</s>}
+                              Price: <span className="md:text-2xl">৳</span> {currentPrice} {oldPrice && <s className=" text-red-500">{oldPrice}</s>}
                             </h2>
                           ) : (
                             <div className="md:text-2xl font-bold text-[#C43882]">

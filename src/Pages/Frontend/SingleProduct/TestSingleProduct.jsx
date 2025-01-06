@@ -239,7 +239,7 @@ import {
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
               {product ? (
                 <img
-                  src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                  src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                   alt="Product"
                   className="w-full h-auto object-cover rounded-md"
                 />
@@ -400,7 +400,7 @@ import {
                       <div className="relative bg-white shadow-md rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300">
                         <div className="relative">
                           <img
-                            src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                             alt={product.offer}
                             className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
@@ -421,12 +421,12 @@ import {
                             {product.variation_combinations.length > 0 ? (
                               <div className="text-gray-700">
                                 {lowPrice === highPrice ? (
-                                  <span className="text-green-500 font-bold">
+                                  <span className="text-pink-500 font-bold">
                                     {highPrice} <span className="text-2xl"><span className="text-2xl">৳</span></span>
                                   </span>
                                 ) : (
                                   <>
-                                    <span className="text-green-500 font-bold">
+                                    <span className="text-pink-500 font-bold">
                                       {lowPrice} <span className="text-2xl"><span className="text-2xl">৳</span></span>{" "}
                                     </span>
                                     -{" "}
@@ -437,7 +437,7 @@ import {
                                 )}
                               </div>
                             ) : (
-                              <div className="text-green-500 font-bold">{product.price} <span className=" text-2xl"><span className="text-2xl">৳</span></span> </div>
+                              <div className="text-pink-500 font-bold">{product.price} <span className=" text-2xl"><span className="text-2xl">৳</span></span> </div>
                             )}
   
                           </div>
@@ -475,7 +475,7 @@ import {
                       <div className="flex gap-5 mt-4">
                         <div>
                           <img
-                            src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
                             alt={product.name}
                             className="w-full h-40 object-cover rounded-lg"
                           />

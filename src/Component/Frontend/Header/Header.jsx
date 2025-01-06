@@ -22,7 +22,7 @@ const Header = () => {
 
   const { cartCount } = useContext(CartContext);
 
- 
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight); // Change header when leaving the hero section
@@ -147,11 +147,10 @@ const Header = () => {
   return (
     <div>
       <header
-        className={` transition-all duration-700 ease-in-out ${
-          isSticky
+        className={` transition-all duration-700 ease-in-out ${isSticky
             ? "w-full bg-white/90 backdrop-blur-md fixed top-0 left-0 z-20 shadow-md"
             : "bg-transparent"
-        } ${showHeader ? "top-0" : "-top-20"}`}
+          } ${showHeader ? "top-0" : "-top-20"}`}
       >
         <div className="py-2 px-4 md:px-10 mx-auto flex items-center  border-b bg-white">
           {isSearchOpen && window.innerWidth < 768 ? (
@@ -248,7 +247,7 @@ const Header = () => {
                   <BsCart3 size={24} />
                   {/* Badge for item count */}
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartCount ?? 0}                  </span>
+                    {cartCount ?? 0}                  </span>
                 </button>
 
                 {/* AddToCart Component - Rendered conditionally */}
@@ -259,9 +258,8 @@ const Header = () => {
 
         {/* Side Menu */}
         <div
-          className={`fixed h-screen top-0 left-0 w-64 bg-white shadow-lg p-6 text-white z-50 transition-transform duration-300 ease-in-out transform ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`fixed h-screen top-0 left-0 w-64 bg-white shadow-lg p-6 text-white z-50 transition-transform duration-300 ease-in-out transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
           onClick={closeMenu}
         >
           <div
@@ -309,7 +307,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          
+
         </div>
 
         {/* Background overlay when menu is open */}
@@ -327,7 +325,7 @@ const Header = () => {
             className="fixed inset-0 bg-black opacity-50 z-40"
           ></div>
         )}
-                {isModalOpen && <AddToCart onClose={handleCloseCart} />}
+        {isModalOpen && <AddToCart onClose={handleCloseCart} />}
 
         {/* Cart Component will come here*/}
       </header>
