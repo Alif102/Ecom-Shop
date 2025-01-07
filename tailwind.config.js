@@ -19,4 +19,7 @@ export default {
     daisyui,
     aspectRatio,
   ],
+  daisyui: {
+    themes: ["light", "cupcake"],
+  }
 };
