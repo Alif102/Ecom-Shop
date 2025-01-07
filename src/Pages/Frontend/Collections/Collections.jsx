@@ -250,17 +250,26 @@ const Collections = ({ products }) => {
                             filterProducts ?
                                 filterProducts.map((product, index) => {
 
+                                    const price = product?.variation_combinations?.length
+                                        ? product.variation_combinations[0].price
+                                        : [product.price];
+
                                     const prices = product?.variation_combinations?.length
                                         ? product.variation_combinations.map((comb) => comb.price)
                                         : [product.price];
 
-                                    const discounts = product?.variation_combinations?.length
-                                        ? product.variation_combinations.map((comb) => comb.discount)
+                                    const lowPrice = Math.min(...prices);
+                                    const highPrice = Math.max(...prices);
+
+                                    const discountAmount = product?.variation_combinations?.length
+                                        ? product.variation_combinations[0].discount
                                         : [product.discount_amount || 0];
 
-                                    const highPrice = Math.max(...prices);
-                                    const lowPrice = Math.min(...prices);
-                                    const discountPrice = Math.max(...discounts);
+                                    const discountDate = product?.variation_combinations?.length
+                                        ? product.variation_combinations[0].discount_date
+                                        : (product.discount_date ? product.discount_date : null);
+
+                                    const isDiscountValid = discountDate == null || new Date(discountDate) >= new Date();
 
                                     return (
                                         <div key={index} className="w-full h-full group">
@@ -277,8 +286,8 @@ const Collections = ({ products }) => {
                                                         </div>
 
                                                         {/* Discount Badge */}
-                                                        {discountPrice ? (
-                                                            <span className="absolute top-3 right-3 bg-red-500 text-white font-semibold py-1 px-3 rounded-full flex items-center text-xs">{discountPrice}/- Off
+                                                        {(discountAmount > 0 && isDiscountValid) ? (
+                                                            <span className="absolute  right-0 top-1 sm:right-3 sm:top-3 bg-pink-500 text-white font-semibold py-1 px-2 rounded-full flex items-center text-xs origin-bottom -rotate-6">৳{Math.round(discountAmount)} Off
                                                             </span>
                                                         ) : ''}
                                                     </div>
@@ -292,31 +301,22 @@ const Collections = ({ products }) => {
 
                                                         {/* Pricing */}
                                                         <div className="flex items-center gap-1 justify-between">
-                                                            {product.variation_combinations.length > 0 ? (
-                                                                <div className="text-gray-700">
-                                                                    {lowPrice === highPrice ? (
-                                                                        <span className="text-pink-500 font-bold">
-                                                                            <span className="text-2xl">৳&nbsp;</span>{highPrice}
-                                                                        </span>
-                                                                    ) : (
-                                                                        <>
-                                                                            <span className="text-pink-500 font-bold">
-                                                                                <span className="text-2xl">৳&nbsp;</span>{lowPrice} {" "}
-                                                                            </span>
-                                                                            -{" "}
-                                                                            <span className="text-pink-500 font-bold">
-                                                                                <span className="text-2xl">৳&nbsp;</span>{highPrice} {" "}
-                                                                            </span>
-                                                                        </>
-                                                                    )}
-                                                                </div>
+                                                            {
+                                                                (discountAmount > 0 && isDiscountValid) ?
+                                                                    <p className="text-pink-500 font-bold ">
+                                                                        ৳{Math.round(price - discountAmount)}&nbsp;
+                                                                        <span className="text-gray-500 font-bold relative strike">৳{price}</span>
+                                                                    </p> :
+                                                                    (lowPrice < highPrice ?
+                                                                        <p className="text-pink-500 font-bold ">
+                                                                            ৳{lowPrice}
+                                                                        </p>
+                                                                        :
+                                                                        <p className="text-pink-500 font-bold ">
+                                                                            ৳{lowPrice} - ৳{highPrice}
+                                                                        </p>)
 
-                                                            ) : (
-                                                                <div className="text-pink-500 font-bold">
-                                                                    <span className="text-2xl">৳&nbsp;</span>{product.price}
-                                                                </div>
-                                                            )}
-
+                                                            }
                                                             <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-2 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">
                                                                 QUICK VIEW
                                                             </button>

@@ -12,11 +12,30 @@ const LatestProducts = ({ products }) => {
     const [winterProducts, setWinterProducts] = useState([]);
     const [latestProducts, setLatestProducts] = useState([]);
 
+    const filterDiscountedProducts = (products, min, max) => {
+        const now = new Date(); // Cache current date for efficiency
+        return products.filter(product => {
+
+            const variation = product.variation_combinations;
+
+            const hasDirectDiscount = (product.has_variation === 0) &&
+                product.discount_percent > min &&
+                product.discount_percent <= max &&
+                new Date(product.discount_date) >= now;
+
+            const hasVariationDiscount = variation.length > 0 &&
+                variation[0].discount_percent > min &&
+                variation[0].discount_percent <= max &&
+                new Date(variation[0].discount_date) >= now;
+
+            return hasDirectDiscount || hasVariationDiscount;
+        });
+    };
+
+
     useEffect(() => {
         if (products.length > 0) {
-            const filteredProducts = products.filter(
-                (product) => product.category.name.toLowerCase() == "mens jacket" || product.category.name.toLowerCase() == "winter" || product.category.name.toLowerCase() === "mens prince coat"
-            );
+            const filteredProducts = filterDiscountedProducts(products, 0, 100);
             setWinterProducts(filteredProducts.slice(0, 10));
             setLatestProducts(products.slice(0, 30));
         }
@@ -45,7 +64,7 @@ const LatestProducts = ({ products }) => {
 
 
     return (
-        <div className="flex justify-between flex-col lg:grid lg:grid-cols-2 gap-5 sm:gap-10">
+        <div className="flex justify-between flex-col lg:grid lg:grid-cols-2 sm:gap-10">
             {/* Left Side Products */}
             <div className="l-item-left w-full">
                 <Swiper
@@ -61,23 +80,22 @@ const LatestProducts = ({ products }) => {
                 >
                     {winterProducts ?
                         winterProducts.map((product, index) => {
-                            const prices = product?.variation_combinations?.length
-                                ? product.variation_combinations.map((comb) => comb.price)
+
+                            const price = product?.variation_combinations?.length
+                                ? product.variation_combinations[0].price
                                 : [product.price];
 
-                            const discounts = product?.variation_combinations?.length
-                                ? product.variation_combinations.map((comb) => comb.discount)
+                            const discountAmount = product?.variation_combinations?.length
+                                ? product.variation_combinations[0].discount
                                 : [product.discount_amount || 0];
 
-                            const discountDates = product?.variation_combinations?.length
-                                ? product.variation_combinations.map((comb) =>
-                                    new Date(comb.discount_date)) // Get the discount date as a timestamp
-                                : (product.discount_date ? [new Date(product.discount_date)] : []); // Use product discount date if available
+                            const discountPercent = product?.variation_combinations?.length
+                                ? product.variation_combinations[0].discount_percent
+                                : [product.discount_percent || 0];
 
-                            const highPrice = Math.max(...prices);
-                            const lowPrice = Math.min(...prices);
-                            const discountPrice = Math.max(...discounts);
-                            const discountDate = discountDates.length ? new Date(Math.max(...discountDates)) : null;
+                            const discountDate = product?.variation_combinations?.length
+                                ? product.variation_combinations[0].discount_date
+                                : product.discount_date;
 
                             return (
                                 <SwiperSlide key={index} className='bg-white shadow rounded text-left h-auto group w-full'>
@@ -99,31 +117,15 @@ const LatestProducts = ({ products }) => {
                                                     <span className='text-[#FF9900] flex'>
                                                         <FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></span> ({Math.floor(Math.random() * 100)} reviews)
                                                 </div>
-                                                <div>
-                                                    {product.variation_combinations.length > 0 ? (
-                                                        <div className="text-gray-700">
-                                                            {lowPrice < highPrice ? (
-                                                                <span className="text-lg font-bold text-pink-500">
-                                                                    ৳&nbsp;{lowPrice} {discountPrice && <s className='text-red-500'>৳&nbsp;{Number(lowPrice) + Number(discountPrice)}</s>}
-                                                                </span>
-                                                            ) : (
-                                                                <span className="text-lg font-bold text-pink-500">
-                                                                    ৳&nbsp;{lowPrice} {discountPrice ? <s className='text-red-500'>৳&nbsp;{Number(lowPrice) + Number(discountPrice)}</s> : ''}
-                                                                </span>
-                                                            )}
-                                                        </div>
-
-                                                    ) : (
-                                                        <div className="font-bold text-pink-500">
-                                                            <span className="sm:text-3xl font-bold text-pink-500">
-                                                                ৳&nbsp;{product.discount_amount ? (product.price - product.discount_amount) : product.price} <s className='text-red-500'>{product.price}</s>
-                                                            </span>
-                                                        </div>
-                                                    )}
+                                                <div className="text-gray-700">
+                                                    <p className="text-pink-500 font-bold">
+                                                        ৳{Math.round(price - discountAmount)}
+                                                        <span className="text-gray-500 font-bold relative strike">৳{price}</span>
+                                                    </p>
                                                 </div>
                                                 <div className='flex gap-2 sm:gap-5 items-center'>
                                                     <span className='bg-pink-700 rounded text-white py-2 px-5'>SALE</span>
-                                                    {discountPrice ? <span className='text-xl sm:text-5xl text-red-500 font-bold'>-{discountPrice && (discountPrice * 100 / highPrice)}% OFF</span> : ''}
+                                                    <span className='text-xl sm:text-5xl text-pink-500 font-bold'>{discountPercent}% OFF</span>
                                                 </div>
                                                 <div className='flex pt-3 items-center gap-2 xl:gap-5'>
                                                     <span className='bg-gray-200 sm:px-10 py-2 w-full rounded-full hover:bg-[#C43882] duration-1000 hover:text-white text-nowrap block sm:w-auto text-center'>Quick View</span>
@@ -199,7 +201,7 @@ const LatestProducts = ({ products }) => {
                                         <div className="">
                                             <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`} className='h-60 w-full' />
                                         </div>
-                                        <div className="py-5 px-3">
+                                        <div className="sm:py-5 sm:px-3 p-1">
                                             <div className="sm:col-span-2 font-serif text-left space-y-2">
                                                 <h4 className='text-xl'>Winter Dress</h4>
                                                 <span className='text-[#FF9900] flex text-sm'>
@@ -209,23 +211,23 @@ const LatestProducts = ({ products }) => {
                                                     <div className="text-gray-700">
                                                         {lowPrice === highPrice ? (
                                                             <span className="text-lg font-bold text-pink-500">
-                                                                <span className="text-2xl">৳&nbsp;</span>{highPrice}
+                                                                <span className="text-2xl">৳</span>{highPrice}
                                                             </span>
                                                         ) : (
                                                             <>
                                                                 <span className="text-lg font-bold text-pink-500">
-                                                                    <span className="text-2xl">৳&nbsp;</span>{lowPrice} {" "}
+                                                                    <span className="text-2xl">৳</span>{lowPrice} {" "}
                                                                 </span>
                                                                 -{" "}
                                                                 <span className="text-pink-500 font-bold">
-                                                                    <span className="text-2xl">৳&nbsp;</span>{highPrice} {" "}
+                                                                    <span className="text-2xl">৳</span>{highPrice} {" "}
                                                                 </span>
                                                             </>
                                                         )}
                                                     </div>
                                                 ) : (
                                                     <div className="text-lg font-bold text-pink-500">
-                                                        <span className="text-2xl">৳&nbsp;</span>{product.price}
+                                                        <span className="text-2xl">৳</span>{product.price}
                                                     </div>
                                                 )}
                                             </div>
@@ -249,7 +251,7 @@ const LatestProducts = ({ products }) => {
                         )}
                 </Swiper>
             </div>
-        </div>
+        </div >
     )
 }
 

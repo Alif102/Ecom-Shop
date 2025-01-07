@@ -44,7 +44,7 @@ function BestSellers({ products }) {
 
   return (
     <div className="relative">
-      <h2 className="text-center text-2xl  md:text-3xl font-semibold pollinator mb-8"> <span className=" border border-pink-500 border-l-4 mr-3"></span> Shop Our <span className=" text-pink-500">Bestsellers</span></h2>
+      <h2 className="text-center text-2xl  md:text-3xl font-semibold pollinator mb-2 sm:mb-8"> <span className=" border border-pink-500 border-l-4 mr-3"></span> Shop Our <span className=" text-pink-500">Bestsellers</span></h2>
       <Slider {...settings} className="cursor-pointer md:mb-10">
 
         {products.slice(0, 8).map((product, index) => {

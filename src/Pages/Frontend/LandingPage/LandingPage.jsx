@@ -25,26 +25,28 @@ const LandingPage = ({ products }) => {
         {/* <div className=" mt-24">
       <ShopCategory/>
     </div> */}
-        <div className=" mt-16">
+        <div className=" mt-6 sm:mt-16">
           <LatestProducts products={products} />
         </div>
 
-        <div className=" mt-16">
+
+
+        <div className="mt-6 sm:mt-16">
+          <DiscountProduct products={products} />
+        </div>
+
+        <div className=" mt-6 sm:mt-16">
           <Feature products={products} />
         </div>
 
-        <div className="mt-16">
+        <div className="mt-6 sm:mt-16">
           <KidsProduct products={products} />
-        </div>
-
-        <div className="mt-16">
-          <DiscountProduct products={products} />
         </div>
 
         {/* <div className=" mt-24">
       <ShopCollection/>
     </div> */}
-        <div className=" mt-24">
+        <div className="mt-6 sm:mt-16">
           <BestSellers products={products} />
         </div>
         {/* <div className=" ">

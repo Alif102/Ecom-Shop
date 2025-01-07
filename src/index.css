@@ -444,3 +444,17 @@ border-radius: 30px;
 .discount-product button:hover::after {
   opacity: 1;
 }
+
+
+.strike::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Center the line vertically relative to the element */
+  left: 0; /* Align the line to the left */
+  transform: translateY(-50%) rotate(-4deg); /* Center vertically and rotate */
+  width: 100%;
+  height: 1px;
+  background-color: #C43882;
+  opacity: 1;
+  display: block;
+}

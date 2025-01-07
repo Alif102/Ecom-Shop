@@ -16,7 +16,7 @@ const KidsProduct = ({ products }) => {
         <div className='relative'>
             {filterProducts?.length > 0 ?
                 <div>
-                    <h2 className="text-center text-2xl  md:text-3xl font-semibold pollinator mb-8"> <span className=" border border-pink-500 border-l-4 mr-3"></span> Shop Our <span className=" text-pink-500">Kids Zone</span></h2>
+                    <h2 className="text-center text-2xl  md:text-3xl font-semibold pollinator mb-5 sm:mb-8"> <span className=" border border-pink-500 border-l-4 mr-3"></span> Shop Our <span className=" text-pink-500">Kids Zone</span></h2>
                     <div className="grid grid-cols-2 lg:grid-cols-6 grid-rows-2 gap-2 sm:gap-4">
                         {filterProducts ?
                             filterProducts.map((product, index) => {
