@@ -62,7 +62,7 @@ const Feature = ({ products }) => {
                 </div>
             ) : (
                 // Feature Products
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:gap-4 gap-2">
                     {filteredProducts.map((product, index) => {
                         // Extract the highest and lowest prices from variation_combinations
                         const prices = product.variation_combinations.length
@@ -79,7 +79,7 @@ const Feature = ({ products }) => {
                                         <div className="relative">
                                             <div className="group relative overflow-hidden">
                                                 <img
-                                                    src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                    src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                     alt={product.name}
                                                     className="sm:h-[380px] h-[300px] w-full object-cover group-hover:scale-125 transition-transform duration-500"
                                                 />
@@ -87,7 +87,7 @@ const Feature = ({ products }) => {
 
                                             {/* Discount Badge */}
                                             {product.discount && (
-                                                <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
+                                                <span className="absolute top-3 left-3 bg-pink-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
                                                     {product.discount}% Off
                                                 </span>
                                             )}
@@ -112,21 +112,21 @@ const Feature = ({ products }) => {
                                             </h2>
 
                                             {/* Pricing */}
-                                            <div className="flex items-center gap-1 justify-between">
+                                            <div className="flex items-center justify-between">
                                                 {product.variation_combinations.length > 0 ? (
                                                     <div className="text-gray-700">
                                                         {lowPrice === highPrice ? (
                                                             <span className="text-pink-500 font-bold">
-                                                                <span className="text-2xl">৳&nbsp;</span>{highPrice}
+                                                                <span className="text-xl">৳&nbsp;</span>{highPrice}
                                                             </span>
                                                         ) : (
                                                             <>
                                                                 <span className="text-pink-500 font-bold">
-                                                                    <span className="text-2xl">৳&nbsp;</span>{lowPrice} {" "}
+                                                                    <span className="text-xl">৳&nbsp;</span>{lowPrice} {" "}
                                                                 </span>
                                                                 -{" "}
-                                                                <span className="text-red-500 font-bold">
-                                                                    <span className="text-2xl">৳&nbsp;</span>{highPrice} {" "}
+                                                                <span className="text-pink-500 font-bold">
+                                                                    <span className="text-xl">৳&nbsp;</span>{highPrice} {" "}
                                                                 </span>
                                                             </>
                                                         )}
@@ -134,7 +134,7 @@ const Feature = ({ products }) => {
 
                                                 ) : (
                                                     <div className="text-pink-500 font-bold">
-                                                        <span className="text-2xl">৳&nbsp;</span>{product.price}
+                                                        <span className="text-xl">৳&nbsp;</span>{product.price}
                                                     </div>
                                                 )}
 

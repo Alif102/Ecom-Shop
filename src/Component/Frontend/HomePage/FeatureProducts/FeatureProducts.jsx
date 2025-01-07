@@ -66,7 +66,7 @@ function FeatureProducts({products}) {
     {/* Product Image */}
     <div className="relative">
       <img
-        src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+        src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
         alt={product.offer}
         className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
       />

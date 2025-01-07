@@ -239,7 +239,7 @@ import {
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
               {product ? (
                 <img
-                  src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                  src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                   alt="Product"
                   className="w-full h-auto object-cover rounded-md"
                 />
@@ -400,7 +400,7 @@ import {
                       <div className="relative bg-white shadow-md rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300">
                         <div className="relative">
                           <img
-                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                             alt={product.offer}
                             className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
@@ -475,7 +475,7 @@ import {
                       <div className="flex gap-5 mt-4">
                         <div>
                           <img
-                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                             alt={product.name}
                             className="w-full h-40 object-cover rounded-lg"
                           />

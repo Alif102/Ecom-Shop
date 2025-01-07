@@ -11,7 +11,6 @@ const KidsProduct = ({ products }) => {
         );
         setFilterProducts(productsCopy.slice(0, 9));
     }, [products])
-    console.log(filterProducts)
     return (
         <div className='relative'>
             {filterProducts?.length > 0 ?
@@ -27,7 +26,7 @@ const KidsProduct = ({ products }) => {
                                 const lowPrice = Math.min(...prices);
                                 return (
                                     <Link to={`/singleproduct/${product.name}-${product.id}`} className={`bg-white shadow relative overflow-hidden rounded ${index == 0 && 'col-span-2 row-span-2'}`} key={index}>
-                                        <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`} className='h-full object-cover w-full duration-500 hover:scale-110' />
+                                        <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`} className='h-full object-cover w-full duration-500 hover:scale-110' />
                                         <div className="absolute bottom-0 right-0 left-0 text-center bg-gray-50/50 shadow justify-center">
                                             <div className="font-serif text-center py-2">
                                                 <h4 className='text-xl font-bold'>{product.name}</h4>

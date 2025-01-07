@@ -42,13 +42,13 @@ const DiscountProduct = ({ products }) => {
 
     return (
         <div className='relative'>
-            <div className="md:grid md:grid-cols-4 gap-10 justify-between">
-                <div className='md:col-span-1'>
+            <div className="lg:grid lg:grid-cols-4 gap-10 lg:justify-between">
+                <div className='md:hidden lg:col-span-1 lg:block'>
                     <Link to="/collection">
-                        <img src={banner} alt="" className='mx-auto'/>
+                        <img src={banner} alt="" className='mx-auto h-full'/>
                     </Link>
                 </div>
-                <div className='md:col-span-3 mt-10 lg:mt-0'>
+                <div className='lg:col-span-3 mt-10 lg:mt-0'>
                     <div className='w-full flex sm:flex-row flex-col justify-between items-center border-b-2 border-gray-300 space-y-5 sm:space-y-0'>
                         <h2 className="text-center text-2xl md:text-3xl font-semibold pollinator"><span className=" text-pink-600">Discount</span> Products</h2>
                         <div className='flex flex-row text-center items-center gap-5 sm:gap-10 discount-product'>
@@ -63,7 +63,7 @@ const DiscountProduct = ({ products }) => {
                             </button>
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 my-5 sm:my-10 sm:gap-5 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 my-5 sm:my-0 sm:mt-5 sm:gap-5 2xl:gap-10 gap-2">
                         {activeTab === 1 && (
                             discountedProduct60.length > 0 &&
                             discountedProduct60.map((product, index) => {
@@ -92,7 +92,7 @@ const DiscountProduct = ({ products }) => {
                                                 <div className="relative">
                                                     <div className="group relative overflow-hidden">
                                                         <img
-                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                             alt={product.name}
                                                             className="sm:h-[340px] mx-auto object-cover group-hover:scale-125 transition-transform duration-500"
                                                         />
@@ -151,7 +151,7 @@ const DiscountProduct = ({ products }) => {
                                                 <div className="relative">
                                                     <div className="group relative overflow-hidden">
                                                         <img
-                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                             alt={product.name}
                                                             className="sm:h-[340px] mx-auto object-cover group-hover:scale-125 transition-transform duration-500"
                                                         />
@@ -221,7 +221,7 @@ const DiscountProduct = ({ products }) => {
                                                 <div className="relative">
                                                     <div className="group relative overflow-hidden">
                                                         <img
-                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                             alt={product.name}
                                                             className="sm:h-[340px] mx-auto object-cover group-hover:scale-125 transition-transform duration-500"
                                                         />

@@ -123,48 +123,33 @@ const Banner = () => {
               <ul className=" flex flex-col justify-center items-center space-y-6">
                 <li className="flex items-center space-x-2">
                   <GiWomanElfFace className="text-blue-500" />
-                  <a
-                    href="#Women"
-                    className="text-gray-800 text-lg hover:text-blue-500"
-                  >
+                  <Link to="/collection/man" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                     Women
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaInfoCircle className="text-blue-500" />
-                  <a
-                    href="#Man"
-                    className="text-gray-800 text-lg hover:text-blue-500"
-                  >
+                  <Link to="/collection/women" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                     Man
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaList className="text-blue-500" />
-                  <a
-                    href="#content"
-                    className="text-gray-800 text-lg hover:text-blue-500"
-                  >
+                  <Link to="/collection/kids" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                     Kids
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaAccusoft className="text-blue-500" />
-                  <a
-                    href="#Accessories"
-                    className="text-gray-800 text-lg hover:text-blue-500"
-                  >
+                  <Link to="/collection/accessories" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                     Accessories
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaPlaneArrival className="text-blue-500" />
-                  <a
-                    href="#New"
-                    className="text-gray-800 text-lg hover:text-blue-500"
-                  >
+                  <Link to="/collection" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
                     New Arrival
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -64,7 +64,7 @@ const LatestProducts = ({ products }) => {
 
 
     return (
-        <div className="flex justify-between flex-col lg:grid lg:grid-cols-2 sm:gap-10">
+        <div className="flex justify-between flex-col lg:grid lg:grid-cols-2 sm:gap-10 space-y-5 sm:space-y-0">
             {/* Left Side Products */}
             <div className="l-item-left w-full">
                 <Swiper
@@ -138,7 +138,7 @@ const LatestProducts = ({ products }) => {
                                                 />
                                             </div>
                                             <div className="">
-                                                <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                     alt={product.name} className='object-contain' />
                                             </div>
                                         </div>
@@ -177,8 +177,12 @@ const LatestProducts = ({ products }) => {
                     autoPlay
                     modules={[Pagination]}
                     breakpoints={{
-                        640: {
+                        1280: {
                             slidesPerView: 3,
+                            spaceBetween: 10,
+                        },
+                        640: {
+                            slidesPerView: 2,
                             spaceBetween: 10,
                         },
                         0: {
@@ -199,7 +203,7 @@ const LatestProducts = ({ products }) => {
 
                                     <Link to={`/singleproduct/${product.name}-${product.id}`}>
                                         <div className="">
-                                            <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`} className='h-60 w-full' />
+                                            <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`} className='h-60 w-full' />
                                         </div>
                                         <div className="sm:py-5 sm:px-3 p-1">
                                             <div className="sm:col-span-2 font-serif text-left space-y-2">

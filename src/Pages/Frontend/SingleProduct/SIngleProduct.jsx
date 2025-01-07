@@ -34,8 +34,9 @@ const SingleProduct = ({ products }) => {
 
   const [currentVariation, setCurrentVariation] = useState([]);
 
-  const [currentPrice, setCurrentPrice] = useState("");
-  const [oldPrice, setOldPrice] = useState('');
+  const [currentPrice, setCurrentPrice] = useState(null);
+  const [oldPrice, setOldPrice] = useState(null);
+  const [discountAmount, setDiscountAmount] = useState(null);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
@@ -68,9 +69,6 @@ const SingleProduct = ({ products }) => {
       } else {
         navigate(`/`);
       }
-    }
-    else {
-      navigate(`/`);
     }
   }, [products, product_id]);
 
@@ -119,20 +117,22 @@ const SingleProduct = ({ products }) => {
       setCurrentId(newId);
       setCurrentVariation(combination);
 
-      const variationDiscountEndDate = new Date(combination.discount_date);
-      const currentDate = new Date();
+      // Handle discount logic
+      const now = new Date();
+      const discountEndDate = combination.discount_date ? new Date(combination.discount_date) : null;
       const isDiscountActive =
-        combination.discount > 0 && variationDiscountEndDate >= currentDate;
+        combination.discount > 0 &&
+        (discountEndDate === null || discountEndDate >= now);
 
       if (isDiscountActive) {
-        const priceToDisplay = combination.price - combination.discount;
-        setCurrentPrice(priceToDisplay);
+        const discountedPrice = combination.price - combination.discount;
+        setCurrentPrice(discountedPrice);
         setOldPrice(combination.price);
-      }
-      else {
-        const priceWithoutDiscount = combination.price;
-        setCurrentPrice(priceWithoutDiscount);
+        setDiscountAmount(combination.discount);
+      } else {
+        setCurrentPrice(combination.price);
         setOldPrice(null);
+        setDiscountAmount(null);
       }
 
     } else {
@@ -217,19 +217,19 @@ const SingleProduct = ({ products }) => {
             {/* Product Image Section */}
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
               <img
-                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                 alt="Product"
                 className="w-full h-auto object-cover rounded-md"
               />
               < img
-                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                 alt="Product" className={`w-[300px] fixed h-[400px] hidden opacity-0 invisible z-50 ${(imageFly && !modalOpen) && 'single-mobile-flying-div  single-flying-div'}`}
                 onAnimationEnd={() => setimageFly(false)}
               />
             </div>
             {/* Add to Cart Product Section */}
-            <div className="w-full md:w-1/2 px-4">
-              <div className="sticky top-4">
+            <div className="w-full sticky md:w-1/2 px-4">
+              <div className="top-4">
                 <h2 className="text-lg shippori md:text-3xl font-semibold text-gray-800">
                   {product.name}
                 </h2>
@@ -237,155 +237,143 @@ const SingleProduct = ({ products }) => {
                   <p className="text-sm md:text-base text-gray-500 mt-0 md:mt-2">
                     SKU: {product.code}
                   </p>
-                  <div className="flex items-center space-x-0 md:space-x-4 mt-0 md:mt-4 flex-col md:flex-row">
+                  <div className="flex flex-col items-center space-x-0 md:space-x-4 mt-0 md:mt-4  md:flex-row">
                     {currentPrice ? (
                       <>
                         <span className="text-lg md:text-2xl font-bold text-[#C43882]">
                           Price: <span className="md:text-2xl">৳</span> {currentPrice}
                         </span>
-                        {oldPrice && <s className="text-lg text-black">৳{oldPrice}</s>}
-                        <span className="bg-red-500 rounded-lg text-white text-sm font-bold py-1 px-2">Save ৳ {(oldPrice - currentPrice)}</span>
+                        {discountAmount && (
+                          <div className="space-x-0 md:space-x-4">
+                            <span className="text-lg text-black relative strike">৳{oldPrice}</span>
+                            <span className="bg-pink-500 rounded-lg text-white text-xl font-bold py-2 px-4">
+                              Save ৳ {discountAmount}
+                            </span>
+                          </div>
+                        )}
                       </>
                     ) : (
-                      <div className="text-lg md:text-2xl font-bold text-[#C43882]">
-                        {product.variation_combinations && product.variation_combinations.length > 0 ? (
-                          (() => {
-                            // Filter valid variations with active discounts
-                            const validCombinations = product.variation_combinations.filter((combination) => {
-                              const variationDiscountEndDate = new Date(combination.discount_date);
-                              return combination.discount > 0 && variationDiscountEndDate >= new Date();
-                            });
+                      (() => {
+                        const now = new Date();
+                        const prices = product?.variation_combinations?.length
+                          ? product.variation_combinations.map((comb) => comb.price)
+                          : [product.price];
 
-                            if (validCombinations.length > 0) {
-                              const minPrice = Math.min(
-                                ...validCombinations.map((combination) => combination.price - combination.discount)
-                              );
-                              const maxPrice = Math.max(
-                                ...validCombinations.map((combination) => combination.price - combination.discount)
-                              );
+                        const lowPrice = Math.min(...prices);
+                        const highPrice = Math.max(...prices);
 
-                              return minPrice === maxPrice ? (
-                                <h2>
-                                  Price: <span className="md:text-2xl">৳</span> {minPrice}{" "}
-                                </h2>
-                              ) : (
-                                <h2>
-                                  Price: <span className="md:text-2xl">৳</span> {minPrice} - <span className="md:text-2xl">৳</span> {maxPrice}{" "}
-                                </h2>
-                              );
-                            } else {
-                              // No active discounts, just show the price
-                              const minPrice = Math.min(
-                                ...product.variation_combinations.map((combination) => combination.price)
-                              );
-                              const maxPrice = Math.max(
-                                ...product.variation_combinations.map((combination) => combination.price)
-                              );
+                        const discountAmount = product?.variation_combinations?.length
+                          ? product.variation_combinations.map((comb) => comb.discount)
+                          : product.discount_amount || 0;
 
-                              return minPrice === maxPrice ? (
-                                <h2>
-                                  Price: <span className="md:text-2xl">৳</span> {maxPrice}
-                                </h2>
-                              ) : (
-                                <h2>
-                                  Price: <span className="md:text-2xl">৳</span> {minPrice} - <span className="md:text-2xl">৳</span> {maxPrice}
-                                </h2>
-                              );
-                            }
-                          })()
-                        ) : (
-                          <h2>
-                            Price: <span className="md:text-2xl">৳</span> {product.price}
-                          </h2>
-                        )}
-                      </div>
+                        const maxDiscount = Math.max(...discountAmount)
+
+                        const discountDate = product?.variation_combinations?.length
+                          ? product.variation_combinations[0].discount_date
+                          : product.discount_date;
+
+                        const isDiscountValid = discountDate == null || new Date(discountDate) >= now;
+
+                        return (
+                          <div className="flex flex-col sm:flex-row items-center space-x-4 space-y-5 sm:space-y-0">
+                            <div className="text-lg md:text-2xl font-bold text-[#C43882]">
+                              Price: {lowPrice == highPrice ? <span>৳ {lowPrice}</span> : <span>৳ {lowPrice} - ৳ {highPrice}</span>}
+                            </div>
+                            {isDiscountValid && maxDiscount > 0 && (
+                              <span className="bg-pink-500 rounded-lg text-white text-xl font-bold py-2 px-4">
+                                Save ৳ {maxDiscount}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })()
                     )}
                   </div>
                 </div>
+              </div>
 
-                <ul className="space-y-4 mt-3">
-                  {product.product_variation?.length > 0 ? (
-                    product.product_variation.map((variation) => (
-                      <div key={variation.id}>
-                        <h3 className="text-sm my-1 font-semibold">{variation.variation.name}</h3>
-                        <div className="flex flex-wrap gap-3">
-                          {variation.variaton_values.split(",").map((value, i) => (
-                            <button
-                              key={i}
-                              onClick={() => handleVariationChange(variation.variation.name, value, i)}
-                              className={`py-1 px-3  rounded ${selectedVariations[variation.variation.name] === value
-                                ? "bg-[#C43882] text-white"
-                                : "bg-gray-200 hover:bg-[#C43882] hover:text-white"
-                                }`}
-                            >
-                              {value}
-                            </button>
-                          ))}
-                        </div>
+              <ul className="space-y-4 mt-3">
+                {product.product_variation?.length > 0 ? (
+                  product.product_variation.map((variation) => (
+                    <div key={variation.id}>
+                      <h3 className="text-sm my-1 font-semibold">{variation.variation.name}</h3>
+                      <div className="flex flex-wrap gap-3">
+                        {variation.variaton_values.split(",").map((value, i) => (
+                          <button
+                            key={i}
+                            onClick={() => handleVariationChange(variation.variation.name, value, i)}
+                            className={`py-1 px-3  rounded capitalize ${selectedVariations[variation.variation.name] === value
+                              ? "bg-[#C43882] text-white"
+                              : "bg-gray-200 hover:bg-[#C43882] hover:text-white"
+                              }`}
+                          >
+                            {value}
+                          </button>
+                        ))}
                       </div>
-                    ))
-                  ) : (
-                    <li>No variations available</li>
-                  )}
-                </ul>
-
-                <div id="error">
-                  {isToastVisible && (
-                    <span className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
-                      Please choose variant. <BsArrowUpSquare size={23} />
-                    </span>
-                  )}
-                </div>
-
-
-                <div className="py-2 flex md:flex-col flex-row items-center md:items-start justify-between">
-                  <div className="mt-2 md:mt-4">
-                    <p className="font-medium text-gray-800 hidden md:block">Quantity:</p>
-                    <div className="flex items-center gap-4 mt-0 md:mt-2 border border-gray-300 rounded-md w-fit">
-                      <button
-                        onClick={decrementCount}
-                        className="w-10 h-10 flex items-center justify-center border-r text-gray-800 rounded-md hover:bg-gray-100 transition text-lg font-semibold"
-                      >
-                        -
-                      </button>
-                      <span className="text-xl font-bold">{quantity}</span>
-                      <button
-                        onClick={incrementCount}
-                        className="w-10 h-10 flex items-center justify-center border-l text-gray-800 rounded-md hover:bg-gray-100 transition text-lg font-semibold"
-                      >
-                        +
-                      </button>
                     </div>
+                  ))
+                ) : (
+                  <li>No variations available</li>
+                )}
+              </ul>
+
+              <div id="error">
+                {isToastVisible && (
+                  <span className="mt-4 text-red-600 flex items-center gap-2 font-medium text-sm">
+                    Please choose variant. <BsArrowUpSquare size={23} />
+                  </span>
+                )}
+              </div>
+
+
+              <div className="py-2 flex md:flex-col flex-row items-center md:items-start justify-between">
+                <div className="mt-2 md:mt-4">
+                  <p className="font-medium text-gray-800 hidden md:block">Quantity:</p>
+                  <div className="flex items-center gap-4 mt-0 md:mt-2 border border-gray-300 rounded-md w-fit">
+                    <button
+                      onClick={decrementCount}
+                      className="w-10 h-10 flex items-center justify-center border-r text-gray-800 rounded-md hover:bg-gray-100 transition text-lg font-semibold"
+                    >
+                      -
+                    </button>
+                    <span className="text-xl font-bold">{quantity}</span>
+                    <button
+                      onClick={incrementCount}
+                      className="w-10 h-10 flex items-center justify-center border-l text-gray-800 rounded-md hover:bg-gray-100 transition text-lg font-semibold"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
+              </div>
 
-                <div className="hidden md:block mt-6 space-y-4">
+              <div className="hidden md:block mt-6 space-y-4">
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full py-2 md:py-3 bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition"
+                >
+                  কার্টে যোগ করুন
+                </button>
+
+                <Link to="/checkout">
                   <button
-                    onClick={handleAddToCart}
-                    className="w-full py-2 md:py-3 bg-gradient-to-r from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition"
+                    onClick={(e) => handleAddToCart(e)}
+                    className="w-full py-2 mt-3 md:py-3 bg-gradient-to-l from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition text-center block"
                   >
-                    কার্টে যোগ করুন
+                    অর্ডার করুন
                   </button>
+                </Link>
 
-                  <Link to="/checkout">
-                    <button
-                      onClick={(e) => handleAddToCart(e)}
-                      className="w-full py-2 mt-3 md:py-3 bg-gradient-to-l from-[#C43882] to-[#F06191] hover:from-[#F06191] hover:to-[#C43882] text-white font-semibold rounded hover:bg-[#db549c] transition text-center block"
-                    >
-                      অর্ডার করুন
-                    </button>
-                  </Link>
+              </div>
 
-                </div>
-
-                <div className="mt-4 border-t border-gray-200">
-                  <p className="py-3 text-left text-gray-800 text-lg">
-                    Description :
-                  </p>
-                  <p className="text-sm md:text-base text-gray-600">
-                    {product.short_desc}
-                  </p>
-                </div>
+              <div className="mt-4 border-t border-gray-200">
+                <p className="py-3 text-left text-gray-800 text-lg">
+                  Description :
+                </p>
+                <p className="text-sm md:text-base text-gray-600">
+                  {product.short_desc}
+                </p>
               </div>
             </div>
           </div>
@@ -433,7 +421,7 @@ const SingleProduct = ({ products }) => {
                         <div className="relative"
                           onClick={() => openModal(product)}>
                           <img
-                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                             alt={product.offer}
                             className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
@@ -490,12 +478,12 @@ const SingleProduct = ({ products }) => {
                       <div className="grid grid-cols-2 md:grid-cols-3 items-center gap-3">
                         <div>
                           <img
-                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                             alt={product.name}
                             className="w-full h-auto rounded-lg"
                           />
                           <img
-                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                            src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                             alt="Product" className={`md:left-10 w-[100px] h-[120px] md:absolute hidden opacity-0 invisible z-50 ${imageFly && 'popup-flying-div popup-mobile-flying-div'}`}
                             onAnimationEnd={() => setimageFly(false)}
                           />
@@ -506,62 +494,54 @@ const SingleProduct = ({ products }) => {
                             <h2 className="text-xl font-semibold text-wrap capitalize">{product.name}</h2>
                           </div>
                           {currentPrice ? (
-                            <h2 className="md:text-2xl font-bold text-[#C43882]">
-                              Price: <span className="md:text-2xl">৳</span> {currentPrice} {oldPrice && <s className=" text-red-500">{oldPrice}</s>}
-                            </h2>
-                          ) : (
-                            <div className="md:text-2xl font-bold text-[#C43882]">
-                              {product.variation_combinations && product.variation_combinations.length > 0 ? (
-                                (() => {
-                                  // Filter valid variations with active discounts
-                                  const validCombinations = product.variation_combinations.filter((combination) => {
-                                    const variationDiscountEndDate = new Date(combination.discount_date);
-                                    return combination.discount > 0 && variationDiscountEndDate >= new Date();
-                                  });
-
-                                  if (validCombinations.length > 0) {
-                                    const minPrice = Math.min(
-                                      ...validCombinations.map((combination) => combination.price - combination.discount)
-                                    );
-                                    const maxPrice = Math.max(
-                                      ...validCombinations.map((combination) => combination.price - combination.discount)
-                                    );
-
-                                    return minPrice === maxPrice ? (
-                                      <h2>
-                                        Price: <span className="md:text-2xl">৳</span> {minPrice}{" "}
-                                      </h2>
-                                    ) : (
-                                      <h2>
-                                        Price: <span className="md:text-2xl">৳</span> {minPrice} - <span className="md:text-2xl">৳</span> {maxPrice}{" "}
-                                      </h2>
-                                    );
-                                  } else {
-                                    // No active discounts, just show the price
-                                    const minPrice = Math.min(
-                                      ...product.variation_combinations.map((combination) => combination.price)
-                                    );
-                                    const maxPrice = Math.max(
-                                      ...product.variation_combinations.map((combination) => combination.price)
-                                    );
-
-                                    return minPrice === maxPrice ? (
-                                      <h2>
-                                        Price: <span className="md:text-2xl">৳</span> {maxPrice}
-                                      </h2>
-                                    ) : (
-                                      <h2>
-                                        Price: <span className="md:text-2xl">৳</span> {minPrice} - <span className="md:text-2xl">৳</span> {maxPrice}
-                                      </h2>
-                                    );
-                                  }
-                                })()
-                              ) : (
-                                <h2>
-                                  Price: <span className="text-lg md:text-2xl">৳</span> {product.price}
-                                </h2>
+                            <p className="space-y-2">
+                              <span className="text-lg font-bold text-[#C43882]">
+                                Price: ৳{currentPrice}{" "}
+                              </span>
+                              {discountAmount && (
+                                <span className="text-lg text-black relative strike">৳{oldPrice}</span>
                               )}
-                            </div>
+                              <br />
+                              {discountAmount && (
+                                <p className="bg-pink-500 rounded-lg text-white text-center font-bold py-1 px-2">
+                                  Save ৳ {discountAmount}
+                                </p>
+                              )}
+                            </p>
+                          ) : (
+                            (() => {
+                              const now = new Date();
+                              const prices = product?.variation_combinations?.length
+                                ? product.variation_combinations.map((comb) => comb.price)
+                                : [product.price];
+
+                              const lowPrice = Math.min(...prices);
+                              const highPrice = Math.max(...prices);
+
+                              const discountAmount = product?.variation_combinations?.length
+                                ? product.variation_combinations.map((comb) => comb.discount)
+                                : product.discount_amount || 0;
+
+                              const maxDiscount = Math.max(...discountAmount)
+
+                              const discountDate = product?.variation_combinations?.length
+                                ? product.variation_combinations[0].discount_date
+                                : product.discount_date;
+
+                              const isDiscountValid = discountDate == null || new Date(discountDate) >= now;
+
+                              return (
+                                <div className="space-y-2 font-bold">
+                                  <p>Price: <span className="text-[#C43882]">{lowPrice == highPrice ? <span>৳ {lowPrice}</span> : <span>৳{lowPrice} - ৳{highPrice}</span>}
+                                  </span></p>
+                                  {isDiscountValid && (maxDiscount > 0) && (
+                                    <p className="bg-pink-500 rounded-lg text-white text-center font-bold py-1 px-2">
+                                      Save ৳ {maxDiscount}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            })()
                           )}
                           {product.product_variation?.length > 0 ? (
                             product.product_variation.map((variation) => (
@@ -574,7 +554,7 @@ const SingleProduct = ({ products }) => {
                                       key={i}
                                       onClick={() => handleVariationChange(variation.variation.name, value)}
                                       className={`py-1 text-sm rounded ${selectedVariations[variation.variation.name] === value
-                                        ? "bg-[#C43882] text-white"
+                                        ? "bg-pink-500 text-white"
                                         : "bg-gray-200 hover:bg-[#C43882] hover:text-white"
                                         }`}
                                     >
@@ -594,7 +574,7 @@ const SingleProduct = ({ products }) => {
                             </div>
                           )}
 
-                          <div className="flex justify-around bg-gray-200 py-1.5 rounded-full items-center mt-3 md:mt-5">
+                          <div className="flex justify-around bg-gray-200 py-1.5 rounded-full items-center mt-3 md:mt-5 md:my-5">
                             <button
                               onClick={decrementCount}
                               className="bg-slate-200 text-gray-800 rounded-full hover:text-white hover:bg-sky-400"

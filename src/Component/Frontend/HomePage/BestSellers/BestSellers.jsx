@@ -16,21 +16,21 @@ function BestSellers({ products }) {
     slidesToScroll: 4,
     responsive: [
       {
-        breakpoint: 1024, // For devices <= 1024px
+        breakpoint: 1280, // For devices <= 1024px
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
         },
       },
       {
-        breakpoint: 898, // For devices <= 768px
+        breakpoint: 1024, // For devices <= 768px
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 480, // For devices <= 480px
+        breakpoint: 640, // For devices <= 480px
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -63,7 +63,7 @@ function BestSellers({ products }) {
                   {/* Product Image */}
                   <div className="relative">
                     <img
-                      src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                      src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                       alt={product.offer}
                       className=" h-[300px] w-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -109,7 +109,7 @@ function BestSellers({ products }) {
                                 {lowPrice} <span className="text-2xl">৳</span>{" "}
                               </span>
                               -{" "}
-                              <span className="text-red-500 font-bold">
+                              <span className="text-pink-500 font-bold">
                                 {highPrice} <span className="text-2xl">৳</span>{" "}
                               </span>
                             </>

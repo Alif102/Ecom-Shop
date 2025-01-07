@@ -9,9 +9,6 @@ import { MdClose } from 'react-icons/md';
 // Price Slider 
 
 const Collections = ({ products }) => {
-
-    console.log(products)
-
     const { category_name } = useParams();
 
     const [categories, setCategories] = useState([]);
@@ -45,9 +42,8 @@ const Collections = ({ products }) => {
             setPriceRange([minPrice, maxPrice]);
             setRangeValues([minPrice, maxPrice]);
         }
-
         if (category_name) {
-            const filteredPdts = products.filter(item => item.name.toLowerCase().includes(category_name.toLowerCase()));
+            const filteredPdts = products.filter(item => item.category?.name?.toLowerCase().includes(category_name.toLowerCase()));
             setFilterProducts(filteredPdts);
         }
         else {
@@ -279,7 +275,7 @@ const Collections = ({ products }) => {
                                                     <div className="relative">
                                                         <div className="group relative overflow-hidden">
                                                             <img
-                                                                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/7/image/${product.image}`}
+                                                                src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                                 alt={product.name}
                                                                 className="sm:h-[380px] h-[300px] w-full object-cover group-hover:scale-125 transition-transform duration-500"
                                                             />
