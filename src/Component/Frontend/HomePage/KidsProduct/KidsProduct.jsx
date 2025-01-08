@@ -27,9 +27,9 @@ const KidsProduct = ({ products }) => {
                                 return (
                                     <Link to={`/singleproduct/${product.name}-${product.id}`} className={`bg-white shadow relative overflow-hidden rounded ${index == 0 && 'col-span-2 row-span-2'}`} key={index}>
                                         <img src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`} className='h-full object-cover w-full duration-500 hover:scale-110' />
-                                        <div className="absolute bottom-0 right-0 left-0 text-center bg-gray-50/50 shadow justify-center">
-                                            <div className="font-serif text-center py-2">
-                                                <h4 className='text-xl font-bold'>{product.name}</h4>
+                                        <div className="absolute bottom-0 right-0 left-0 text-center bg-gray-300 shadow justify-center">
+                                            <div className="font-serif text-center p-1 sm:py-2">
+                                                <h4 className='font-bold'>{product.name}</h4>
                                                 {product.variation_combinations.length > 0 ? (
                                                     <div className="text-gray-700">
                                                         {lowPrice === highPrice ? (

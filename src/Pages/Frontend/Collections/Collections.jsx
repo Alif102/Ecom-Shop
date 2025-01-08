@@ -35,7 +35,12 @@ const Collections = ({ products }) => {
 
     useEffect(() => {
         // Initialize price range based on product data
-        const prices = products.map((p) => p.price);
+        const prices = products.flatMap((product) =>
+            product?.variation_combinations?.length
+                ? product.variation_combinations.map((comb) => comb.price)
+                : [product.price]
+        );
+
         if (prices.length > 0) {
             const minPrice = Math.min(...prices);
             const maxPrice = Math.max(...prices);
@@ -61,7 +66,7 @@ const Collections = ({ products }) => {
         }
     };
 
-    const applyFilter = () => {
+    const applyCategoryFilter = () => {
 
         let productsCopy = products;
 
@@ -76,8 +81,11 @@ const Collections = ({ products }) => {
         }
 
         productsCopy = productsCopy.filter(
-            (product) => product.price >= rangeValues[0] && product.price <= rangeValues[1]
+            (product) => product?.variation_combinations?.length
+                ? (product.variation_combinations[0].price >= rangeValues[0] && product.variation_combinations[0].price <= rangeValues[1]) : (product.price >= rangeValues[0] && product.price <= rangeValues[1])
         );
+
+        setFilterProducts(productsCopy);
 
         setFilterProducts(productsCopy);
     }
@@ -87,11 +95,13 @@ const Collections = ({ products }) => {
 
         switch (sortType) {
             case 'low-high': // Sort by price (low to high)
-                setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
+                setFilterProducts(fpCopy.sort((a, b) => (a?.variation_combinations?.length && b?.variation_combinations?.length)
+                    ? (a.variation_combinations[0].price - b.variation_combinations[0].price) : (a.price - b.price)));
                 break;
 
             case 'high-low': // Sort by price (high to low)
-                setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
+                setFilterProducts(fpCopy.sort((a, b) => (a?.variation_combinations?.length && b?.variation_combinations?.length)
+                    ? (b.variation_combinations[0].price - a.variation_combinations[0].price) : (b.price - a.price)));
                 break;
 
             case 'name-asc': // Sort by name (A to Z)
@@ -119,14 +129,14 @@ const Collections = ({ products }) => {
                 break;
 
             default:// Apply default filter if no sorting type matches
-                applyFilter();
+                applyCategoryFilter();
                 break;
         }
 
     }
 
     useEffect(() => {
-        applyFilter();
+        applyCategoryFilter();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category, isSearchOpen, search]);
 
@@ -187,11 +197,11 @@ const Collections = ({ products }) => {
             <div className='flex sm:flex-row flex-col gap-1 sm:gap-10 pt-5 py-10 border-t sm:space-y-5'>
                 {/* Left Filter Option */}
                 <div className="min-w-60 px-2 sm:px-0">
-                    {/* <button onClick={() => setShowFilter(!showFilter)} className='flex items-center gap-2 my-2 text-xl cursor-pointer'>FILTERS
+                    <button onClick={() => setShowFilter(!showFilter)} className='flex items-center gap-2 my-2 text-xl cursor-pointer'>FILTERS
                         <FaAngleRight className={`h-3 sm:hidden  transition ease-in-out duration-200 ${showFilter ? 'rotate-90' : ''}`} />
-                    </button> */}
+                    </button>
                     {/* Category Filter  */}
-                    <div className={`border rounded border-gray-300 sm:mt-12 p-5 mb-5 ${showFilter ? '' : 'hidden'} sm:block`}>
+                    <div className={`border rounded border-pink-500 sm:mt-2 p-5 mb-5 ${showFilter ? '' : 'hidden'} sm:block`}>
                         <div className='mb-10 space-y-3'>
                             <span className="font-semibold">Filter by Category</span>
 
@@ -223,11 +233,11 @@ const Collections = ({ products }) => {
                 <div className="flex-1">
                     <div className="flex justify-between text-base sm:text-2xl px-2 sm:px-0">
                         <div className='inline-flex gap-2 items-center mb-3'>
-                            <p className='text-gray-500'>ALL <span className='text-gray-700 font-medium' >COLLECTIONS</span>
+                            <p className='text-gray-500'>ALL <span className='text-pink-500 font-medium' >COLLECTIONS</span>
                             </p>
                             <p className='w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700'></p>
                         </div>
-                        <select onChange={(e) => setSortType(e.target.value)} name="" id="" className="border-2 border-gray-300 px-2 text-sm">
+                        <select onChange={(e) => setSortType(e.target.value)} name="" id="" className="border-2 border-pink-500 px-2 text-sm">
                             <option value="relavent">Sort by: Relavent</option>
                             <option value="low-high">Price: Low to High</option>
                             <option value="high-low">Price: High to Low</option>
@@ -239,7 +249,7 @@ const Collections = ({ products }) => {
                             <option value="stock-low">Stock: Low to High</option>
                         </select>
                     </div>
-                    <p className='mb-5'>Showing all {filterProducts.length} results</p>
+                    <p className='mb-5 px-2 sm:px-0'>Showing all <span className='text-pink-500'>{filterProducts.length} results</span></p>
                     {/* products */}
                     <div className="gap-2 lg:gap-4 gap-y-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
                         {
@@ -303,7 +313,7 @@ const Collections = ({ products }) => {
                                                                         ৳{Math.round(price - discountAmount)}&nbsp;
                                                                         <span className="text-gray-500 font-bold relative strike">৳{price}</span>
                                                                     </p> :
-                                                                    (lowPrice < highPrice ?
+                                                                    ((lowPrice == highPrice) ?
                                                                         <p className="text-pink-500 font-bold ">
                                                                             ৳{lowPrice}
                                                                         </p>

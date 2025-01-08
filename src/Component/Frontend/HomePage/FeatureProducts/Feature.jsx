@@ -101,7 +101,7 @@ const Feature = ({ products }) => {
                                         </div>
 
                                         {/* Product Details */}
-                                        <div className="p-4">
+                                        <div className="p-2 sm:p-4">
                                             {/* Product Name */}
                                             <h2 className="font-semibold shippori text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300">
                                                 {product.name}

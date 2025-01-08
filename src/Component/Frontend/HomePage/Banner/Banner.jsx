@@ -6,6 +6,7 @@ import azmain from '../../../../assets/azmain.png'
 import SwiperBanner from "../../SwiperBanner/SwiperBanner";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import Header from "../../Header/Header";
 
 
 const Banner = () => {
@@ -32,6 +33,12 @@ const Banner = () => {
   return (
     <div>
       <div className="relative">
+
+        {/* Navbar */}
+        <div>
+          <Header />
+        </div>
+        
         <div className="relative">
           <SwiperBanner />
           {/* <div className=" flex justify-around w-full absolute  md:-bottom-20 gap-2">
@@ -51,59 +58,6 @@ const Banner = () => {
 
         </div>
 
-        {/* Navbar */}
-        <div>
-          <nav className="navbar absolute top-0 left-0 w-ful bg-transparent z-50">
-            <div className="container mx-auto flex items-center justify-between">
-              {/* Logo */}
-              <img src={azmain} alt="logo" className="w-auto h-16" srcSet="" />
-
-              {/* Links (hidden on small devices) */}
-              <div className="hidden md:flex space-x-4">
-                <Link to="/collection" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  New-Arrival
-                </Link>
-                <Link to="/collection/man" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  Man
-                </Link>
-                <Link to="/collection/women" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  Women
-                </Link>
-                <Link to="/collection/kids" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  Kids
-                </Link>
-                <Link to="/collection/accessories" className="text-[#C43882] font-sembold text-[20px] hover:text-gray-700">
-                  Accessories
-                </Link>
-              </div>
-
-              {/* Right icons */}
-              <div className="flex items-center space-x-4">
-                <div className="relative">
-                  <Link to="/collection">
-                    <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#C43882] font-sembold z-30 block" size={20} />
-                  </Link>
-                </div>
-                {/* <div className="relative group cursor-pointer">
-                    <HiOutlineShoppingCart  className="text-gray-600 font-sembold text-[20px]  text-lg" size={22} />
-                    <span className="badge badge-sm bg-red-200 text-[#C43882] font-sembold text-[20px] absolute -top-3 -right-4">
-                      3
-                    </span>
-                    <div className="absolute left-1/2 -translate-x-1/2  w-72 mt-2 hidden text-center group-hover:block bg-white text-gray-800 text-sm p-6 rounded shadow-lg">
-                    <HiOutlineShoppingCart  className=" mx-auto text-lg my-3" size={32} />   Your Whishlist is empty
-                    </div>
-                  </div> */}
-                {/* Menu icon (visible on small devices) */}
-                <button
-                  className="text-[#C43882] font-sembold text-[20px] md:hidden"
-                  onClick={() => setIsDrawerOpen(true)}
-                >
-                  <FaBars className="text-xl" size={22} />
-                </button>
-              </div>
-            </div>
-          </nav>
-        </div>
 
 
 

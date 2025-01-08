@@ -207,7 +207,7 @@ const LatestProducts = ({ products }) => {
                                         </div>
                                         <div className="sm:py-5 sm:px-3 p-1">
                                             <div className="sm:col-span-2 font-serif text-left space-y-2">
-                                                <h4 className='text-xl'>Winter Dress</h4>
+                                                <h4 className='text-xl'>{product.name}</h4>
                                                 <span className='text-[#FF9900] flex text-sm'>
                                                     <FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></span>
                                                 {/* <div className=''><span className='text-lg font-bold text-pink-500'>$250</span> <s className='text-gray-700 text-sm'>$400</s></div> */}
