@@ -148,8 +148,8 @@ const Header = () => {
   return (
     <div>
       <header
-        className={` transition-all duration-700 ease-in-out ${isSticky
-          ? "w-full bg-white backdrop-blur-md fixed top-0 left-0 z-20 shadow-md"
+        className={` transition-all duration-700 bg-white ease-in-out ${isSticky
+          ? "w-full backdrop-blur-md fixed top-0 left-0 z-20 shadow-md"
           : "bg-transparent"
           } ${showHeader ? "top-0" : "-top-20"}`}
       >

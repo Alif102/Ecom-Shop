@@ -78,8 +78,6 @@ const SingleProduct = ({ products }) => {
   const incrementCount = () => setQuantity(quantity + 1);
   const decrementCount = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
-  console.log(viewImage)
-
   const handleCartToggle = () => {
     if (cartCount < 1) {
       toast("Your cart is empty", {
@@ -186,6 +184,9 @@ const SingleProduct = ({ products }) => {
     }
   };
 
+
+
+
   // Modal..............
 
   const openModal = (product) => {
@@ -210,6 +211,28 @@ const SingleProduct = ({ products }) => {
     setCurrentPrice('')
     setimageFly(false);
   };
+
+  const modalRef = useRef();
+  const outerRef = useRef();
+
+  useEffect(() => {
+    // Close modal if clicked outside
+    const handleClickOutside = (event) => {
+      if (outerRef.current && !outerRef.current.contains(event.target) && !modalRef.current.contains(event.target)) {
+        closeModal(); // Close modal
+      }
+    };
+
+    if (openModal) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openModal, closeModal]);
 
   return (
     <div className="relative">
@@ -489,9 +512,9 @@ const SingleProduct = ({ products }) => {
                         </Link>
 
                         <button onClick={() => openModal(product)}
-                          className="absolute right-5 bottom-20 bg-[#C43882] rounded-full p-2 text-white hover:text-[#C43882] hover:bg-white duration-500 border border-transparent hover:border-[#C43882]"
+                          className="absolute right-5 bottom-16 sm:bottom-20 bg-[#C43882] rounded-full p-2 text-white hover:text-[#C43882] hover:bg-white duration-500 border border-transparent hover:border-[#C43882]"
                         >
-                          <FaEye />
+                          <FaPlus />
                         </button>
                       </div>
                     );
@@ -499,8 +522,8 @@ const SingleProduct = ({ products }) => {
 
               {modalOpen && (() => {
                 return (
-                  <div className="fixed inset-0 flex justify-center z-50 bg-black bg-opacity-50 items-center">
-                    <div className="relative w-full px-5 sm:px-0 h-full flex justify-center items-center">
+                  <div ref={outerRef} className="fixed inset-0 flex justify-center z-50 items-center bg-black bg-opacity-50">
+                    <div ref={modalRef} className="relative w-full px-5 sm:px-0 h-full flex justify-center items-center">
                       <div className="bg-white p-2 md:p-5 rounded shadow-lg w-96 sm:w-[500px]">
                         <div className="grid grid-cols-2 md:grid-cols-3 items-center gap-3">
                           <div>

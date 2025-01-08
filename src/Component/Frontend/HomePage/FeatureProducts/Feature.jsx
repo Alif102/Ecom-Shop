@@ -63,7 +63,7 @@ const Feature = ({ products }) => {
             ) : (
                 // Feature Products
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:gap-4 gap-2">
-                    {filteredProducts.map((product, index) => {
+                    {filteredProducts.slice(0, 8).map((product, index) => {
                         // Extract the highest and lowest prices from variation_combinations
                         const prices = product.variation_combinations.length
                             ? product.variation_combinations.map((comb) => comb.price)
@@ -150,6 +150,9 @@ const Feature = ({ products }) => {
                     })}
                 </div>
             )}
+            <div className="text-right mt-5 sm:mt-10">
+                <Link to={`/collection/${selectedCategory.toLowerCase()}`} className="bg-pink-500 text-white text-center text-sm py-2 px-4 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">View More</Link>
+            </div>
         </div>
     );
 };

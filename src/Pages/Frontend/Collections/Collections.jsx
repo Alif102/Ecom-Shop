@@ -5,10 +5,12 @@ import { Link, useParams } from 'react-router-dom';
 import azmain from '../../../assets/azmain.png'
 import PriceRangeFilter from '../../../Component/Frontend/PriceRange/PriceRangeFilter';
 import { MdClose } from 'react-icons/md';
+import FeatureProducts from '../../../Component/Frontend/HomePage/FeatureProducts/FeatureProducts';
 
 // Price Slider 
 
 const Collections = ({ products }) => {
+
     const { category_name } = useParams();
 
     const [categories, setCategories] = useState([]);
@@ -35,10 +37,10 @@ const Collections = ({ products }) => {
 
     useEffect(() => {
         // Initialize price range based on product data
-        const prices = products.flatMap((product) =>
+        const prices = filterProducts.flatMap((product) =>
             product?.variation_combinations?.length
                 ? product.variation_combinations.map((comb) => comb.price)
-                : [product.price]
+                : product.price
         );
 
         if (prices.length > 0) {
@@ -47,15 +49,55 @@ const Collections = ({ products }) => {
             setPriceRange([minPrice, maxPrice]);
             setRangeValues([minPrice, maxPrice]);
         }
-        if (category_name) {
-            const filteredPdts = products.filter(item => item.category?.name?.toLowerCase().includes(category_name.toLowerCase()));
-            setFilterProducts(filteredPdts);
+    }, [filterProducts])
+
+
+    // useEffect(() => {
+    //     if (products.length > 0 && category_name) {
+    //         const lastIndex = category_name.lastIndexOf("-");
+    //         const category_id = parseInt(category_name.substring(lastIndex + 1), 10);  // Extract the category ID
+    //         if (category_id) {
+    //             const filtered = products.filter(product => {
+    //                 return category_name.includes(String(product.category.id)) || product.category?.name?.toLowerCase().includes(String(category_name.toLowerCase()));
+    //             });
+    //             setFilterProducts(filtered);
+    //         }
+    //         else {
+    //             const filtered = products.filter(product => product.category?.name?.toLowerCase().includes(String(category_name.toLowerCase())));
+    //             // If no category_name is provided, show all products
+    //             setFilterProducts(filtered);
+    //         }
+    //     }
+    //     else {
+    //         // If no category_name is provided, show all products
+    //         setFilterProducts(products);
+    //     }
+    // }, [category_name]);
+
+    useEffect(() => {
+        if (category_name && products?.length) {
+            // Decode and normalize the category name for comparison
+            const categoryName = decodeURIComponent(category_name).replace(/-/g, ' ').toLowerCase();
+            console.log("Decoded category name:", categoryName);
+
+            // Filter products based on the category name
+            const filteredPdts = products.filter(
+                (item) =>
+                    item.category?.name?.toLowerCase() === categoryName ||
+                    item.category?.name?.toLowerCase().includes(category_name.toLowerCase())
+            );
+
+            console.log("Filtered Products:", filteredPdts);
+
+            // Set filtered products or show all if none match
+            setFilterProducts(filteredPdts.length > 0 ? filteredPdts : products);
+        } else if (!category_name && products?.length) {
+            // If no category is provided, show all products
+            setFilterProducts(products);
         }
-        else {
-            const filteredPdts = products;
-            setFilterProducts(filteredPdts);
-        }
-    }, [products, category_name]);
+    }, [category_name, products]); // Ensure `products` is in dependencies
+
+
 
     const toggleCategory = (e) => {
         const value = String(e.target.value); // Ensure value is a string
@@ -68,7 +110,7 @@ const Collections = ({ products }) => {
 
     const applyCategoryFilter = () => {
 
-        let productsCopy = products;
+        let productsCopy = products.slice();
 
         if (isSearchOpen && search) {
             productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
@@ -80,14 +122,14 @@ const Collections = ({ products }) => {
             });
         }
 
-        productsCopy = productsCopy.filter(
-            (product) => product?.variation_combinations?.length
-                ? (product.variation_combinations[0].price >= rangeValues[0] && product.variation_combinations[0].price <= rangeValues[1]) : (product.price >= rangeValues[0] && product.price <= rangeValues[1])
-        );
+        // productsCopy = productsCopy.filter(
+        //     (product) => product?.variation_combinations?.length
+        //         ? (product.variation_combinations[0].price >= rangeValues[0] && product.variation_combinations[0].price <= rangeValues[1]) : (product.price >= rangeValues[0] && product.price <= rangeValues[1])
+        // );
 
-        setFilterProducts(productsCopy);
-
-        setFilterProducts(productsCopy);
+        if (productsCopy.length > 0) {
+            setFilterProducts(productsCopy);
+        }
     }
 
     const sortProducts = () => {
@@ -135,6 +177,8 @@ const Collections = ({ products }) => {
 
     }
 
+    const [showProduct, setShowProduct] = useState(8);
+
     useEffect(() => {
         applyCategoryFilter();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -145,6 +189,12 @@ const Collections = ({ products }) => {
         sortProducts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortType]);
+
+    const getMoreProduct = () => {
+        if (filterProducts.length >= showProduct) {
+            setShowProduct((prev) => prev + 8)
+        }
+    }
 
 
 
@@ -249,12 +299,12 @@ const Collections = ({ products }) => {
                             <option value="stock-low">Stock: Low to High</option>
                         </select>
                     </div>
-                    <p className='mb-5 px-2 sm:px-0'>Showing all <span className='text-pink-500'>{filterProducts.length} results</span></p>
+                    <p className='mb-5 px-2 sm:px-0'>Showing {filterProducts.slice(0, showProduct).length} out of <span className='text-pink-500'>{filterProducts.length}</span> results</p>
                     {/* products */}
                     <div className="gap-2 lg:gap-4 gap-y-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
                         {
                             filterProducts ?
-                                filterProducts.map((product, index) => {
+                                filterProducts.slice(0, showProduct).map((product, index) => {
 
                                     const price = product?.variation_combinations?.length
                                         ? product.variation_combinations[0].price
@@ -287,6 +337,7 @@ const Collections = ({ products }) => {
                                                             <img
                                                                 src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                                 alt={product.name}
+                                                                loading="lazy"
                                                                 className="sm:h-[380px] h-[300px] w-full object-cover group-hover:scale-125 transition-transform duration-500"
                                                             />
                                                         </div>
@@ -299,7 +350,7 @@ const Collections = ({ products }) => {
                                                     </div>
 
                                                     {/* Product Details */}
-                                                    <div className="p-4">
+                                                    <div className="p-2 sm:p-4">
                                                         {/* Product Name */}
                                                         <h2 className="font-semibold shippori text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300">
                                                             {product.name}
@@ -323,7 +374,7 @@ const Collections = ({ products }) => {
                                                                         </p>)
 
                                                             }
-                                                            <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-2 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">
+                                                            <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-2 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300 hidden sm:block">
                                                                 QUICK VIEW
                                                             </button>
                                                         </div>
@@ -337,6 +388,10 @@ const Collections = ({ products }) => {
                         }
                     </div>
 
+
+                    <div className="text-center mt-5">
+                        <button onClick={() => getMoreProduct()} className="bg-pink-500 text-white text-center text-sm py-2 md:px-10 px-4 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">View More</button>
+                    </div>
                 </div>
             </div>
         </div>

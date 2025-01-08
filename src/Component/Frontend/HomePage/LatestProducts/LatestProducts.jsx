@@ -104,7 +104,8 @@ const LatestProducts = ({ products }) => {
                                         <div className="bg-[#C43882] sm:w-1/2 rounded-br-3xl text-xl px-4 py-3 font-semibold text-white text-left whitespace-normal">
                                             Best Deals of Winter
                                         </div>
-                                        <Link to={`collection/${product.category.name.toLowerCase()}`} className="flex pr-4 items-center gap-2">
+                                        {/* to={`collection/${product.category.name.toLowerCase()}-${product.category.id}`} */}
+                                        <Link to={`collection/${product.category.name.toLowerCase()}-${product.category.id}`} className="flex pr-4 items-center gap-2">
                                             <span>View more</span>
                                             <FaAngleRight />
                                         </Link>
@@ -166,7 +167,7 @@ const LatestProducts = ({ products }) => {
                 {/* header  */}
                 <div className="flex justify-between items-center bg-pink-100">
                     <div className='bg-[#00C8FF] sm:w-1/2 rounded-br-3xl text-xl px-4 py-3 font-semibold text-white text-left whitespace-normal'>New Arrivals</div>
-                    <Link to="/collection" className='flex pr-4 items-center gap-2'>
+                    <Link to="/collection/" className='flex pr-4 items-center gap-2'>
                         <span>View more </span><FaAngleRight />
                     </Link>
                 </div>
