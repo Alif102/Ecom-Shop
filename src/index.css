@@ -7,126 +7,213 @@
 
 .delius {
   font-family: "Delius Swash Caps", cursive;
- 
+
 }
 
 
 .roboto-mono {
   font-family: "Roboto Mono", monospace;
-  
+
 }
+
 .floating-image {
-    /* display: inline-block; */
-    animation: float 5s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0); /* Initial position */
-    }
-    50% {
-      transform: translateY(-0.2in); /* Moves up by 1 inch */
-    }
-  }
-  .circle-container {
-    position: relative;
-    width: 200px; /* Diameter of the circular path */
-    height: 200px;
-    border-radius: 50%; /* Makes the container a perfect circle */
-  }
-  
-  .circle-image {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 150px; /* Adjust to your image size */
-    height: 150px;
-    border-radius: 50%; /* Optional: Makes the image itself circular */
-    animation: run-circle 15s linear infinite;
-  }
-  
-  @keyframes run-circle {
-    0% {
-      transform: translate(-50%, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(-50%, 0) rotate(90deg);
-    }
-    50% {
-      transform: translate(-50%, 0) rotate(180deg);
-    }
-    75% {
-      transform: translate(-50%, 0) rotate(270deg);
-    }
-    100% {
-      transform: translate(-50%, 0) rotate(360deg);
-    }
-  }
-  
+  /* display: inline-block; */
+  animation: float 5s ease-in-out infinite;
+}
 
-  .floating-left-right-image {
-    /* display: inline-block; */
-    animation: float-right-left 5s ease-in-out infinite;
-  }
-  
-  @keyframes float-right-left {
-    0%, 100% {
-      transform: translateX(0); /* Initial position */
-    }
-    50% {
-      transform: translateX(0.5in); /* Moves right by 0.5 inches */
-    }
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    /* Initial position */
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  50% {
+    transform: translateY(-0.2in);
+    /* Moves up by 1 inch */
   }
-  
-  .spin-image {
-  
-    animation: spin 15s linear infinite; /* Spin continuously */
+}
+
+.circle-container {
+  position: relative;
+  width: 200px;
+  /* Diameter of the circular path */
+  height: 200px;
+  border-radius: 50%;
+  /* Makes the container a perfect circle */
+}
+
+.circle-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 150px;
+  /* Adjust to your image size */
+  height: 150px;
+  border-radius: 50%;
+  /* Optional: Makes the image itself circular */
+  animation: run-circle 15s linear infinite;
+}
+
+/* Latest Product page Swiper  */
+.swiper {
+  height: auto !important;
+}
+
+@media (max-width: 767px) {
+  .l-item-right .swiper-slide {
+    width: auto !important;
+  }
+}
+
+/* Horizontal scrollbar width */
+.scrollbar::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  /* Set the height for horizontal scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to right top, #C43882, #fff);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Horizontal scrollbar track */
+.scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Track background color */
+  border-radius: 100px;
+  /* Rounded corners for the track */
+}
+
+/* Horizontal scrollbar thumb */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Thumb background color */
+  border-radius: 100px;
+  /* Rounded corners for the thumb */
+}
+
+/* Horizontal scrollbar thumb on hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Darker color on hover */
+}
+
+/* For Firefox */
+.scrollbar {
+  scrollbar-width: thin;
+  /* Thin scrollbar */
+  scrollbar-color: #888 #f1f1f1;
+  /* Thumb and track colors */
+}
+
+
+
+@keyframes run-circle {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
   }
 
-  .custom-bg-blue{
-    background-color: rgb(73 87 158);
-  }
-  .slider-con{
-    gap: 5px;
-  }
- .pollinator {
-    font-family: 'Pollinator';
-    src: url('/public/font/pollinator.otf') format('truetype');
-  
-    font-style: normal;
+  25% {
+    transform: translate(-50%, 0) rotate(90deg);
   }
 
-  @layer utilities {
-    .shadow-inner-bottom {
-      box-shadow: inset 0 -14px 26px rgba(0, 0, 0, 0.1);
-    }
+  50% {
+    transform: translate(-50%, 0) rotate(180deg);
   }
-  
+
+  75% {
+    transform: translate(-50%, 0) rotate(270deg);
+  }
+
+  100% {
+    transform: translate(-50%, 0) rotate(360deg);
+  }
+}
 
 
-  .slider-container {
-    position: relative;
-    overflow: hidden;
-    max-width: 90%;
-    margin: 0 auto;
+.floating-left-right-image {
+  /* display: inline-block; */
+  animation: float-right-left 5s ease-in-out infinite;
+}
+
+@keyframes float-right-left {
+
+  0%,
+  100% {
+    transform: translateX(0);
+    /* Initial position */
   }
-  
-  .arrow-icon {
-    z-index: 10; /* Ensure the arrows are above other content */
-    color: gray; /* Set color to ensure it's visible */
-    font-size: 2rem; /* Adjust size if needed */
+
+  50% {
+    transform: translateX(0.5in);
+    /* Moves right by 0.5 inches */
   }
-  
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-image {
+
+  animation: spin 15s linear infinite;
+  /* Spin continuously */
+}
+
+.custom-bg-blue {
+  background-color: rgb(73 87 158);
+}
+
+.slider-con {
+  gap: 5px;
+}
+
+.pollinator {
+  font-family: 'Pollinator';
+  src: url('/public/font/pollinator.otf') format('truetype');
+
+  font-style: normal;
+}
+
+@layer utilities {
+  .shadow-inner-bottom {
+    box-shadow: inset 0 -14px 26px rgba(0, 0, 0, 0.1);
+  }
+}
+
+img {
+  max-width: 100% !important;
+  height: auto;
+  display: block;
+}
+
+/* .slider-container {
+  position: relative;
+  overflow: hidden;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.arrow-icon {
+  z-index: 10;
+  color: gray;
+  font-size: 2rem;
+} */
+
 /* .slick-next:before {
   font-family:initial!important;
   color:rgb(238, 229, 229); 
@@ -146,50 +233,228 @@ border-radius: 30px;
   
   
 } */
-.swiper {
+
+/* .swiper {
   width: 100%;
   height: 100%;
 }
-
 .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* .swiper-slide img {
+ .swiper-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-} */
+} 
 .swiper-button-next,
 .swiper-button-prev {
   display: none !important;
 }
 
 .slick-next:before {
-  font-family:initial!important;
-  color:rgb(238, 229, 229); 
-border-radius: 30px;
+  font-family: initial !important;
+  color: rgb(238, 229, 229);
+  border-radius: 30px;
   padding: 5px;
   background: #D8D8D8;
-  
-}
-.slick-prev:before
-{
 
-  font-family:initial!important;
-  color:rgb(238, 229, 229); 
-border-radius: 30px;
+}
+
+.slick-prev:before {
+
+  font-family: initial !important;
+  color: rgb(238, 229, 229);
+  border-radius: 30px;
   padding: 5px;
-  /* margin-right: 15px; */
   background: #D8D8D8;
-  
-  
+} */
+
+
+
+@media (max-width: 767px) {
+  .single-mobile-flying-div {
+    position: fixed;
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    animation: single_mobile_fly_to_cart 1s ease-out;
+  }
+
+  @keyframes single_mobile_fly_to_cart {
+    0% {
+      left: 20%;
+      top: 10%;
+      opacity: 1;
+    }
+
+    100% {
+      left: calc(100% - 198px);
+      top: calc(100% - 240px);
+      opacity: 0.5;
+      transform: scale(0.05);
+    }
+  }
+
+  .popup-mobile-flying-div {
+    position: fixed;
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    animation: popup_mobile_fly_to_cart 1s ease-out;
+  }
+
+  @keyframes popup_mobile_fly_to_cart {
+    0% {
+      left: 20%;
+      top: 40%;
+      opacity: 1;
+    }
+
+    100% {
+      left: calc(100% - 100px);
+      top: calc(100% - 100px);
+      opacity: 0.5;
+      transform: scale(0.05);
+    }
+  }
+}
+
+
+
+@media (min-width: 768px) {
+
+  .single-flying-div {
+    /* or relative/fixed */
+    position: fixed;
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    animation: single_fly_to_cart 1s ease-out;
+  }
+
+  @keyframes single_fly_to_cart {
+    0% {
+      left: 10%;
+      /* Adjust to start position */
+      top: 20%;
+      /* Adjust to start position */
+      opacity: 1;
+    }
+
+    100% {
+      left: calc(100% - 200px);
+      /* Adjust to end position */
+      top: -170px;
+      /* Adjust to end position */
+      opacity: .5;
+      /* Optional fade-out */
+      transform: scale(0.01);
+    }
+  }
+
+
+  .popup-flying-div {
+    /* or relative/fixed */
+    position: absolute;
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    animation: popup_fly_to_cart 2s ease-out;
+  }
+
+  @keyframes popup_fly_to_cart {
+    0% {
+      left: 35%;
+      /* Adjust to start position */
+      top: 40%;
+      /* Adjust to start position */
+      opacity: 1;
+    }
+
+    100% {
+      left: calc(100% - 100px);
+      /* Adjust to end position */
+      top: -30px;
+      /* Adjust to end position */
+      opacity: .5;
+      /* Optional fade-out */
+      transform: scale(0.1);
+    }
+  }
+}
+
+
+
+/* discount-product */
+.discount-product button {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.discount-product button::before {
+  background-color: #C43882;
+  bottom: -3px;
+  height: 4px;
+  width: 40px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 0.4s ease;
+  position: absolute;
+  content: "";
+  left: 50%;
+  -webkit-transition: all 0.4s ease;
+  opacity: 0;
+}
+
+
+.discount-product button::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  -webkit-transition: all 0.4s ease;
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: -15px;
+  border-top: 8px solid #C43882;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  transition: all 0.4s ease;
+  border-top: 8px solid #C43882;
+}
+
+.discount-product button.activeTab::before,
+.discount-product button.activeTab::after {
+  opacity: 1;
+}
+
+.discount-product button:hover {
+  color: #C43882;
+}
+
+.discount-product button:hover::before,
+.discount-product button:hover::after {
+  opacity: 1;
+}
+
+
+.strike::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Center the line vertically relative to the element */
+  left: 0; /* Align the line to the left */
+  transform: translateY(-50%) rotate(-4deg); /* Center vertically and rotate */
+  width: 100%;
+  height: 1px;
+  background-color: #C43882;
+  opacity: 1;
+  display: block;
 }

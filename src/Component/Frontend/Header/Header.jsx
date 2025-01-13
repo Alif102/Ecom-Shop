@@ -17,12 +17,13 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../CartContext";
 import AddToCart from "./AddToCArt";
 import azmain from '../../../assets/azmain.png'
+import { FaSearch } from "react-icons/fa";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const { cartCount } = useContext(CartContext);
 
- 
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight); // Change header when leaving the hero section
@@ -147,51 +148,31 @@ const Header = () => {
   return (
     <div>
       <header
-        className={` transition-all duration-700 ease-in-out ${
-          isSticky
-            ? "w-full bg-white/90 backdrop-blur-md fixed top-0 left-0 z-20 shadow-md"
-            : "bg-transparent"
-        } ${showHeader ? "top-0" : "-top-20"}`}
+        className={` transition-all duration-700 bg-white ease-in-out ${isSticky
+          ? "w-full backdrop-blur-md fixed top-0 left-0 z-20 shadow-md"
+          : "bg-transparent"
+          } ${showHeader ? "top-0" : "-top-20"}`}
       >
-        <div className="py-2 px-4 md:px-10 mx-auto flex items-center  border-b bg-white">
-          {isSearchOpen && window.innerWidth < 768 ? (
-            // Full-width search bar for mobile
-            <div className="flex items-center w-full relative ml-2">
-              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className=" pl-10 pr-12 py-2 w-full rounded-full border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 ease-in-out"
-                autoFocus
-              />
-              <button
-                onClick={closeSearch}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-              >
-                <FiX size={24} />
-              </button>
-            </div>
-          ) : (
-            <>
-              {/* Left Section: Menu Icon and Search Button */}
-              <div className="flex items-center space-x-4">
-                <button
-                  className="text-gray-600 hover:text-[#C43882] gap-2 hidden sm:flex"
-                  onClick={toggleMenu}
-                >
-                  <RiMenu2Line size={24} />
-                  {/* <span className="hidden lg:block">Menu</span> */}
-                </button>
+        <div className="py-2 px-4 md:px-10 mx-auto flex sm:items-center justify-between border-b">
+          {/* Left Section: Menu Icon and Search Button */}
+          <div className="sm:flex items-center space-x-4 hidden">
+            <button
+              className="text-gray-600 hover:text-[#C43882] gap-2 sm:flex"
+              onClick={toggleMenu}
+            >
+              <RiMenu2Line size={24} />
+              {/* <span className="hidden lg:block">Menu</span> */}
+            </button>
 
-                {/* <button
+            {/* <button
                   className="text-gray-600 hover:text-blue-500 lg:hidden "
                   onClick={toggleSearch}
                 >
                   <FiSearch size={24} />
                 </button> */}
 
-                {/* Search Bar Toggle */}
-                {/* <div className="relative hidden lg:flex items-center">
+            {/* Search Bar Toggle */}
+            {/* <div className="relative hidden lg:flex items-center">
                   {isSearchOpen ? (
                     <div
                       className={`flex items-center relative overflow-hidden transition-all duration-300 ease-in-out`}
@@ -218,50 +199,49 @@ const Header = () => {
                     </button>
                   )}
                 </div> */}
-              </div>
+          </div>
 
-              {/* Middle Section: Company Logo */}
-              <div className="flex-1 items-center justify-center text-center  ">
-                <Link to="/" className="">
-                  <div className="w-80 h-10 md:w-[5%]  md:h-[2%] mx-auto overflow-hidden">
-                    <img
-                      src={azmain}
-                      alt="MyCompany Logo"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </Link>
+          {/* Middle Section: Company Logo */}
+          <div className="sm:flex-1 sm:items-center sm:justify-between sm:text-center">
+            <Link to="/" className="">
+              <div className="sm:w-80 h-10 md:w-[5%]  md:h-[2%] mx-auto overflow-hidden">
+                <img
+                  src={azmain}
+                  alt="MyCompany Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
+            </Link>
+          </div>
 
-              {/* Right Section: Profile and Cart Icons */}
-              <div className="hidden sm:flex items-center space-x-6">
-                <Link
-                  to="/login"
-                  className="text-gray-600 hover:text-[#C43882]"
-                >
-                  <FiUser size={24} />
-                </Link>
-                <button
-                  className="relative text-gray-600 hover:text-[#C43882] z-50"
-                  onClick={handleViewCart}
-                >
-                  <BsCart3 size={24} />
-                  {/* Badge for item count */}
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartCount ?? 0}                  </span>
-                </button>
+          {/* Right Section: Profile and Cart Icons */}
+          <div className="flex justify-around items-center space-x-6">
+            <Link to="/collection">
+              <FiSearch className="text-gray-600 hover:text-[#C43882]" size={26} />
+            </Link>
+            <Link
+              className="text-gray-600 hover:text-[#C43882]"
+            >
+              <FiUser size={24} />
+            </Link>
+            <button
+              className="relative text-gray-600 hover:text-[#C43882] z-50"
+              onClick={handleViewCart}
+            >
+              <BsCart3 size={24} />
+              {/* Badge for item count */}
+              <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center">
+                {cartCount ?? 0}                  </span>
+            </button>
 
-                {/* AddToCart Component - Rendered conditionally */}
-              </div>
-            </>
-          )}
+            {/* AddToCart Component - Rendered conditionally */}
+          </div>
         </div>
 
         {/* Side Menu */}
         <div
-          className={`fixed h-screen top-0 left-0 w-64 bg-white shadow-lg p-6 text-white z-50 transition-transform duration-300 ease-in-out transform ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`fixed h-screen top-0 left-0 w-64 bg-white shadow-lg p-6 text-white z-50 transition-transform duration-300 ease-in-out transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
           onClick={closeMenu}
         >
           <div
@@ -284,16 +264,20 @@ const Header = () => {
             </div>
 
             <ul className="space-y-6 mt-8">
-              <li className="flex items-center text-lg text-black  font-semibold hover:bg-[#C43882] rounded-lg p-3 transition-colors group">
-                <FiHome size={20} className="mr-3  group-hover:text-white" />
-                <span className="group-hover:text-white">Home</span>
+              <li>
+                <Link to="/" className="flex items-center text-lg font-se text-black mibold hover:bg-[#C43882] rounded-lg p-3 transition-colors group">
+                  <FiHome size={20} className="mr-3  group-hover:text-white" />
+                  <span className="group-hover:text-white">Home</span>
+                </Link>
               </li>
-              <li className="flex items-center text-lg font-se text-black mibold hover:bg-[#C43882] rounded-lg p-3 transition-colors group">
-                <FiShoppingCart
-                  size={20}
-                  className="mr-3  group-hover:text-white"
-                />
-                <span className="group-hover:text-white">Shop</span>
+              <li>
+                <Link to="/collection/" className="flex items-center text-lg font-se text-black mibold hover:bg-[#C43882] rounded-lg p-3 transition-colors group">
+                  <FiShoppingCart
+                    size={20}
+                    className="mr-3  group-hover:text-white"
+                  />
+                  <span className="group-hover:text-white">Shop</span>
+                </Link>
               </li>
               <li className="flex items-center text-lg text-black  font-semibold hover:bg-[#C43882] rounded-lg p-3 transition-colors group">
                 <FiList size={20} className="mr-3  group-hover:text-white" />
@@ -309,7 +293,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          
+
         </div>
 
         {/* Background overlay when menu is open */}
@@ -327,7 +311,7 @@ const Header = () => {
             className="fixed inset-0 bg-black opacity-50 z-40"
           ></div>
         )}
-                {isModalOpen && <AddToCart onClose={handleCloseCart} />}
+        {isModalOpen && <AddToCart onClose={handleCloseCart} />}
 
         {/* Cart Component will come here*/}
       </header>

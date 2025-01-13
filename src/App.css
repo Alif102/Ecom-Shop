@@ -1,0 +1,153 @@
+@media (max-width: 639px) {
+
+    .mobile-flying-div {
+        position: fixed;
+        visibility: visible;
+        display: block;
+        animation: mobile_fly_to_cart 2s ease-out;
+    }
+
+    @keyframes mobile_fly_to_cart {
+        0% {
+            left: 2%;
+            top: 0;
+            opacity: 1;
+        }
+
+        100% {
+            left: calc(100% - 120px);
+            top: calc(100% - 200px);
+            opacity: 1;
+            transform: scale(.01);
+        }
+    }
+
+    .mobile-related-fly-odd {
+        position: fixed;
+        visibility: visible;
+        display: block;
+        top: 25%;
+        left: 50%;
+        animation: mobile_related_odd 2s ease-out;
+    }
+
+    @keyframes mobile_related_odd {
+        0% {
+            top: 25%;
+            left: 50%;
+            opacity: 1;
+        }
+
+        100% {
+            left: calc(100% - 120px);
+            top: calc(100% - 120px);
+            opacity: 1;
+            transform: scale(.1);
+        }
+    }
+
+
+    .mobile-related-fly-even {
+        position: fixed;
+        visibility: visible;
+        display: block;
+        left: 15px;
+        top: 25%;
+        animation: mobile_related_even 2s ease-out;
+    }
+
+    @keyframes mobile_related_even {
+        0% {
+            left: 0;
+            top: 25%;
+            opacity: 1;
+        }
+
+        100% {
+            left: calc(100% - 120px);
+            top: calc(100% - 120px);
+            opacity: 1;
+            transform: scale(.1);
+        }
+    }
+
+
+    .mobile-home-flying-div-odd {
+        position: fixed;
+        visibility: visible;
+        display: block;
+        right: 15px;
+        top: calc(50% - 100px);
+        animation: mobile_home_fly_to_cart_odd 2s ease-out;
+    }
+
+    @keyframes mobile_home_fly_to_cart_odd {
+        0% {
+            right: 15px;
+            top: 25%;
+            opacity: 1;
+        }
+
+        100% {
+            right: calc(50% - 80px);
+            top: calc(100% - 150px);
+            opacity: 1;
+            transform: scale(.1);
+        }
+    }
+
+
+
+
+    .mobile-home-flying-div-even {
+        position: fixed;
+        left: 15px;
+        visibility: visible;
+        display: block;
+        top: calc(50% - 100px);
+        animation: mobile_home_fly_to_cart_even 2s ease-out;
+    }
+
+    @keyframes mobile_home_fly_to_cart_even {
+        0% {
+            left: 15px;
+            top: 25%;
+            opacity: 1;
+        }
+
+        100% {
+            left: calc(50% - 80px);
+            top: calc(100% - 150px);
+            opacity: 1;
+            transform: scale(.1);
+        }
+    }
+
+    .single-mobile-flying-div {
+        position: fixed;
+        left: 15px;
+        visibility: visible;
+        display: block;
+        top: 0;
+        animation: mobile_single_fly 1.5s ease-out;
+    }
+
+    @keyframes mobile_single_fly {
+        0% {
+            left: 0;
+            top: 0;
+            opacity: 1;
+            transform: scale(.8);
+        }
+
+        100% {
+            left: calc(100% - 50px);
+            top: calc(100% - 60px);
+            opacity: 1;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+

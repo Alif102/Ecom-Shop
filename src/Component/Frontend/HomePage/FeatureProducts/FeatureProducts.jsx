@@ -8,7 +8,7 @@ import { FaEye, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function FeatureProducts({products}) {
-  console.log(products)
+  
   const settings = {
     dots: true,
     infinite: true,
@@ -66,7 +66,7 @@ function FeatureProducts({products}) {
     {/* Product Image */}
     <div className="relative">
       <img
-        src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+        src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
         alt={product.offer}
         className=" h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
       />
@@ -102,12 +102,12 @@ function FeatureProducts({products}) {
         {product.variation_combinations.length > 0 ? (
           <div className="text-gray-700">
           {lowPrice === highPrice ? (
-            <span className="text-green-500 font-bold">
+            <span className="text-pink-500 font-bold">
               {highPrice} <span className="text-2xl">৳</span>
             </span>
           ) : (
             <>
-              <span className="text-green-500 font-bold">
+              <span className="text-pink-500 font-bold">
                 {lowPrice} <span className="text-2xl">৳</span>{" "}
               </span>
               -{" "}
@@ -118,7 +118,7 @@ function FeatureProducts({products}) {
           )}
         </div>
         ) : (
-          <div className="text-green-500 font-bold">{product.price} <span className=" text-2xl">৳</span> </div>
+          <div className="text-pink-500 font-bold">{product.price} <span className=" text-2xl">৳</span> </div>
         )}
         {/* Add to Cart Button */}
         <button className="bg-pink-500 text-white text-sm py-1 px-4 rounded-full hover:bg-pink-600 transition duration-300">

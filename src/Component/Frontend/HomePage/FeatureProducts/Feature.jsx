@@ -21,20 +21,20 @@ const Feature = ({ products }) => {
     );
 
     return (
-        <div className="md:w-[80%] w-full mx-auto">
+        <div className="w-full mx-auto">
             <h2 className="text-center text-2xl md:text-3xl font-semibold pollinator mb-8">
                 <span className="border border-pink-500 border-l-4 mr-3"></span> Shop By <span className=" text-pink-500">Categories</span>
             </h2>
 
             {/* Category Buttons */}
-            <div className="mb-4 overflow-x-auto flex justify-start lg:justify-center gap-2 text-[16px] font-bold scrollbar-hide">
+            <div className="mb-4 pb-2 sm:pb-0 md:px-0 overflow-x-auto flex justify-start gap-2 text-[16px] font-bold scrollbar">
                 {uniqueCategories.map((category, index) => (
                     <button
                         key={index}
                         onClick={() => setSelectedCategory(category)}
                         className={` whitespace-nowrap px-2 md:px-3 py-1 mb-1 rounded-md lg:rounded-full  ${selectedCategory === category
-                                ? "bg-pink-700 text-white"
-                                : "bg-pink-200 text-pink-700"
+                            ? "bg-pink-700 text-white"
+                            : "bg-pink-200 text-pink-700"
                             }`}
                     >
                         {category}
@@ -44,36 +44,50 @@ const Feature = ({ products }) => {
 
             {/* Display Loading if Data is Still Being Fetched */}
             {loading ? (
-                <div className="text-center text-xl font-semibold">Loading Categories...</div>
+                <div className="flex sm:flex-row flex-col gap-12 border-gray-300 mx-auto px-4 py-5 sm:py-[100px] border rounded animate-pulse">
+                    <div className="bg-slate-200 p-4 rounded sm:w-1/2 hidden sm:block"></div>
+                    <div className="flex-1 space-y-6 py-1 sm:w-1/2">
+                        <div className="bg-slate-200 rounded h-40"></div>
+                        <div className="space-y-3">
+                            <div className="gap-4 grid grid-cols-3">
+                                <div className="col-span-2 bg-slate-200 rounded h-40"></div>
+                                <div className="col-span-1 bg-slate-200 rounded h-40"></div>
+                            </div>
+                            <div className="bg-slate-200 rounded h-40"></div>
+                            <div className="bg-slate-200 rounded h-40"></div>
+                            <div className="bg-slate-200 rounded h-40"></div>
+                            <div className="bg-slate-200 rounded h-40"></div>
+                        </div>
+                    </div>
+                </div>
             ) : (
                 // Feature Products
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {filteredProducts.map((product, index) => {
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:gap-4 gap-2">
+                    {filteredProducts.slice(0, 8).map((product, index) => {
                         // Extract the highest and lowest prices from variation_combinations
                         const prices = product.variation_combinations.length
                             ? product.variation_combinations.map((comb) => comb.price)
                             : [product.price]; // Default to the product price if variation_combinations is empty
-
                         const highPrice = Math.max(...prices);
                         const lowPrice = Math.min(...prices);
 
                         return (
-                            <div key={index} className="w-full gap-2 py-4 px-2 h-full group">
+                            <div key={index} className="w-full h-full group">
                                 <Link to={`/singleproduct/${product.name}-${product.id}`}>
                                     <div className="relative bg-white shadow-md rounded-lg overflow-hidden group hover:shadow-lg transition-shadow duration-300">
                                         {/* Product Image */}
                                         <div className="relative">
                                             <div className="group relative overflow-hidden">
                                                 <img
-                                                    src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                                                    src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                                                     alt={product.name}
-                                                    className="h-full w-full object-cover group-hover:scale-125 transition-transform duration-500"
+                                                    className="sm:h-[380px] h-[300px] w-full object-cover group-hover:scale-125 transition-transform duration-500"
                                                 />
                                             </div>
 
                                             {/* Discount Badge */}
                                             {product.discount && (
-                                                <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
+                                                <span className="absolute top-3 left-3 bg-pink-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
                                                     {product.discount}% Off
                                                 </span>
                                             )}
@@ -87,7 +101,7 @@ const Feature = ({ products }) => {
                                         </div>
 
                                         {/* Product Details */}
-                                        <div className="p-4">
+                                        <div className="p-2 sm:p-4">
                                             {/* Product Name */}
                                             <h2 className="font-semibold shippori text-gray-800 truncate mb-1 group-hover:text-pink-500 transition-colors duration-300">
                                                 {product.name}
@@ -98,33 +112,33 @@ const Feature = ({ products }) => {
                                             </h2>
 
                                             {/* Pricing */}
-                                            <div className="flex items-center gap-1 justify-between">
+                                            <div className="flex items-center justify-between">
                                                 {product.variation_combinations.length > 0 ? (
                                                     <div className="text-gray-700">
                                                         {lowPrice === highPrice ? (
-                                                            <span className="text-green-500 font-bold">
-                                                                {highPrice} <span className="text-2xl">৳</span>
+                                                            <span className="text-pink-500 font-bold">
+                                                                <span className="text-xl">৳&nbsp;</span>{highPrice}
                                                             </span>
                                                         ) : (
                                                             <>
-                                                                <span className="text-green-500 font-bold">
-                                                                    {lowPrice} <span className="text-2xl">৳</span>{" "}
+                                                                <span className="text-pink-500 font-bold">
+                                                                    <span className="text-xl">৳&nbsp;</span>{lowPrice} {" "}
                                                                 </span>
                                                                 -{" "}
-                                                                <span className="text-red-500 font-bold">
-                                                                    {highPrice} <span className="text-2xl">৳</span>{" "}
+                                                                <span className="text-pink-500 font-bold">
+                                                                    <span className="text-xl">৳&nbsp;</span>{highPrice} {" "}
                                                                 </span>
                                                             </>
                                                         )}
                                                     </div>
 
                                                 ) : (
-                                                    <div className="text-green-500 font-bold">
-                                                        {product.price} <span className="text-2xl">৳</span>
+                                                    <div className="text-pink-500 font-bold">
+                                                        <span className="text-xl">৳&nbsp;</span>{product.price}
                                                     </div>
                                                 )}
-                                        
-                                                <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-1 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">
+
+                                                <button className="bg-pink-500 text-white text-sm py-1 md:px-4 px-2 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">
                                                     QUICK VIEW
                                                 </button>
                                             </div>
@@ -136,6 +150,9 @@ const Feature = ({ products }) => {
                     })}
                 </div>
             )}
+            <div className="text-right mt-5 sm:mt-10">
+                <Link to={`/collection/${selectedCategory.toLowerCase()}`} className="bg-pink-500 text-white text-center text-sm py-2 px-4 whitespace-nowrap rounded-full hover:bg-pink-600 transition duration-300">View More</Link>
+            </div>
         </div>
     );
 };

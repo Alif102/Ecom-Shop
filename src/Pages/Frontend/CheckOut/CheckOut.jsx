@@ -17,8 +17,8 @@ const CheckOut = () => {
 
   const { cart, totalPrice } = useContext(CartContext);
 
-const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
-// console.log(ttt)
+  const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
+  // console.log(ttt)
   const [errors, setErrors] = useState({});
 
   const [name, setName] = useState("");
@@ -72,12 +72,12 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
 
 
   const sProductQty = cart
-  .filter((product) => product.has_variation === 0)
-  .map((product) => product.quantity);
+    .filter((product) => product.has_variation === 0)
+    .map((product) => product.quantity);
 
   const vProductQty = cart
-  .filter((product) => product.has_variation === 1)
-  .map((product) => product.quantity);
+    .filter((product) => product.has_variation === 1)
+    .map((product) => product.quantity);
   // Create an axios instance for common configuration
 
   const handleSave = async (e) => {
@@ -95,10 +95,10 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
     formData.append(
       "v_product_qty",
       vProductQty.length > 0 ? vProductQty.join(",") : null
-    );    formData.append("business_id", cart[0]?.businesses[0]?.id || "" );
-    formData.append("c_name", name);
-    formData.append("c_phone", phone);
-   
+    ); formData.append("business_id", cart[0]?.businesses[0]?.id || "");
+    formData.append("name", name);
+    formData.append("phone", phone);
+
     formData.append("address", address);
     formData.append("delivery_charge", deliveryFee);
     formData.append("cod_amount", total);
@@ -116,7 +116,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
 
       console.log(response);
       if (response.data.status) {
-        
+
         console.log(response.data.data.id);
 
         // Reset form fields
@@ -158,7 +158,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
       <Header />
 
       <form onSubmit={handleSave}>
-        <div className="min-h-screen bg-white p-5 pb-28 md:pb-0">
+        <div className="min-h-screen bg-white p-0 sm:p-5 pb-28">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* Right Side: Order Summary */}
 
@@ -264,7 +264,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
                 </h2>
 
                 <div className="mb-4 border-b block md:hidden opacity-50">
-                  {cart.map((product,index) => (
+                  {cart.map((product, index) => (
                     <div className="flex justify-between" key={index}>
                       <p className="flex shippori gap-2">
                         {product.name} <p> X {product.quantity}</p>
@@ -317,7 +317,7 @@ const cod_amount = cart.reduce((acc, product) => acc + product.price, 0)
                     <div className="flex items-center">
                       <div className="relative">
                         <img
-                          src={`https://admin.ezicalc.com/public/storage/product/${product.image}`}
+                          src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/${product.image}`}
                           alt="Product Image"
                           className="w-16 h-20 rounded-md mr-4"
                         />
