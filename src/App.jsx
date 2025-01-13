@@ -51,7 +51,7 @@ const App = () => {
 
         <Route
             path="/singleproduct/:product_info"
-            element={<SingleProduct products={products} />}   />
+            element={<SingleProduct products={products} />} />
              <Route path="/checkout" element={<CheckOut />} />
 
              <Route path="/thankyou/:order_id" element={<ThankYou />} />
