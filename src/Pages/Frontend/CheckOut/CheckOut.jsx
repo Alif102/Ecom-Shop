@@ -109,7 +109,7 @@ const CheckOut = () => {
     setLoading(true); // Start loading
     try {
       const response = await axios.post(
-        "https://admin.ezicalc.com/api/public/order/create",
+        "https://admin.beta.ezicalc.com/api/public/order/create",
         formData,
         {}
       );
@@ -180,8 +180,8 @@ const CheckOut = () => {
                   placeholder="Enter your name"
                 />
 
-                {errors.c_name && (
-                  <p className="text-red-500 text-sm">{errors.c_name[0]}</p>
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name[0]}</p>
                 )}
               </div>
 
@@ -198,8 +198,8 @@ const CheckOut = () => {
                   value={phone}
                 />
 
-                {errors.c_phone && (
-                  <p className="text-red-500 text-sm">{errors.c_phone[0]}</p>
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone[0]}</p>
                 )}
               </div>
 

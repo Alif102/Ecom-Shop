@@ -34,7 +34,7 @@ const ThankYou = () => {
           {/* Confirmation Text */}
           <p className="text-gray-600 mb-8">
             আমাদের একজন কাস্টমার কেয়ার এক্সিকিউটিভ খুব শীঘ্রই আপনার সাথে যোগাযোগ
-            করে <br /> অর্ডারটি কনফার্ম করে নিবে। G'lorebd এ অর্ডার করার
+            করে <br /> অর্ডারটি কনফার্ম করে নিবে। <span className="text-2xl font-bold text-[#C43882]">Azmain Fashion</span> এ অর্ডার করার
             জন্য অসংখ্য ধন্যবাদ
           </p>
 
